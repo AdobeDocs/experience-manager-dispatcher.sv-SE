@@ -2,7 +2,7 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 410346694a134c0f32a24de905623655f15269b4
+source-git-commit: 336e69a4635c9822a97bbffd0b1410807012f9e7
 workflow-type: tm+mt
 source-wordcount: '8857'
 ht-degree: 0%
@@ -1885,3 +1885,4 @@ Servergruppens cache styrs av en sessionshanterare (konfigurationen innehåller 
 Fjärrservern returnerade en `Dispatcher: no_cache` header, förbjuder Dispatcher att cachelagra utdata.
 * **inte tillgänglig: längden på svarsinnehållet är noll**
 Svarets innehållslängd är noll. Dispatcher skapar inte en fil med längden noll.
+
