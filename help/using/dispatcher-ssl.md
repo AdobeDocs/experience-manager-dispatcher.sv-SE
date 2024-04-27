@@ -1,21 +1,17 @@
 ---
 title: Använda SSL med Dispatcher
-seo-title: Using SSL with Dispatcher
 description: Lär dig hur du konfigurerar Dispatcher att kommunicera med AEM via SSL-anslutningar.
-seo-description: Learn how to configure Dispatcher to communicate with AEM using SSL connections.
-uuid: 1a8f448c-d3d8-4798-a5cb-9579171171ed
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
-discoiquuid: 771cfd85-6c26-4ff2-a3fe-dff8d8f7920b
 index: y
 internal: n
 snippet: y
 exl-id: ec378409-ddb7-4917-981d-dbf2198aca98
-source-git-commit: e87af532ee3268f0a45679e20031c3febc02de58
+source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
 workflow-type: tm+mt
-source-wordcount: '1355'
+source-wordcount: '1302'
 ht-degree: 0%
 
 ---
@@ -37,9 +33,9 @@ Konfigurera Dispatcher för att kommunicera med AEM eller CQ-återgivningsinstan
 
 Innan du konfigurerar Dispatcher måste du konfigurera AEM eller CQ så att SSL används:
 
-* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions.html?lang=en)
-* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions.html?lang=en)
-* Äldre AEM: se [den här sidan](https://experienceleague.adobe.com/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions.html?lang=en).
+* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* Äldre AEM: se [den här sidan](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions).
 
 ### SSL-relaterade begärandehuvuden {#ssl-related-request-headers}
 
@@ -133,7 +129,7 @@ Om du vill konfigurera gemensam SSL måste du ha certifikat som är signerade av
 
 Så här konfigurerar du gemensam SSL:
 
-1. [Installera](dispatcher-install.md) den senaste versionen av Dispatcher för din plattform. Använd en Dispatcher-binär som stöder SSL (SSL finns i filnamnet, till exempel dispatcher-apache2.4-linux-x86-64-ssl10-4.1.7.tar).
+1. [Installera](dispatcher-install.md) den senaste versionen av Dispatcher för din plattform. Använd en Dispatcher-binär som har stöd för SSL (SSL) i filnamnet, till exempel `dispatcher-apache2.4-linux-x86-64-ssl10-4.1.7.tar`).
 1. [Skapa eller hämta CA-signerat certifikat](dispatcher-ssl.md#main-pars-title-3) för Dispatcher och återgivningsinstansen.
 1. [Skapa en nyckelbehållare som innehåller återgivningscertifikat](dispatcher-ssl.md#main-pars-title-6) och konfigurera återgivningens HTTP-tjänst.
 1. [Konfigurera webbservermodulen Dispatcher](dispatcher-ssl.md#main-pars-title-4) för gemensam SSL.
@@ -157,14 +153,14 @@ Om du agerar som certifikatutfärdare ska du använda [OpenSSL](https://www.open
    >
    >Flera egenskaper i `openssl.cnf` -filen styr beteendet för skriptet CA.sh. Redigera den här filen efter behov innan du skapar din certifikatutfärdare.
 
-#### Skapa certifikat {#creating-the-certificates}
+#### Skapa certifikaten {#creating-the-certificates}
 
 Använd OpenSSL för att skapa de certifikatbegäranden som ska skickas till certifikatutfärdaren från tredje part eller för att signera med din certifikatutfärdare.
 
-När du skapar ett certifikat använder OpenSSL egenskapen Gemensamt namn för att identifiera certifikatinnehavaren. För återgivningsinstansens certifikat använder du instansdatorns värdnamn som gemensamt namn om du konfigurerar Dispatcher att acceptera certifikatet, och bara om det matchar värdnamnet för Publish-instansen. (Se [DispatcherCheckPeerCN](dispatcher-ssl.md#main-pars-title-11) egenskap.)
+När du skapar ett certifikat använder OpenSSL egenskapen Gemensamt namn för att identifiera certifikatinnehavaren. För återgivningsinstansens certifikat använder du instansdatorns värdnamn som gemensamt namn om du konfigurerar Dispatcher att acceptera certifikatet. Gör bara detta om det matchar värdnamnet för Publishing-instansen. Se [DispatcherCheckPeerCN](dispatcher-ssl.md#main-pars-title-11) -egenskap.
 
 1. Öppna en terminal och ändra den aktuella katalogen till den katalog som innehåller CH.sh-filen för dina OpenSSL-bibliotek.
-1. Ange följande kommando och ange värden när du uppmanas till det. Använd vid behov värdnamnet för publiceringsinstansen som gemensamt namn. Värdnamnet är DNS-matchningsbart namn för återgivningens IP-adress:
+1. Ange följande kommando och ange värden när du uppmanas till det. Om det behövs använder du värdnamnet för publiceringsinstansen som Gemensamt namn. Värdnamnet är ett DNS-matchningsbart namn för återgivningens IP-adress:
 
    ```shell
    ./CA.sh -newreq
@@ -251,11 +247,11 @@ Last Modified Date: 2014-08-12T13:11:21.401-0400
 
 #### Konfigurera återgivningsinstansen {#configuring-the-render-instance}
 
-Om du vill konfigurera HTTP-tjänsten för återgivningsinstansen så att den använder SSL använder du återgivningscertifikatet med instruktionerna i *Aktivera SSL på publiceringsinstansen* avsnitt:
+Om du vill konfigurera HTTP-tjänsten för återgivningsinstansen så att den använder SSL använder du återgivningscertifikatet med instruktionerna i *`Enable SSL on the Publish Instance`* avsnitt:
 
-* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions.html?lang=en)
-* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions.html?lang=en)
-* Äldre AEM: se [den här sidan.](https://experienceleague.adobe.com/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions.html?lang=en)
+* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* Äldre AEM: se [den här sidan.](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
 
 ### Konfigurera SSL för Dispatcher Module {#configuring-ssl-for-the-dispatcher-module}
 
@@ -289,9 +285,9 @@ Kombinera Dispatcher-certifikatet och den okrypterade privata nyckeln till en en
 
 Lägg till följande egenskaper i [Dispatcher-modulens konfiguration](dispatcher-install.md#main-pars-55-35-1022) (in `httpd.conf`):
 
-* `DispatcherCertificateFile`: Sökvägen till den enhetliga certifikatfilen för Dispatcher, som innehåller det offentliga certifikatet och den okrypterade privata nyckeln. Den här filen används när SSL-servern begär Dispatcher-klientcertifikatet.
+* `DispatcherCertificateFile`: Sökvägen till den enhetliga certifikatfilen Dispatcher, som innehåller det offentliga certifikatet och den okrypterade privata nyckeln. Den här filen används när SSL-servern begär Dispatcher-klientcertifikatet.
 * `DispatcherCACertificateFile`: Sökvägen till certifikatutfärdarens certifikatfil, som används om SSL-servern visar en certifikatutfärdare som inte är betrodd av en rotutfärdare.
-* `DispatcherCheckPeerCN`: Om du vill aktivera ( `On`) eller inaktivera ( `Off`) värdnamnskontroll för fjärrservercertifikat.
+* `DispatcherCheckPeerCN`: Om aktivering ska ske ( `On`) eller inaktivera ( `Off`) värdnamnskontroll för fjärrservercertifikat.
 
 Följande kod är en exempelkonfiguration:
 

@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 002458d52df4680ded5cb84a8119bc000e3ca88a
+source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
 workflow-type: tm+mt
-source-wordcount: '8857'
+source-wordcount: '8854'
 ht-degree: 0%
 
 ---
@@ -19,7 +19,7 @@ I följande avsnitt beskrivs hur du konfigurerar olika aspekter av Dispatcher.
 
 ## Stöd för IPv4 och IPv6 {#support-for-ipv-and-ipv}
 
-Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/docs/experience-manager-65/deploying/introduction/technical-requirements.html?lang=en#ipv-and-ipv).
+Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#ipv-and-ipv).
 
 ## Dispatcher-konfigurationsfiler {#dispatcher-configuration-files}
 
@@ -259,7 +259,7 @@ Comment Type: draft
 
 The `/clientheaders` -egenskapen definierar en lista med HTTP-huvuden som Dispatcher skickar från klientens HTTP-begäran till återgivaren (AEM instans).
 
-Som standard vidarebefordrar Dispatcher standard-HTTP-huvuden till AEM. I vissa fall kanske du vill vidarebefordra ytterligare rubriker eller ta bort specifika rubriker:
+Som standard vidarebefordrar Dispatcher standard-HTTP-huvuden till AEM. I vissa fall kanske du vill vidarebefordra andra rubriker eller ta bort specifika rubriker:
 
 * Lägg till rubriker, t.ex. anpassade rubriker, som din AEM förväntar sig i HTTP-begäran.
 * Ta bort rubriker, t.ex. autentiseringsrubriker som bara är relevanta för webbservern.
@@ -402,9 +402,9 @@ I följande tabell visas de virtuella värdarna som matchas för de angivna HTTP
 
 >[!CAUTION]
 >
->`/allowAuthorized` Ange till `"0"` i `/cache` för att aktivera funktionen. Enligt informationen i [Cachelagring när autentisering används](#caching-when-authentication-is-used) -sektion, när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation **not** cachelagrad. Om behörighetskänslig cachelagring krävs finns mer information i [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/permissions-cache.html) sida.
+>`/allowAuthorized` Ange till `"0"` i `/cache` för att aktivera funktionen. Enligt informationen i [Cachelagring när autentisering används](#caching-when-authentication-is-used) -sektion, när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation **not** cachelagrad. Om behörighetskänslig cachelagring krävs finns mer information i [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/permissions-cache) sida.
 
-Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Se [Skapa en stängd användargrupp](https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/cug.html?lang=en#creating-the-user-group-to-be-used) om du vill ha information om hur du använder den här funktionen med CUG. Se även Skicka [Säkerhetschecklista](/help/using/security-checklist.md) innan du publicerar.
+Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Se [Skapa en stängd användargrupp](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/cug#creating-the-user-group-to-be-used) om du vill ha information om hur du använder den här funktionen med CUG. Se även Skicka [Säkerhetschecklista](/help/using/security-checklist.md) innan du publicerar.
 
 The `/sessionmanagement` egenskapen är en underegenskap till `/farms`.
 
@@ -420,7 +420,7 @@ Katalogen som lagrar sessionsinformationen. Om katalogen inte finns skapas den.
 
 >[!CAUTION]
 >
-> När katalogunderparametern konfigureras, **inte** peka på rotmappen (`/directory "/"`) eftersom det kan orsaka allvarliga problem. Ange alltid sökvägen till den mapp som lagrar sessionsinformationen. Till exempel:
+> När du konfigurerar katalogunderparametern **inte** peka på rotmappen (`/directory "/"`) eftersom det kan orsaka allvarliga problem. Ange alltid sökvägen till den mapp som lagrar sessionsinformationen. Till exempel:
 
 ```xml
 /sessionmanagement
@@ -513,7 +513,7 @@ Anger timeout för anslutningen som använder AEM i millisekunder. Standardvärd
 
 Anger tiden i millisekunder som ett svar får ta. Standardvärdet är `"600000"`, vilket gör att Dispatcher väntar i 10 minuter. En inställning för `"0"` eliminerar tidsgränsen.
 
-Om tidsgränsen nås när svarshuvuden tolkas returneras HTTP-statusen 504 (Felaktig gateway). Om tidsgränsen nås när svarstexten läses, returnerar Dispatcher det ofullständiga svaret till klienten. Dessutom tas alla cachefiler som kan ha skrivits bort.
+Om tidsgränsen nås när svarshuvuden tolkas returneras HTTP-statusen 504 (Felaktig gateway). Om tidsgränsen nås när svarstexten läses, returnerar Dispatcher det ofullständiga svaret till klienten. Eventuella cachelagrade filer som kan ha skrivits tas också bort.
 
 **/ipv4**
 
@@ -525,7 +525,7 @@ Amazon Elastic Load Balancing (ELB) är en tjänst som svarar på getaddrinfo me
 
 **/secure**
 
-Om `/secure` egenskapen har värdet `"1"`, används HTTPS för att kommunicera med AEM. Mer information finns även i [Konfigurera Dispatcher att använda SSL](dispatcher-ssl.md#configuring-dispatcher-to-use-ssl).
+Om `/secure` egenskapen har värdet `"1"`, används HTTPS för att kommunicera med AEM. Mer information finns i [Konfigurera Dispatcher att använda SSL](dispatcher-ssl.md#configuring-dispatcher-to-use-ssl).
 
 **/always-resolve**
 
@@ -555,7 +555,7 @@ Använd `/filter` för att ange de HTTP-begäranden som Dispatcher accepterar. A
 
 >[!CAUTION]
 >
->Se [Dispatcher Security Checklist](security-checklist.md) om du vill ha mer information när du begränsar åtkomsten med Dispatcher. Läs även [AEM](https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/security-checklist.html?lang=en#security) om du vill ha mer säkerhetsinformation om AEM.
+>Se [Dispatcher Security Checklist](security-checklist.md) om du vill ha mer information när du begränsar åtkomsten med Dispatcher. Se även [AEM](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om AEM.
 
 The `/filter` -avsnittet består av en serie regler som antingen nekar eller tillåter åtkomst till innehåll enligt mönster i begärandoradsdelen av HTTP-begäran. Använd en tillåtelselista-strategi för `/filter` avsnitt:
 
@@ -588,7 +588,7 @@ Varje objekt i `/filter` -avsnittet innehåller en typ och ett mönster som matc
 >
 >`/glob "* *.css *"`
 >
->use
+>Använd
 >
 >`/url "*.css"`
 
@@ -670,7 +670,7 @@ Om du måste komma åt enstaka sidor inom det begränsade området kan du tillå
 
 >[!NOTE]
 >
->När flera filtermönster används på en begäran, gäller det senast använda filtermönstret.
+>När flera filtermönster används i en begäran gäller det senast använda filtermönstret.
 
 #### Exempelfilter: Använda reguljära uttryck {#example-filter-using-regular-expressions}
 
@@ -680,7 +680,7 @@ Det här filtret aktiverar tillägg i icke-offentliga innehållskataloger med hj
 /005  {  /type "allow" /extension '(css|gif|ico|js|png|swf|jpe?g)' }
 ```
 
-#### Exempelfilter: Filtrera ytterligare element för en URL för en begäran {#example-filter-filter-additional-elements-of-a-request-url}
+#### Exempelfilter: Filtrera extra element för en URL för en begäran {#example-filter-filter-additional-elements-of-a-request-url}
 
 Nedan visas ett regelexempel som blockerar innehåll som hämtas från `/content` sökväg och dess underträd, med filter för sökväg, väljare och tillägg:
 
@@ -797,15 +797,15 @@ Tänk på följande om du väljer att utöka åtkomsten:
 
    * `/libs/opensocial/proxy*`
 
-Beroende på installationen kan det finnas ytterligare resurser under `/libs`, `/apps` eller någon annanstans, som måste göras tillgänglig. Du kan använda `access.log` som en metod för att avgöra resurser som används externt.
+Beroende på installationen kan det finnas fler resurser under `/libs`, `/apps` eller någon annanstans, som måste göras tillgänglig. Du kan använda `access.log` som en metod för att avgöra resurser som används externt.
 
 >[!CAUTION]
 >
->Åtkomst till konsoler och kataloger kan utgöra en säkerhetsrisk för produktionsmiljöer. Om du inte har några uttryckliga motiveringar bör de förbli inaktiverade (kommenterade ut).
+>Åtkomst till konsoler och kataloger kan utgöra en säkerhetsrisk för produktionsmiljöer. Om du inte har en explicit motivering ska de förbli inaktiverade (kommenterade ut).
 
 >[!CAUTION]
 >
->Om du [använda rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/docs/experience-manager-65/administering/operations/reporting.html?lang=en#using-reports-in-a-publish-environment)bör du konfigurera Dispatcher så att åtkomst till `/etc/reports` för externa besökare.
+>Om du [använda rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/operations/reporting#using-reports-in-a-publish-environment)bör du konfigurera Dispatcher så att åtkomst till `/etc/reports` för externa besökare.
 
 ### Begränsa frågesträngar {#restricting-query-strings}
 
@@ -937,7 +937,7 @@ The `/vanity_urls` -avsnittet innehåller följande egenskaper:
 
 >[!NOTE]
 >
->Om återgivningen är en instans av AEM måste du installera [VanityURLS-Components-paket från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Se [Programvarudistribution](https://experienceleague.adobe.com/docs/experience-manager-65/administering/contentmanagement/package-manager.html?lang=en#software-distribution) för mer information.)
+>Om återgivningen är en instans av AEM måste du installera [VanityURLS-Components-paket från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Se [Programvarudistribution](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager#software-distribution) för mer information.)
 
 Använd följande procedur för att aktivera åtkomst till mål-URL:er.
 
@@ -1150,7 +1150,7 @@ Last Modified Date: 2017-11-13T09:23:24.326-0500
 Använd `/statfileslevel` egenskap som gör cachelagrade filer ogiltiga enligt deras sökväg:
 
 * Dispatcher skapar `.stat`filer i varje mapp från mappen docroot till den nivå du anger. Dokumentmappen är nivå 0.
-* Filerna blir ogiltiga genom att röra vid `.stat` -fil. The `.stat` filens senaste ändringsdatum jämförs med det senaste ändringsdatumet för ett cachelagrat dokument. Dokumentet hämtas igen om `.stat` filen är nyare.
+* Filerna blir ogiltiga genom att röra vid `.stat` -fil. The `.stat` filens senaste ändringsdatum jämförs med det senaste ändringsdatumet för ett cachelagrat dokument. Dokumentet uppdateras om `.stat` filen är nyare.
 
 * När en fil på en viss nivå ogiltigförklaras, **alla** `.stat` filer från dokumentet **till** den ogiltiga filens nivå eller den konfigurerade `statsfilevel` (beroende på vilket som är minst) rörs.
 
@@ -1167,7 +1167,7 @@ När en fil `/content/myWebsite/xx` blir ogiltigt, sedan var `.stat` från dokum
 
 >[!NOTE]
 >
->Du kan förhindra invalidering genom att skicka en extra rubrik `CQ-Action-Scope:ResourceOnly`. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Se [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/page-invalidate.html?lang=en#configuring) om du vill ha mer information.
+>Du kan förhindra invalidering genom att skicka en extra rubrik `CQ-Action-Scope:ResourceOnly`. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Se [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/page-invalidate#configuring) för mer information.
 
 >[!NOTE]
 >
@@ -1195,7 +1195,7 @@ Den här konfigurationen orsakar följande aktivitet när `/content/wknd/us/en` 
 
 * Alla filer med mönstret en.* tas bort från `/content/wknd/us` mapp.
 * The `/content/wknd/us/en./_jcr_content` mappen tas bort.
-* Alla andra filer som matchar `/invalidate` -konfigurationen tas inte bort omedelbart. Dessa filer tas bort när nästa begäran görs. I exemplet `/content/wknd.html` tas inte bort; den tas bort när `/content/wknd.html` har begärts.
+* Alla andra filer som matchar `/invalidate` -konfigurationen tas inte bort omedelbart. Dessa filer tas bort när nästa begäran görs. I exemplet `/content/wknd.html` tas inte bort. I stället tas den bort när `/content/wknd.html` har begärts.
 
 Om du erbjuder automatiskt genererade PDF- och ZIP-filer för nedladdning kan du behöva göra dessa filer ogiltiga automatiskt. Ett konfigurationsexempel ser ut så här:
 
@@ -1229,7 +1229,7 @@ Den anropas med följande argument:
 
 Den här metoden kan användas för att täcka flera olika användningsfall. Om du till exempel gör andra programspecifika cacheminnen ogiltiga eller hanterar fall där den externa URL-adressen för en sida och dess plats i dokumentroten inte matchar innehållssökvägen.
 
-Nedanstående exempel på skript loggar varje invalidate-begäran till en fil.
+Nedanstående exempel på skript loggar varje ogiltig begäran till en fil.
 
 ```xml
 /invalidateHandler "/opt/dispatcher/scripts/invalidate.sh"
@@ -1380,7 +1380,7 @@ Med standardinställningen `/invalidate` egenskapen, all aktivering gör alla `.
 
 The `/gracePeriod` anger hur många sekunder en inaktuell, automatiskt ogiltigförklarad resurs fortfarande kan betjänas från cachen efter den senaste aktiveringen. Egenskapen kan användas i en inställning där en grupp av aktiveringar annars skulle göra hela cachen ogiltig upprepade gånger. Det rekommenderade värdet är 2 sekunder.
 
-Mer information finns även i `/invalidate` och `/statfileslevel`avsnitt ovan.
+Mer information finns i `/invalidate` och `/statfileslevel`tidigare.
 
 ### Konfigurerar tidsbaserad cacheinvalidering - /enableTTL {#configuring-time-based-cache-invalidation-enablettl}
 
@@ -1412,7 +1412,7 @@ På så sätt säkerställer du att `.stat` filogiltigförklaring används inte 
 
 >[!NOTE]
 >
->Kom ihåg att inställningen `/enableTTL` till 1 aktiverar endast TTL-cachelagring på dispatchersidan. TTL-informationen i den extra filen (se ovan) tillhandahålls inte till någon annan användaragent som begär en sådan filtyp från avsändaren. Om du vill ge cachelagringshuvuden till underordnade system som ett CDN eller en webbläsare, bör du konfigurera `/cache/headers` i enlighet med detta.
+>Kom ihåg att inställningen `/enableTTL` till 1 aktiverar endast TTL-cachelagring på Dispatcher-sidan. TTL-informationen i den kompletterande filen (se ovan) tillhandahålls inte till någon annan användaragent som begär en sådan filtyp från Dispatcher. Om du vill ge cachelagringshuvuden till underordnade system som ett CDN eller en webbläsare, bör du konfigurera `/cache/headers` i enlighet med detta.
 
 >[!NOTE]
 >
@@ -1520,13 +1520,13 @@ När en sida består av innehåll från flera innehållsnoder inkluderar du `/pa
 }
 ```
 
-### httpOnly {#httponly}
+### `httpOnly` {#httponly}
 
 När klisterlappande anslutningar är aktiverade ställer modulen Dispatcher in `renderid` cookie. Den här cookien har inte `httponly` som bör läggas till för att öka säkerheten. Du lägger till `httponly` flagga genom att ange `httpOnly` -egenskapen i `/stickyConnections` nod i en `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen `0` eller `1`) definierar om `renderid` cookie har `HttpOnly` attribut tillagt. Standardvärdet är `0`, vilket innebär att attributet inte läggs till.
 
-Mer information om `httponly` flagga, läsa [den här sidan](https://www.owasp.org/index.php/HttpOnly).
+Mer information om `httponly` flagga, läsa [den här sidan](https://owasp.org/www-community/HttpOnly).
 
-### säker {#secure}
+### `secure` {#secure}
 
 När klisterlappande anslutningar är aktiverade ställer modulen Dispatcher in `renderid` cookie. Den här cookien har inte `secure` som bör läggas till för att öka säkerheten. Du lägger till `secure` flagga som anger `secure` -egenskapen i `/stickyConnections` nod i en `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen `0` eller `1`) definierar om `renderid` cookie har `secure` attribut tillagt. Standardvärdet är `0`, vilket innebär att attributet läggs till **if** den inkommande begäran är säker. Om värdet är `1`, läggs flaggan secure till oavsett om den inkommande begäran är säker eller inte.
 
@@ -1550,7 +1550,7 @@ Använd `/health_check` för att ange en URL som kontrolleras när en 500-status
 
 The `/retryDelay` anger tiden (i sekunder) som Dispatcher väntar mellan anslutningsförsök med servergruppsåtergivningar. För varje rund är det maximala antalet gånger Dispatcher försöker ansluta till en rendering antalet renderingar i servergruppen.
 
-Dispatcher använder värdet `"1"` if `/retryDelay` är inte explicit definierad. Standardvärdet är vanligtvis lämpligt.
+Dispatcher använder värdet `"1"` if `/retryDelay` är inte explicit definierad. Standardvärdet är lämpligt.
 
 ```xml
 /retryDelay "1"
@@ -1619,7 +1619,7 @@ Inställning `/ignoreEINTR` till `"1"` gör att Dispatcher fortsätter att förs
 
 ## Designa mönster för globegenskaper {#designing-patterns-for-glob-properties}
 
-Flera avsnitt i Dispatcher-konfigurationsfilen använder `glob` egenskaper som urvalskriterier för klientförfrågningar. Värdena för `glob` egenskaper är mönster som Dispatcher jämför med en aspekt av begäran, till exempel sökvägen till den begärda resursen eller klientens IP-adress. Objekten i `/filter` avsnittsanvändning `glob` mönster för att identifiera sökvägarna för de sidor som Dispatcher agerar på eller avvisar.
+Flera avsnitt i Dispatcher-konfigurationsfilen kan använda `glob` egenskaper som urvalskriterier för klientförfrågningar. Värdena för `glob` egenskaper är mönster som Dispatcher jämför med en aspekt av begäran, till exempel sökvägen till den begärda resursen eller klientens IP-adress. Objekten i `/filter` avsnittsanvändning `glob` mönster för att identifiera sökvägarna för de sidor som Dispatcher agerar på eller avvisar.
 
 The `glob` -värden kan innehålla jokertecken och alfanumeriska tecken för att definiera mönstret.
 
@@ -1751,7 +1751,7 @@ Se dokumentationen för Apache-webbservern om Loggrotation och Pipe-loggar. Till
 >
 >Efter installationen är standardloggnivån hög (d.v.s. nivå 3 = Felsökning) så att Dispatcher loggar alla fel och varningar. Den här nivån är användbar i de inledande faserna.
 >
->En sådan nivå kräver dock ytterligare resurser. När Dispatcher fungerar som den ska *efter dina behov* kan du sänka loggnivån.
+>En sådan nivå kräver dock mer resurser. När Dispatcher fungerar som den ska *efter dina behov* kan du sänka loggnivån.
 
 ### Spårningsloggning {#trace-logging}
 

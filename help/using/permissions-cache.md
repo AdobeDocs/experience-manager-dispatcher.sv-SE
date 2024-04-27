@@ -1,18 +1,14 @@
 ---
 title: Cachelagra skyddat innehåll
-seo-title: Caching Secured Content in AEM Dispatcher
 description: Lär dig hur behörighetskänslig cachelagring fungerar i Dispatcher.
-seo-description: Learn how permission-sensitive caching works in AEM Dispatcher.
-uuid: abfed68a-2efe-45f6-bdf7-2284931629d6
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
-discoiquuid: 4f9b2bc8-a309-47bc-b70d-a1c0da78d464
 exl-id: 3d8d8204-7e0d-44ad-b41b-6fec2689c6a6
-source-git-commit: 31eaa42b17838d97cacd5c535e04be01a3eb6807
+source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
 workflow-type: tm+mt
-source-wordcount: '918'
+source-wordcount: '910'
 ht-degree: 0%
 
 ---
@@ -49,7 +45,7 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 1. Renderingen anropar den AEM autentiseringsservern (det här är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
 1. Skickaren vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
-## Användaren har inte behörighet {#user-is-not-authorized}
+## Användaren är inte auktoriserad {#user-is-not-authorized}
 
 ![](assets/chlimage_1-2.png)
 
@@ -73,8 +69,8 @@ Så här implementerar du behörighetskänslig cachelagring:
 
 >[!NOTE]
 >
->När det finns ett CDN (eller någon annan cache) framför dispatchern bör du ställa in cache-rubrikerna så att CDN inte cachelagrar det privata innehållet. Till exempel: `Header always set Cache-Control private`.
->För AEM as a Cloud Service se [Cachelagring](https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching.html) om du vill ha mer information om hur du ställer in privata cachelagringshuvuden.
+>När det finns ett CDN (eller något annat cache-minne) framför Dispatcher bör du ställa in cache-rubrikerna så att CDN inte cachelagrar det privata innehållet. Till exempel: `Header always set Cache-Control private`.
+>AEM as a Cloud Service finns i [Cachning](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching) om du vill ha mer information om hur du ställer in privata cachelagringsrubriker.
 
 ## Skapa Auth Checker-servleten {#create-the-auth-checker-servlet}
 
@@ -92,7 +88,7 @@ Serletens svarsmeddelande måste innehålla följande HTTP-statuskoder:
 
 * 200: Autentisering och auktorisering lyckades.
 
-Följande exempelserver hämtar URL:en för den begärda resursen från HTTP-begäran. Koden använder Felix SCR `Property` anteckning för att ange värdet för `sling.servlet.paths` till /bin/permissionsCheck. I `doHead` -metoden hämtar servottleten sessionsobjektet och använder `checkPermission` metod för att fastställa lämplig svarskod.
+Följande exempelserver hämtar URL:en för den begärda resursen från HTTP-begäran. Koden använder Felix SCR `Property` anteckning för att ange värdet för `sling.servlet.paths` till /bin/permissionsCheck. I `doHead` -metoden hämtar servern sessionsobjektet och använder `checkPermission` metod för att fastställa lämplig svarskod.
 
 >[!NOTE]
 >
@@ -151,15 +147,15 @@ public class AuthcheckerServlet extends SlingSafeMethodsServlet {
 
 >[!NOTE]
 >
->Om dina krav tillåter cachelagring av autentiserade dokument anger du egenskapen /allowAuthorized under avsnittet /cache till `/allowAuthorized 1`. Se [Cachelagring när autentisering används](/help/using/dispatcher-configuration.md) för mer information.
+>Om dina krav tillåter cachelagring av autentiserade dokument anger du egenskapen /allowAuthorized under avsnittet /cache till `/allowAuthorized 1`. Se ämnet [Cachelagring när autentisering används](/help/using/dispatcher-configuration.md) för mer information.
 
 Avsnittet auth_checker i dispatchern.any-filen styr beteendet för behörighetskänslig cachelagring. Avsnittet auth_checker innehåller följande underavsnitt:
 
 * `url`: Värdet för `sling.servlet.paths` egenskapen för den servlet som utför säkerhetskontrollen.
 
-* `filter`: Filter som anger de mappar som behörighetskänslig cachelagring ska användas på. Vanligtvis är `deny` filtret tillämpas på alla mappar, och `allow` filter tillämpas på skyddade mappar.
+* `filter`: Filter som anger vilka mappar som behörighetsstyrd cachelagring ska användas på. Oftast är `deny` filtret tillämpas på alla mappar, och `allow` filter tillämpas på skyddade mappar.
 
-* `headers`: Anger de HTTP-huvuden som auktoriseringsservern inkluderar i svaret.
+* `headers`: Anger de HTTP-huvuden som åtkomstservern inkluderar i svaret.
 
 När Dispatcher startas innehåller Dispatcher-loggfilen följande felsökningsnivåmeddelande:
 

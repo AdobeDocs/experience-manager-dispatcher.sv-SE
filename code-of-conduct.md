@@ -1,15 +1,17 @@
 ---
-source-git-commit: 053f90d9a0574c7d470cec6794498919e3340713
-translation-type: tm+mt
+source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+workflow-type: tm+mt
+source-wordcount: '421'
+ht-degree: 0%
 
 ---
-# Adobes uppförandekod
+# Adobe uppförandekod
 
-## Vår redovisning
+## Adobe Pledge
 
-I syfte att främja en öppen och välkommen miljö lovar vi som medverkande och underhållande att göra deltagande i vårt projekt och i vår community till en trakasserfri upplevelse för alla, oavsett ålder, kroppsstorlek, funktionshinder, etnicitet, könsidentitet och -uttryck, erfarenhetsnivå, nationalitet, personligt utseende, ras, religion, sexuell identitet och läggning.
+För att främja en öppen och välkommen miljö lovar både medverkande och underhållande att göra deltagandet i ett projekt och samhället till en trakasserfri upplevelse för alla. Denna erfarenhet är oberoende av ålder, kroppsstorlek, funktionshinder, etnicitet, könsidentitet och -uttryck, erfarenhetsnivå, nationalitet, personligt utseende, ras, religion, sexuell identitet och läggning.
 
-## Våra standarder
+## Adobe
 
 Exempel på beteenden som bidrar till att skapa en positiv miljö är:
 
@@ -27,11 +29,11 @@ Exempel på oacceptabla beteenden från deltagarnas sida är:
 * Publicera andras personuppgifter, t.ex. en fysisk eller elektronisk adress, utan uttryckligt tillstånd
 * Annat beteende som rimligen skulle kunna anses olämpligt i yrkesmässig miljö
 
-## Vårt ansvar
+## Adobe
 
 Projektledare ansvarar för att förtydliga standarderna för godtagbart beteende och förväntas vidta lämpliga och rättvisa korrigerande åtgärder som svar på eventuella fall av oacceptabla beteenden.
 
-Projektledare har rätt och ansvar att ta bort, redigera eller avvisa kommentarer, implementeringar, kod, wiki-redigeringar, utgåvor och andra bidrag som inte följer denna uppförandekod, eller att tillfälligt eller permanent förbjuda medverkande för andra beteenden som de anser vara olämpliga, hotfulla, stötande eller skadliga.
+Projektledare har rätt och ansvar att ta bort, redigera eller avvisa kommentarer, implementeringar, kod, wiki-redigeringar, utgåvor eller andra bidrag som inte är anpassade till denna uppförandekod. Eller förbjuda tillfälligt eller permanent medverkande till andra beteenden som de tycker är olämpliga, hotfulla, stötande eller skadliga.
 
 ## Omfång
 
@@ -39,10 +41,11 @@ Denna uppförandekod gäller både inom projektutrymmen och på offentliga plats
 
 ## Verkställande
 
-Fall av missbruk, trakasserier eller på annat sätt oacceptabelt beteende kan rapporteras genom att kontakta projektgruppen på Grp-opensourceoffice@adobe.com. Alla klagomål kommer att granskas och utredas och kommer att resultera i ett svar som bedöms vara nödvändigt och lämpligt med hänsyn till omständigheterna. Projektgruppen är skyldig att upprätthålla sekretess med avseende på rapportören för en incident. Ytterligare information om specifika verkställighetsregler kan bokföras separat.
+Fall av missbruk, trakasserier eller på annat sätt oacceptabelt beteende kan rapporteras genom att kontakta projektgruppen på Grp-opensourceoffice@adobe.com. Alla klagomål granskas och utreds och kan resultera i ett svar som bedöms vara nödvändigt och lämpligt med hänsyn till omständigheterna. Projektgruppen är skyldig att upprätthålla sekretess med avseende på rapportören för en incident. Ytterligare information om specifika efterlevnadspolicyer kan bokföras separat.
 
 Projektledare som inte följer eller tillämpar uppförandekoden i god tro kan drabbas av tillfälliga eller permanenta konsekvenser som fastställs av andra medlemmar i projektets ledarskap.
 
 ## Attribut
 
-Denna uppförandekod har anpassats från [Contributor-konventionen](https://contributor-covenant.org), version 1.4, som finns på [https://contributor-covenant.org/version/1/4](https://contributor-covenant.org/version/1/4/).
+Denna uppförandekod har anpassats från [Contributor-konventionen](https://www.contributor-covenant.org/), version 1.4, finns på [Contributor-konventionen](https://www.contributor-covenant.org/version/1/4/code-of-conduct/).
+

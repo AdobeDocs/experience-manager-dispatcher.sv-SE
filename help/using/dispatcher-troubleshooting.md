@@ -1,9 +1,6 @@
 ---
 title: Felsökning av Dispatcher-problem
-seo-title: Troubleshooting AEM Dispatcher Problems
 description: Lär dig att felsöka Dispatcher-problem.
-seo-description: Learn to troubleshoot AEM Dispatcher issues.
-uuid: 9c109a48-d921-4b6e-9626-1158cebc41e7
 cmgrlastmodified: 01.11.2007 08 22 29 [aheimoz]
 pageversionid: 1193211344162
 template: /apps/docs/templates/contentpage
@@ -11,11 +8,10 @@ contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
-discoiquuid: a612e745-f1e6-43de-b25a-9adcaadab5cf
 exl-id: 29f338ab-5d25-48a4-9309-058e0cc94cff
-source-git-commit: 26c8edbb142297830c7c8bd068502263c9f0e7eb
+source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
 workflow-type: tm+mt
-source-wordcount: '560'
+source-wordcount: '538'
 ht-degree: 0%
 
 ---
@@ -30,7 +26,7 @@ ht-degree: 0%
 
 >[!NOTE]
 >
->Kontrollera [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), [Felsökning av problem med att tömma dispatcher](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager]) och [Vanliga frågor och svar om Dispatcher](dispatcher-faq.md) för ytterligare information.
+>Kontrollera [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), [Felsökning av problem med att tömma dispatcher](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager])och [Vanliga frågor och svar om Dispatcher](dispatcher-faq.md) för ytterligare information.
 
 ## Kontrollera den grundläggande konfigurationen {#check-the-basic-configuration}
 
@@ -43,11 +39,11 @@ Som alltid är de första stegen att kontrollera grunderna:
 
    * Har du flera utskickare?
 
-      * Har du fastställt vilken Dispatcher som hanterar webbplatsen/sidan som du undersöker?
+      * Har du fastställt vilken Dispatcher som hanterar den webbplats/sida som du undersöker?
+
    * Har du implementerat filter?
 
-      * Påverkar de här filtren det du undersöker?
-
+      * Påverkar de här filtren det du utforskar?
 
 ## Diagnostikverktyg för IIS {#iis-diagnostic-tools}
 
@@ -71,12 +67,12 @@ Kontrollera också att Dispatcher-cacheroten och IIS-dokumentroten är inställd
 
 **Symtom**
 
-Problem med att ta bort arbetsflödesmodeller när en AEM författarinstans öppnas via Dispatcher.
+Problem med att ta bort arbetsflödesmodeller vid åtkomst till en AEM författarinstans via Dispatcher.
 
 **Steg som ska återskapas:**
 
 1. Logga in på din författarinstans (bekräfta att begäranden dirigeras via Dispatcher).
-1. Skapa ett arbetsflöde, till exempel med Title inställd på workflowToDelete.
+1. Skapa ett arbetsflöde, till exempel med titeln inställd på workflowToDelete.
 1. Bekräfta att arbetsflödet har skapats.
 1. Markera och högerklicka på arbetsflödet och klicka sedan på **Ta bort**.
 
@@ -119,12 +115,12 @@ När Dispatcher är aktiverad bearbetar den sådana förfrågningar genom att re
 
 ### Apache 2.x {#apache-x}
 
-I Apache 2.x är det annorlunda. En modul kan hantera olika faser av begäran, till exempel URL-korrigering. The `mod_dir` hanterar det här steget genom att dirigera om en begäran (när URL:en mappar till en katalog) till URL:en med en `/` tillagd.
+I Apache 2.x är det annorlunda. En modul kan hantera olika faser av begäran, t.ex. URL-korrigering. The `mod_dir` hanterar det här steget genom att dirigera om en begäran (när URL:en mappar till en katalog) till URL:en med en `/` tillagd.
 
-Dispatcher fångar inte `mod_dir` korrigering, men hanterar begäran fullständigt till den omdirigerade URL:en (det vill säga med `/` tillagd). Den här processen kan utgöra ett problem om fjärrservern (till exempel AEM) hanterar begäranden till `/a_path` skiljer sig från förfrågningar till `/a_path/` (när `/a_path` mappar till en befintlig katalog).
+Dispatcher fångar inte upp `mod_dir` korrigering, men hanterar begäran fullständigt till den omdirigerade URL:en (det vill säga med `/` tillagd). Den här processen kan utgöra ett problem om fjärrservern (till exempel AEM) hanterar begäranden till `/a_path` skiljer sig från förfrågningar till `/a_path/` (när `/a_path` mappar till en befintlig katalog).
 
 Om detta händer måste du antingen:
 
 * disable `mod_dir` för `Directory` eller `Location` underträd som hanteras av Dispatcher
 
-* use `DirectorySlash Off` för att konfigurera `mod_dir` inte att lägga till `/`
+* use `DirectorySlash Off` konfigurera `mod_dir` inte att lägga till `/`

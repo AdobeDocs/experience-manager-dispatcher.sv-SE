@@ -1,12 +1,10 @@
 ---
-title: Skicka de vanligaste frågorna
-seo-title: Top issues for AEM Dispatcher
-description: De vanligaste frågorna för AEM Dispatcher
-seo-description: Top issues for Adobe AEM Dispatcher
+title: De vanligaste frågorna för Dispatcher
+description: De vanligaste problemen för Adobe Experience Manager Dispatcher.
 exl-id: 4dcc7318-aba5-4b17-8cf4-190ffefbba75
-source-git-commit: f83b02d74a22e055b486305dfe5420e152efb452
+source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
 workflow-type: tm+mt
-source-wordcount: '1578'
+source-wordcount: '1542'
 ht-degree: 0%
 
 ---
@@ -19,7 +17,7 @@ ht-degree: 0%
 
 ### Vad är Dispatcher?
 
-Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller belastningsutjämning som gör att du kan skapa en snabb och dynamisk webbmiljö. För cachelagring fungerar Dispatcher som en del av en HTTP-server, till exempel Apache. Syftet är att lagra (eller&quot;cachelagra&quot;) så mycket av det statiska webbplatsinnehållet som möjligt och att så sällan som möjligt få åtkomst till webbplatsens layoutmotor. I en lastbalanserande roll distribuerar Dispatcher användarförfrågningar (inläsning) över olika AEM instanser (återgivningar).
+Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller belastningsutjämning som gör att du kan skapa en snabb och dynamisk webbmiljö. För cachelagring fungerar Dispatcher som en del av en HTTP-server, till exempel Apache. Syftet är att lagra (eller&quot;cachelagra&quot;) så mycket av det statiska webbplatsinnehållet som möjligt och att så sällan som möjligt få tillgång till layouten i webbplatsens motor. I en lastbalanserande roll distribuerar Dispatcher användarförfrågningar (inläsning) över olika AEM instanser (återgivningar).
 
 För cachelagring använder modulen Dispatcher webbserverns förmåga att hantera statiskt innehåll. Dispatcher placerar de cachelagrade dokumenten i dokumentroten på webbservern.
 
@@ -70,9 +68,9 @@ Läs [Använda Dispatcher med flera domäner](dispatcher-domains.md) för mer in
 
 ### Hur konfigurerar jag Dispatcher så att alla begäranden från en användare dirigeras till samma Publish-instans?
 
-Du kan använda [klisterlappande anslutningar](dispatcher-configuration.md#identifying-a-sticky-connection-folder-stickyconnectionsfor) som ser till att alla dokument för en användare bearbetas i samma instans av AEM. Den här funktionen är viktig om du använder personaliserade sidor och sessionsdata. Data lagras på instansen. Därför måste efterföljande begäranden från samma användare returnera till den instansen, annars går data förlorade.
+Du kan använda [klisterlappar](dispatcher-configuration.md#identifying-a-sticky-connection-folder-stickyconnectionsfor) som ser till att alla dokument för en användare bearbetas i samma instans av AEM. Den här funktionen är viktig om du använder personaliserade sidor och sessionsdata. Data lagras på instansen. Därför måste efterföljande begäranden från samma användare returnera till den instansen, annars går data förlorade.
 
-Eftersom häftiga anslutningar begränsar Dispatcher möjlighet att optimera begäranden bör du bara använda den här metoden när det behövs. Du kan ange den mapp som innehåller de&quot;klisterlappande&quot; dokumenten, så att alla dokument i mappen behandlas på samma plats för en användare.
+Eftersom häftiga anslutningar begränsar Dispatcher möjlighet att optimera förfrågningar bör du bara använda den här metoden när det behövs. Du kan ange den mapp som innehåller de&quot;klisterlappande&quot; dokumenten, så att alla dokument i mappen behandlas på samma plats för en användare.
 
 ### Kan jag använda kladdiga anslutningar och cachelagring tillsammans?
 
@@ -84,7 +82,7 @@ I vissa program kan du använda både fast anslutning och cachelagring. Om du ti
 
 Ja, om maskinen är tillräckligt kraftfull. Du bör dock konfigurera Dispatcher och AEM Publish-instansen på olika datorer.
 
-Vanligtvis finns Publish-instansen inuti brandväggen och Dispatcher finns i DMZ. Om du väljer att ha både Publish-instansen och Dispatcher på samma fysiska dator måste du se till att brandväggsinställningarna förhindrar direktåtkomst till Publish-instansen från externa nätverk.
+Vanligtvis finns Publishing-instansen inuti brandväggen och Dispatcher finns i DMZ. Om du väljer att ha både Publishing-instansen och Dispatcher på samma fysiska dator måste du se till att brandväggsinställningarna förhindrar direktåtkomst till Publishing-instansen från externa nätverk.
 
 ### Kan jag bara cachelagra filer med specifika tillägg?
 
@@ -117,13 +115,13 @@ Se [Cachelagra säkert innehåll](permissions-cache.md) sida.
 
 ### Hur skyddar jag kommunikationen mellan Dispatcher- och CQ-instanserna?
 
-Se [Dispatcher Security Checklist](security-checklist.md) och [AEM](https://experienceleague.adobe.com/docs/experience-manager-64/administering/security/security-checklist.html?lang=en) sidor.
+Se [Dispatcher Security Checklist](security-checklist.md) och [AEM](https://experienceleague.adobe.com/en/docs/experience-manager-64/administering/security/security-checklist) sidor.
 
 ### Skickaproblem `jcr:content` ändrat till `jcr%3acontent`
 
 **Fråga**: Företaget har nyligen stött på ett problem på Dispatcher-nivå. En av AJAX samtal som fick data från CQ-databasen hade `jcr:content` i den. Det blev kodat till `jcr%3acontent` vilket resulterar i fel resultatmängd.
 
-**Svar**: Använd `ResourceResolver.map()` metod för att hämta en Friendly-URL som ska användas/utfärdas, hämta begäranden från och även för att lösa cachelagringsproblemet med Dispatcher. Metoden map() kodar `:` kolon till understreck och metoden resolve() avkodar dem till SLING JCR-läsbart format. Använd metoden map() för att generera den URL som används i Ajax-anropet.
+**Svar**: Använd `ResourceResolver.map()` metod för att hämta en Friendly-URL som ska användas/utfärdas, hämta begäranden från och även för att lösa cachelagringsproblemet med Dispatcher. Metoden map() kodar `:` kolon till understreck och metoden resolve() avkodar dem tillbaka till SLING JCR-läsbart format. Använd metoden map() för att generera den URL som används i Ajax-anropet.
 
 Läs mer: [https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html#namespace-mangling](https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html#namespace-mangling)
 
@@ -131,17 +129,17 @@ Läs mer: [https://sling.apache.org/documentation/the-sling-engine/mappings-for-
 
 ### Hur konfigurerar jag push-agenter för Dispatcher i en Publish-instans?
 
-Se [Replikering](https://experienceleague.adobe.com/docs/experience-manager-65/deploying/configuring/replication.html?lang=en#configuring-your-replication-agents) sida.
+Se [Replikering](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/replication#configuring-your-replication-agents) sida.
 
 ### Hur felsöker jag problem med att tömma Dispatcher?
 
 [Se de här felsökningsartiklarna](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager]).
 
-Om åtgärderna Ta bort gör att Dispatcher rensas [använd lösningen i det här blogginlägget från Sensei Martin](https://mkalugin-cq.blogspot.com/2012/04/i-have-been-working-on-following.html).
+Om Delete-åtgärderna får Dispatcher att tömmas, [använd lösningen i det här blogginlägget från Sensei Martin](https://mkalugin-cq.blogspot.com/2012/04/i-have-been-working-on-following.html).
 
 ### Hur tömmer jag DAM-resurser från Dispatcher-cachen?
 
-Du kan använda funktionen &quot;kedjereplikering&quot;. När den här funktionen är aktiverad skickar Dispatcher flush-agenten en tömningsbegäran när en replikering tas emot från författaren.
+Du kan använda funktionen &quot;kedjereplikering&quot;. När den här funktionen är aktiverad skickar Dispatcher-agenten en tömningsbegäran när en replikering tas emot från författaren.
 
 Så här aktiverar du den:
 
@@ -162,7 +160,7 @@ Du kan definiera om Dispatcher ska cachelagra ett dokument med [Dispatcher-konfi
 
 The `/rules` anger vilka dokument som cachelagras enligt dokumentets sökväg. Oavsett `/rules` egenskapen, Dispatcher cachelagrar aldrig ett dokument under följande omständigheter:
 
-* URI för begäran innehåller en `(?)` frågetecken.
+* URI:n för begäran innehåller en `(?)` frågetecken.
 * Det indikerar en dynamisk sida, till exempel ett sökresultat som inte behöver cachas.
 * Filtillägget saknas.
 * Webbservern behöver tillägget för att kunna avgöra dokumenttypen (MIME-typen).

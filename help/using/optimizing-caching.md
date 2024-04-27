@@ -1,21 +1,17 @@
 ---
 title: Optimera en webbplats för cacheprestanda
-seo-title: Optimizing a Website for Cache Performance
 description: Lär dig hur du utformar din webbplats för att maximera fördelarna med cachning.
-seo-description: Dispatcher offers a number of built-in mechanisms that you can use to optimize performance. Learn how to design your web site to maximize the benefits of caching.
-uuid: 2d4114d1-f464-4e10-b25c-a1b9a9c715d1
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
-discoiquuid: ba323503-1494-4048-941d-c1d14f2e85b2
 redirecttarget: https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/configuring-performance.html
 index: y
 internal: n
 snippet: y
-source-git-commit: 762f575a58f53d25565fb9f67537e372c760674f
+source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
 workflow-type: tm+mt
-source-wordcount: '1134'
+source-wordcount: '1125'
 ht-degree: 0%
 
 ---
@@ -37,7 +33,7 @@ Last Modified Date: 2017-10-25T04:13:34.919-0400
 >
 >Dispatcher-versionerna är oberoende av AEM. Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i dokumentationen för en tidigare version av AEM.
 
-Dispatcher har ett antal inbyggda mekanismer som du kan använda för att optimera prestanda. I det här avsnittet beskrivs hur du utformar din webbplats för att maximera fördelarna med cachning.
+Dispatcher har flera inbyggda mekanismer som du kan använda för att optimera prestanda. I det här avsnittet beskrivs hur du utformar din webbplats för att maximera fördelarna med cachning.
 
 >[!NOTE]
 >
@@ -46,14 +42,14 @@ Dispatcher har ett antal inbyggda mekanismer som du kan använda för att optime
 >* kan cachelagra allt som du kan lagra som en sida och begära med en URL
 >* kan inte lagra andra saker, t.ex. HTTP-huvuden, cookies, sessionsdata och formulärdata.
 >
->I allmänhet handlar många cachelagringsstrategier om att välja bra URL:er och inte förlita sig på dessa ytterligare data.
+>I allmänhet innebär många cachelagringsstrategier att du väljer bra URL-adresser och inte förlitar dig på dessa ytterligare data.
 
 ## Använda konsekvent sidkodning {#using-consistent-page-encoding}
 
-Rubriker för HTTP-begäran cachelagras inte, vilket innebär att problem kan uppstå om du lagrar sidkodningsinformation i sidhuvudet. I det här fallet används webbserverns standardkodning för sidan när Dispatcher visar en sida från cachen. Det finns två sätt att undvika det här problemet:
+HTTP-begäranrubriker cachelagras inte, vilket innebär att problem kan uppstå om du lagrar sidkodningsinformation i sidhuvudet. I det här fallet används webbserverns standardkodning för sidan när Dispatcher visar en sida från cachen. Det finns två sätt att undvika det här problemet:
 
 * Om du bara använder en kodning kontrollerar du att den kodning som används på webbservern är densamma som standardkodningen för den AEM webbplatsen.
-* Använd en `<META>` -taggen i HTML `head` -sektion för att ställa in kodningen, som i följande exempel:
+* Om du vill ställa in kodningen använder du `<META>` -taggen i HTML `head` -avsnittet, som i följande exempel:
 
 ```xml
         <META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
@@ -91,7 +87,7 @@ www.myCompany.com/news/main.large.html
 
 >[!NOTE]
 >
->I de flesta layoutaspekter går det även att använda formatmallar och/eller skript på klientsidan. De fungerar vanligtvis mycket bra med cachning.
+>I de flesta layoutaspekter går det även att använda formatmallar och/eller skript på klientsidan. De fungerar vanligtvis bra med cachning.
 >
 >Detta är också användbart för en utskriftsversion där du kan använda en URL-adress som:
 >
@@ -101,7 +97,7 @@ www.myCompany.com/news/main.large.html
 
 ## Invaliderar bildfiler som används som titlar {#invalidating-image-files-used-as-titles}
 
-Om du återger sidrubriker, eller annan text, som bilder bör du lagra filerna så att de tas bort vid en innehållsuppdatering på sidan:
+Om du återger sidrubriker eller annan text som bilder kan du lagra filerna så att de tas bort när innehållet uppdateras på sidan:
 
 1. Placera bildfilen i samma mapp som sidan.
 1. Använd följande namnformat för bildfilen:
@@ -116,56 +112,55 @@ Du kan till exempel lagra titeln för sidan myPage.html i filen myPage.title.gif
 
 ## Ogiltiga bildfiler som används för navigering {#invalidating-image-files-used-for-navigation}
 
-Om du använder bilder för navigeringsposterna är metoden i stort sett densamma som med titlar, något mer komplex. Lagra alla navigeringsbilder med målsidorna. Om du använder två bilder för normal och aktiv användning kan du använda följande skript:
+Om du använder bilder för navigeringsposterna är metoden i stort sett densamma som med titlar, vilket är lite mer komplicerat. Lagra alla navigeringsbilder med målsidorna. Om du använder två bilder för normal och aktiv användning kan du använda följande skript:
 
 * Ett skript som visar sidan som vanligt.
 * Ett skript som bearbetar &quot;.normal&quot;-begäranden och returnerar den normala bilden.
 * Ett skript som bearbetar &quot;.active&quot;-begäranden och returnerar den aktiverade bilden.
 
-Det är viktigt att du skapar dessa bilder med samma namngivningshandtag som sidan, så att innehållsuppdateringen tar bort både dessa bilder och sidan.
+Det är viktigt att du skapar de här bilderna med samma namngivningshandtag som sidan för att vara säker på att en innehållsuppdatering tar bort dessa bilder och sidan.
 
-För sidor som inte ändras finns bilderna kvar i cachen, även om själva sidorna vanligtvis blir automatiskt ogiltiga.
+För sidor som inte ändras finns bilderna kvar i cacheminnet, även om själva sidorna är automatiskt ogiltiga.
 
-## Personanpassning {#personalization}
+## Personalisering {#personalization}
 
 Dispatcher kan inte cachelagra anpassade data, så vi rekommenderar att du begränsar personaliseringen till där det är nödvändigt. Så här visar du varför:
 
 * Om du använder en fritt anpassningsbar startsida måste den sidan sammanställas varje gång en användare begär den.
-* Om du däremot har 10 olika startsidor kan du cachelagra var och en av dem, vilket förbättrar prestandan.
+* Om du däremot erbjuder ett alternativ på tio olika startsidor kan du cachelagra var och en av dem, vilket förbättrar prestandan.
 
 >[!NOTE]
 >
 >Om du anpassar varje sida (till exempel genom att placera användarens namn i namnlisten) kan du inte cachelagra den, vilket kan få stor prestandapåverkan.
 >
->Om du måste göra det kan du:
+>Men om du måste göra det kan du:
 >
 >* Använd iFrames för att dela upp sidan i en del som är densamma för alla användare och en del som är densamma för alla sidor i användaren. Du kan sedan cachelagra båda dessa delar.
 >* använda JavaScript på klientsidan för att visa personlig information. Du måste dock se till att sidan fortfarande visas korrekt om en användare stänger av JavaScript.
 >
 
-
 ## Fästiga anslutningar {#sticky-connections}
 
-[Fästanslutningar](dispatcher.md#TheBenefitsofLoadBalancing) se till att dokumenten för en användare är sammansatta på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp för alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Detta påverkar belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
+[Fästanslutningar](dispatcher.md#TheBenefitsofLoadBalancing) se till att dokumenten för en användare är sammansatta på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp så att den kan innehålla alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Detta påverkar belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
 
 ## MIME-typer {#mime-types}
 
 Det finns två sätt som en webbläsare kan använda för att avgöra vilken typ av fil det är:
 
-1. Genom filtillägg (t.ex. .html, .gif, .jpg osv.)
+1. Med filnamnstillägget (till exempel .html, .gif och .jpg)
 1. Med MIME-typen som servern skickar med filen.
 
-För de flesta filer används MIME-typen i filtillägget. i.e.:
+För de flesta filer används MIME-typen i filtillägget. Det vill säga:
 
-1. Genom filtillägg (t.ex. .html, .gif, .jpg osv.)
+1. Med filnamnstillägget (till exempel .html, .gif och .jpg)
 1. Med MIME-typen som servern skickar med filen.
 
-Om filnamnet inte har något filtillägg visas det som oformaterad text.
+Om filnamnet saknar filtillägg visas det som oformaterad text.
 
 MIME-typen är en del av HTTP-huvudet och Dispatcher cachelagrar den därför inte. Om AEM returnerar filer som inte har ett känt filslut, men som i stället använder MIME-typen, kan dessa filer visas felaktigt.
 
 Följ dessa riktlinjer för att vara säker på att filerna cachelagras korrekt:
 
 * Kontrollera att filerna alltid har rätt filtillägg.
-* Undvik generiska filserverskript med URL-adresser som download.jsp?file=2214. Skriv om skriptet så att URL:er som innehåller filspecifikationen används. i föregående exempel är detta download.2214.pdf.
+* Undvik generiska filserverskript med URL-adresser som download.jsp?file=2214. Skriv om skriptet så att det använder URL:er som innehåller filspecifikationen. I det föregående exemplet är det `download.2214.pdf`.
 
