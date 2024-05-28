@@ -1,6 +1,6 @@
 ---
 title: Invaliderar cachelagrade sidor från AEM
-description: Lär dig hur du konfigurerar interaktionen mellan Dispatcher och Adobe Experience Manager för att säkerställa effektiv cachehantering.
+description: Lär dig hur du konfigurerar interaktionen mellan Dispatcher och AEM för att säkerställa effektiv cachehantering.
 cmgrlastmodified: 01.11.2007 08 22 29 [aheimoz]
 pageversionid: 1193211344162
 template: /apps/docs/templates/contentpage
@@ -9,9 +9,9 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 90eb6a78-e867-456d-b1cf-f62f49c91851
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
 workflow-type: tm+mt
-source-wordcount: '1408'
+source-wordcount: '1411'
 ht-degree: 0%
 
 ---
@@ -24,13 +24,13 @@ När du använder Dispatcher med AEM måste interaktionen konfigureras för att 
 
 Standardvärdet `admin` användarkontot används för att autentisera de replikeringsagenter som är installerade som standard. Skapa ett dedikerat användarkonto som kan användas med replikeringsagenter.
 
-Mer information finns i [Konfigurationsreplikering och transportanvändare](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#VerificationSteps) i AEM Security Checklist.
+Mer information finns i [Konfigurera replikerings- och transportanvändare](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#VerificationSteps) i AEM Security Checklist.
 
 <!-- OLD URL from above https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#VerificationSteps -->
 
 ## Dispatcher Cache har inte verifierats från redigeringsmiljön {#invalidating-dispatcher-cache-from-the-authoring-environment}
 
-En replikeringsagent på AEM författarinstans skickar en cacheogiltigförklaring till Dispatcher när en sida publiceras. Begäran gör att Dispatcher så småningom uppdaterar filen i cachen när nytt innehåll publiceras.
+En replikeringsagent på AEM författarinstans skickar en cacheogiltigförklaring till Dispatcher när en sida publiceras. Dispatcher uppdaterar filen så småningom i cachen när nytt innehåll publiceras.
 
 <!-- 
 
@@ -50,14 +50,15 @@ Last Modified Date: 2017-05-25T10:37:23.679-0400
 
  -->
 
-Använd följande procedur för att konfigurera en replikeringsagent på AEM författarinstans för att göra Dispatcher-cachen ogiltig vid sidaktivering:
+Använd följande procedur för att konfigurera en replikeringsagent på AEM författarinstans. Konfigurationen gör Dispatcher-cachen ogiltig vid sidaktivering:
 
 1. Öppna AEM verktygskonsol. (`https://localhost:4502/miscadmin#/etc`)
 1. Öppna den nödvändiga replikeringsagenten under Verktyg/replikering/Agenter på författare. Du kan använda agenten Dispatcher Flush som är installerad som standard.
 1. Klicka på Redigera och kontrollera på fliken Inställningar att **Aktiverad** är markerat.
 
 1. (valfritt) Markera alternativet **Aliasuppdatering** alternativ.
-1. På fliken Transport anger du den URI som behövs för att få åtkomst till Dispatcher.\
+1. Gå till Dispatcher på fliken Transport genom att ange URI:n.
+
    Om du använder standardagenten Dispatcher Flush uppdaterar du värdnamnet och porten, till exempel https://&lt;*dispatcherHost*>:&lt;*portApache*>/dispatcher/invalidate.cache
 
    **Obs!** För Dispatcher Flush-agenter används URI-egenskapen endast om du använder sökvägsbaserade virtuella värdposter för att skilja mellan grupper. Du använder det här fältet för att ange gruppen som ogiltig. Servergrupp #1 har till exempel en virtuell värd för `www.mysite.com/path1/*` och grupp 2 har en virtuell värd för `www.mysite.com/path2/*`. Du kan använda en URL med `/path1/invalidate.cache` för att rikta in sig på den första gården och `/path2/invalidate.cache` för den andra gruppen. Mer information finns i [Använda Dispatcher med flera domäner](dispatcher-domains.md).
@@ -71,13 +72,13 @@ Mer information om hur du aktiverar åtkomst till mål-URL:er finns i [Aktivera 
 
 >[!NOTE]
 >
->Agenten för tömning av Dispatcher-cachen behöver inte ha ett användarnamn och lösenord, men om den är konfigurerad skickas de med grundläggande autentisering.
+>Agenten för tömning av Dispatcher-cachen behöver inget användarnamn och lösenord, men om den är konfigurerad skickas de med grundläggande autentisering.
 
 Det finns två möjliga problem med den här metoden:
 
-* Dispatcher måste kunna nås från utvecklingsinstansen. Om ditt nätverk (till exempel brandväggen) är konfigurerat så att åtkomsten mellan de båda är begränsad, kanske detta inte är fallet.
+* Dispatcher måste kunna nås från utvecklingsinstansen. Om ditt nätverk (till exempel brandväggen) är konfigurerat så att åtkomsten mellan dessa två är begränsad, kanske detta inte är fallet.
 
-* Publicering och cacheminnet blir ogiltiga samtidigt. Beroende på tidpunkten kan en användare begära en sida precis efter att den tagits bort från cachen, och precis innan den nya sidan publiceras. AEM returnerar nu den gamla sidan och Dispatcher cachelagrar den igen. Detta är mer av ett problem för stora webbplatser.
+* Publicering och cacheminnet blir ogiltiga samtidigt. Beroende på tidpunkten kan en användare begära en sida precis efter att den tagits bort från cachen, och precis innan den nya sidan publiceras. AEM returnerar nu den gamla sidan och Dispatcher cachelagrar den igen. Det här är mer en fråga för stora sajter.
 
 ## Invaliderar Dispatcher Cache från en publiceringsinstans {#invalidating-dispatcher-cache-from-a-publishing-instance}
 
@@ -93,23 +94,21 @@ Comment Type: draft
 
  -->
 
-* Förhindra möjliga timingkonflikter mellan Dispatcher och publiceringsinstansen (se [Dispatcher-cachen från redigeringsmiljön har inte verifierats](#invalidating-dispatcher-cache-from-the-authoring-environment)).
-* Systemet innehåller flera publiceringsinstanser som finns på högpresterande servrar och endast en redigeringsinstans.
+* Förhindra möjliga tidskonflikter mellan AEM Dispatcher och publiceringsinstansen (se [Dispatcher-cachen från redigeringsmiljön har inte verifierats](#invalidating-dispatcher-cache-from-the-authoring-environment)).
+* Systemet innehåller flera publiceringsinstanser som finns på servrar med höga prestanda och endast en redigeringsinstans.
 
 >[!NOTE]
 >
->Beslutet att använda denna metod bör fattas av en erfaren AEM.
+>En erfaren AEM bör fatta beslut om att använda den här metoden.
 
-Dispatcher-rensningen styrs av en replikeringsagent som körs på publiceringsinstansen. Konfigurationen görs emellertid i redigeringsmiljön och överförs sedan genom att agenten aktiveras:
+En replikeringsagent som körs på publiceringsinstansen styr rensningen av Dispatcher. Konfigurationen görs dock i redigeringsmiljön och överförs sedan genom att agenten aktiveras:
 
 1. Öppna AEM verktygskonsol.
 1. Öppna den nödvändiga replikeringsagenten under Verktyg/replikering/Agenter vid publicering. Du kan använda agenten Dispatcher Flush som är installerad som standard.
 1. Klicka på Redigera och kontrollera på fliken Inställningar att **Aktiverad** är markerat.
 1. (valfritt) Markera alternativet **Aliasuppdatering** alternativ.
-1. På fliken Transport anger du den URI som behövs för att få åtkomst till Dispatcher.\
-   Om du använder standardagenten Dispatcher Flush måste du uppdatera värdnamnet och porten. Exempel:
-
-   `http://<dispatcherHost>:<portApache>/dispatcher/invalidate.cache`
+1. Gå till Dispatcher på fliken Transport genom att ange önskad URI.\
+   Om du använder standardagenten Dispatcher Flush ska du uppdatera värdnamnet och porten, till exempel `http://<dispatcherHost>:<portApache>/dispatcher/invalidate.cache`
 
    **Obs!** För Dispatcher Flush-agenter används URI-egenskapen endast om du använder sökvägsbaserade virtuella värdposter för att skilja mellan grupper. Du använder det här fältet för att ange gruppen som ogiltig. Servergrupp #1 har till exempel en virtuell värd för `www.mysite.com/path1/*` och grupp 2 har en virtuell värd för `www.mysite.com/path2/*`. Du kan använda en URL med `/path1/invalidate.cache` för att rikta in sig på den första gården och `/path2/invalidate.cache` för den andra gruppen. Mer information finns i [Använda Dispatcher med flera domäner](dispatcher-domains.md).
 
@@ -125,11 +124,11 @@ När du har konfigurerat och aktiverar en sida från författaren till publiceri
 
 Om du vill göra Dispatcher-cachen ogiltig (eller tömma) utan att aktivera en sida kan du skicka en HTTP-begäran till Dispatcher. Du kan till exempel skapa ett AEM program som gör att administratörer eller andra program kan tömma cachen.
 
-HTTP-begäran gör att Dispatcher tar bort specifika filer från cachen. Dispatcher kan sedan uppdatera cachen med en ny kopia.
+HTTP-begäran gör att AEM Dispatcher tar bort specifika filer från cachen. Dispatcher kan sedan uppdatera cachen med en ny kopia.
 
 ### Ta bort cachelagrade filer {#delete-cached-files}
 
-Utfärda en HTTP-begäran som får Dispatcher att ta bort filer från cachen. Dispatcher cachelagrar filerna igen endast när de tar emot en klientbegäran för sidan. Att ta bort cachelagrade filer på det här sättet är lämpligt för webbplatser som sannolikt inte tar emot samtidiga begäranden för samma sida.
+Utfärda en HTTP-begäran som gör att AEM Dispatcher tar bort filer från cachen. Dispatcher cachelagrar filerna igen endast när de tar emot en klientbegäran för sidan. Att ta bort cachelagrade filer på det här sättet är lämpligt för webbplatser som sannolikt inte tar emot samtidiga begäranden för samma sida.
 
 HTTP-begäran har följande format:
 
@@ -144,15 +143,15 @@ Dispatcher tömmer (tar bort) de cachelagrade filer och mappar som har namn som 
 
 * Alla filer (med valfritt filtillägg) namngivna `en` i `geometrixx-outdoors` katalog
 
-* Alla kataloger med namnet &quot; `_jcr_content`&quot; nedanför katalogen en (som, om den finns, innehåller cachelagrade återgivningar av sidans undernoder)
+* Alla kataloger med namn `_jcr_content` nedanför `en` katalog (som, om den finns, innehåller cachelagrade återgivningar av sidans undernoder)
 
-Alla andra filer i Dispatcher-cachen (eller upp till en viss nivå, beroende på `/statfileslevel` inställning) ogiltigförklaras genom att `.stat` -fil. Filens senaste ändringsdatum jämförs med det senaste ändringsdatumet för ett cachelagrat dokument och dokumentet uppdateras om `.stat` filen är nyare. Se [Ogiltiga filer per mappnivå](dispatcher-configuration.md#main-pars_title_26) för mer information.
+Alla andra filer i Dispatcher-cachen (eller upp till en viss nivå, beroende på `/statfileslevel` inställning) ogiltigförklaras genom att `.stat` -fil. Filens senaste ändringsdatum jämförs med det senaste ändringsdatumet för ett cachelagrat dokument och dokumentet hämtas igen om `.stat` filen är nyare. Se [Ogiltiga filer per mappnivå](dispatcher-configuration.md#main-pars_title_26) för mer information.
 
-Invalidering (d.v.s. beröring av .stat-filer) kan förhindras genom att en extra rubrik skickas `CQ-Action-Scope: ResourceOnly`. Detta kan användas för att tömma vissa resurser utan att göra andra delar av cachen ogiltiga, som JSON-data som skapas dynamiskt och som kräver regelbunden tömning oberoende av cachen. Som exempel kan du representera data som hämtas från ett tredjepartssystem för att visa nyheter och aktiefärger.
+Invalidering (d.v.s. beröring av .stat-filer) kan förhindras genom att en extra rubrik skickas `CQ-Action-Scope: ResourceOnly`. Den här funktionen kan användas för att tömma vissa resurser. Allt utan att andra delar av cachen blir ogiltiga, som JSON-data. Dessa data skapas dynamiskt och kräver regelbunden tömning oberoende av cachen. Som exempel kan du representera data som hämtas från ett tredjepartssystem för att visa nyheter, aktiekurser och så vidare.
 
 ### Ta bort och cacha filer {#delete-and-recache-files}
 
-Skicka en HTTP-begäran som får Dispatcher att ta bort cachelagrade filer och omedelbart hämta och cacha filen. Ta bort och cacha filer direkt när det är troligt att webbplatser tar emot samtidiga klientbegäranden för samma sida. Omedelbar cachelagring säkerställer att Dispatcher bara hämtar och cachelagrar sidan en gång, i stället för en gång för varje samtidig klientbegäran.
+Utfärda en HTTP-begäran som gör att AEM Dispatcher tar bort cachelagrade filer och omedelbart hämtar och cachelagrar filen. Ta bort och cachelagra omedelbart om filer när det är troligt att webbplatser tar emot samtidiga klientbegäranden för samma sida. Omedelbar cachelagring säkerställer att Dispatcher bara hämtar och cachelagrar sidan en gång, i stället för en gång för varje samtidig klientbegäran.
 
 **Obs!** Borttagning och cachelagring av filer bör endast utföras på publiceringsinstansen. När det utförs från författarinstansen inträffar konkurrensförhållanden när försök att hämta resurser görs innan de har publicerats.
 
@@ -170,7 +169,7 @@ page_path1
 page_pathn
 ```
 
-Sidsökvägarna till direkt cacheminne visas på separata rader i meddelandetexten. Värdet för `CQ-Handle` är sökvägen till en sida som gör sidorna ogiltiga. (Se `/statfileslevel` parametern för [Cache](dispatcher-configuration.md#main-pars_146_44_0010) konfigurationsobjekt.) Följande exempel på HTTP-begäran tar bort och cachelagrar `/content/geometrixx-outdoors/en.html page`:
+De sidsökvägar som ska cachelagras omedelbart visas på separata rader i meddelandetexten. Värdet för `CQ-Handle` är sökvägen till en sida som gör sidorna ogiltiga. (Se `/statfileslevel` parametern för [Cache](dispatcher-configuration.md#main-pars_146_44_0010) konfigurationsobjekt.) Följande exempel på HTTP-begäran tar bort och cachelagrar `/content/geometrixx-outdoors/en.html page`:
 
 ```xml
 POST /dispatcher/invalidate.cache HTTP/1.1  
@@ -186,7 +185,7 @@ Content-Length: 36
 
 I följande kod implementeras en servlet som skickar en invalideringsbegäran till Dispatcher. Servern tar emot ett begärandemeddelande som innehåller `handle` och `page` parametrar. De här parametrarna anger värdet för `CQ-Handle` sidhuvud och sidans sökväg till cachelagring. Servern använder värdena för att konstruera HTTP-begäran för Dispatcher.
 
-När servern distribueras till publiceringsinstansen gör följande URL att Dispatcher tar bort /content/geometrixx-outdoors/en.html och sedan cachelagrar en ny kopia.
+När servern distribueras till publiceringsinstansen gör följande URL att AEM Dispatcher tar bort /content/geometrixx-outdoors/en.html och sedan cachelagrar en ny kopia.
 
 `10.36.79.223:4503/bin/flushcache/html?page=/content/geometrixx-outdoors/en.html&handle=/content/geometrixx-outdoors/en/men.html`
 

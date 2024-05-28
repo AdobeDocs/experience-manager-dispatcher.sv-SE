@@ -9,9 +9,9 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 29f338ab-5d25-48a4-9309-058e0cc94cff
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
 workflow-type: tm+mt
-source-wordcount: '538'
+source-wordcount: '539'
 ht-degree: 0%
 
 ---
@@ -20,9 +20,9 @@ ht-degree: 0%
 
 >[!NOTE]
 >
->Dispatcher-versionerna är oberoende av AEM, men Dispatcher-dokumentationen är inbäddad i AEM. Använd alltid Dispatcher-dokumentationen som är inbäddad i dokumentationen för den senaste versionen av AEM.
+>Dispatcher-versionerna är oberoende av AEM. Dispatcher-dokumentationen är dock inbäddad i AEM. Använd alltid Dispatcher-dokumentationen som är inbäddad i dokumentationen för den senaste versionen av AEM.
 >
->Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i dokumentationen för en tidigare version av AEM.
+>Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen. Länken är inbäddad i dokumentationen för en tidigare version av AEM.
 
 >[!NOTE]
 >
@@ -78,7 +78,7 @@ Problem med att ta bort arbetsflödesmodeller vid åtkomst till en AEM författa
 
 1. Klicka **Ja** för att bekräfta.
 1. En felmeddelanderuta med följande information visas:\
-   &quot; `ERROR 'Could not delete workflow model!!`&quot;.
+   `ERROR 'Could not delete workflow model!!`.
 
 **Upplösning**
 

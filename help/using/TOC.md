@@ -10,10 +10,10 @@ feature-set: Experience Manager
 feature: Dispatcher
 topic: Administration
 role: Admin
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: d8e224401e5ab041bb297b99a99c71a69ca6deac
 workflow-type: tm+mt
-source-wordcount: '78'
-ht-degree: 30%
+source-wordcount: '83'
+ht-degree: 28%
 
 ---
 
@@ -26,13 +26,13 @@ ht-degree: 30%
    + [Checklistan för Dispatcher-säkerhet](security-checklist.md)
    + [AEM Dispatcher Release Notes](release-notes.md)
 + Konfigurerar {#configuring}
-   + [Konfigurera Dispatcher](dispatcher-configuration.md)
+   + [Konfigurera AEM Dispatcher](dispatcher-configuration.md)
    + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
    + [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
    + [Cachelagra skyddat innehåll](permissions-cache.md)
-   + [Använda Dispatcher med flera domäner](dispatcher-domains.md)
-   + [Använda SSL med Dispatcher](dispatcher-ssl.md)
-   + [Konfigurera Dispatcher för att förhindra CSRF-attacker](configuring-dispatcher-to-prevent-csrf.md)
+   + [Använda AEM Dispatcher med flera domäner](dispatcher-domains.md)
+   + [Använda SSL med AEM Dispatcher](dispatcher-ssl.md)
+   + [Konfigurera AEM Dispatcher för att förhindra CSRF-attacker](configuring-dispatcher-to-prevent-csrf.md)
 + Felsökning {#troubleshooting}
    + [Felsökning av Dispatcher-problem](dispatcher-troubleshooting.md)
    + [Vanliga frågor och svar om Dispatcher](dispatcher-faq.md)

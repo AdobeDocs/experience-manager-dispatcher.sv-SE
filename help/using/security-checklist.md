@@ -1,6 +1,6 @@
 ---
 title: Checklistan för Dispatcher-säkerhet
-description: En checklista för säkerhet som ska slutföras innan produktionen påbörjas.
+description: Lär dig mer om Dispatcher Security Checklist som ska fyllas i innan du börjar producera.
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
@@ -10,9 +10,9 @@ index: y
 internal: n
 snippet: y
 exl-id: 49009810-b5bf-41fd-b544-19dd0c06b013
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
 workflow-type: tm+mt
-source-wordcount: '591'
+source-wordcount: '590'
 ht-degree: 0%
 
 ---
@@ -38,11 +38,11 @@ Adobe rekommenderar att du slutför följande checklista innan du börjar produc
 
 ## Använd den senaste versionen av Dispatcher {#use-the-latest-version-of-dispatcher}
 
-Installera den senaste versionen som är tillgänglig för din plattform. Uppgradera Dispatcher-instansen så att du kan använda den senaste versionen och dra nytta av produkt- och säkerhetsförbättringarna. Se [Installerar Dispatcher](dispatcher-install.md).
+Installera den senaste tillgängliga versionen som är tillgänglig för din plattform. Uppgradera Dispatcher-instansen till den senaste versionen och dra nytta av produkt- och säkerhetsförbättringarna. Se [Installerar Dispatcher](dispatcher-install.md).
 
 >[!NOTE]
 >
->Kontrollera den aktuella versionen av Dispatcher-installationen genom att titta i Dispatcher-loggfilen.
+>Du kan kontrollera den aktuella versionen av Dispatcher-installationen genom att titta i Dispatcher-loggfilen.
 >
 >`[Thu Apr 30 17:30:49 2015] [I] [23171(140735307338496)] Dispatcher initialized (build 4.1.9)`
 >
@@ -52,9 +52,9 @@ Installera den senaste versionen som är tillgänglig för din plattform. Uppgra
 
 Adobe rekommenderar att du [begränsa vilka klienter som kan tömma cachen.](dispatcher-configuration.md#limiting-the-clients-that-can-flush-the-cache)
 
-## Aktivera HTTPS för transportlagersäkerhet {#enable-https-for-transport-layer-security}
+## Aktivera HTTPS för transportlagrets säkerhet {#enable-https-for-transport-layer-security}
 
-Adobe rekommenderar att du aktiverar HTTPS-transportskiktet på både författaren och publiceringsinstansen.
+Adobe rekommenderar att du aktiverar HTTPS-transportlagret på både författare- och publiceringsinstanser.
 
 <!-- 
 
@@ -89,22 +89,22 @@ Tillåtelselista är ett bättre sätt att tillhandahålla åtkomstkontroll efte
 
 ## Kör Dispatcher med en dedikerad systemanvändare {#run-dispatcher-with-a-dedicated-system-user}
 
-När du konfigurerar Dispatcher bör du se till att webbservern körs av en dedikerad användare med minst behörighet. Vi rekommenderar att du bara ger skrivåtkomst till cachemappen för Dispatcher.
+När du konfigurerar Dispatcher måste du se till att webbservern körs av en dedikerad användare med minst behörighet. Vi rekommenderar att du bara ger skrivåtkomst till cachemappen för Dispatcher.
 
 IIS-användare måste dessutom konfigurera sin webbplats på följande sätt:
 
-1. I inställningen för fysisk sökväg för din webbplats väljer du **Anslut som specifik användare**.
+1. I inställningen för fysisk sökväg för din webbplats väljer du **Ansluta som en specifik användare**.
 1. Ange användaren.
 
 ## Förhindra DoS-attacker {#prevent-denial-of-service-dos-attacks}
 
 En denial of service-attack (DoS) är ett försök att göra en datorresurs otillgänglig för de avsedda användarna.
 
-På nivån Dispatcher finns [två metoder för att konfigurera för att förhindra DoS-attacker](https://experienceleaguecommunities.adobe.com/t5/adobe-experience-manager/configure-aem-dispatcher-to-prevent-dos-attacks-aem-community/m-p/447780).
+På nivån Dispatcher finns det två metoder för att konfigurera för att förhindra DoS-attacker: [Filter](https://experienceleague.adobe.com/en/docs#/filter)
 
 * Använd modulen mod_rewrite (till exempel) [Apache 2.4](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)) för att utföra URL-valideringar (om URL-mönsterreglerna inte är för komplexa).
 
-* Förhindra att Dispatcher cachelagrar URL:er med falska tillägg genom att använda [filter](dispatcher-configuration.md#configuring-access-to-conten-tfilter).\
+* Förhindra att Dispatcher cachelagrar URL:er med falska tillägg genom att använda [filter](dispatcher-configuration.md#configuring-access-to-content-filter).\
   Ändra till exempel cachningsreglerna för att begränsa cachning till de förväntade MIME-typerna, som:
 
    * `.html`
@@ -116,9 +116,9 @@ På nivån Dispatcher finns [två metoder för att konfigurera för att förhind
    * `.pdf`
    * `.ppt`
 
-  En exempelkonfigurationsfil finns för [begränsa extern åtkomst](#restrict-access)innehåller detta begränsningar för MIME-typer.
+  En exempelkonfigurationsfil finns för [begränsa extern åtkomst](#restrict-access). Den innehåller begränsningar för MIME-typer.
 
-Om du vill aktivera alla funktioner för publiceringsinstanserna på ett säkert sätt konfigurerar du filter så att de inte får åtkomst till följande noder:
+Om du vill aktivera alla funktioner för publiceringsinstanserna konfigurerar du filter så att de inte får åtkomst till följande noder:
 
 * `/etc/`
 * `/libs/`
@@ -148,9 +148,7 @@ Last Modified Date: 2015-06-26T04:38:17.016-0400
 
 ## Konfigurera Dispatcher för att förhindra CSRF-attacker {#configure-dispatcher-to-prevent-csrf-attacks}
 
-AEM tillhandahåller en [ramverk](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#verification-steps) som syftar till att förhindra attacker av typen cross-site Request. För att du ska kunna använda det här ramverket måste du tillåtslista CSRF-tokenstöd i Dispatcher.
-<!-- OLD URL ABOVE USED TO BE https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#verification-steps -->
-Du kan uppnå detta genom att göra följande:
+AEM tillhandahåller en [ramverk](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#verification-steps) som syftar till att förhindra attacker av typen cross-site Request. Om du vill använda det här ramverket på rätt sätt tillåtslista du CSRF-tokenstödet i Dispatcher genom att göra följande:
 
 1. Skapa ett filter som tillåter `/libs/granite/csrf/token.json` sökväg,
 1. Lägg till `CSRF-Token` sidhuvud till `clientheaders` i Dispatcher-konfigurationen.
@@ -163,4 +161,5 @@ Mer information om clickjacking finns i [OWASP-plats](https://owasp.org/www-comm
 
 ## Utför ett penetrationstest {#perform-a-penetration-test}
 
-Adobe rekommenderar att du utför ett penetrationstest av din AEM infrastruktur innan du börjar producera.
+Adobe rekommenderar starkt att du utför ett penetrationstest av din AEM infrastruktur innan du börjar producera.
+
