@@ -2,9 +2,9 @@
 title: Konfigurera AEM Dispatcher
 description: Lär dig hur du konfigurerar AEM Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
+source-git-commit: 0189feaf345495ba2f992d91eccf5690ec7581ce
 workflow-type: tm+mt
-source-wordcount: '8897'
+source-wordcount: '8898'
 ht-degree: 0%
 
 ---
@@ -1229,7 +1229,7 @@ Den anropas med följande argument:
 
 Den här metoden kan användas för att täcka flera olika användningsfall. Om du till exempel gör andra programspecifika cacheminnen ogiltiga eller hanterar fall där den externa URL-adressen för en sida och dess plats i dokumentroten inte matchar innehållssökvägen.
 
-Nedanstående exempel på skript loggar varje ogiltig begäran till en fil.
+Följande exempelskript loggar varje ogiltig begäran till en fil.
 
 ```xml
 /invalidateHandler "/opt/dispatcher/scripts/invalidate.sh"

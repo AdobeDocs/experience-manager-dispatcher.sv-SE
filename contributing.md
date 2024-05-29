@@ -1,15 +1,15 @@
 ---
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 0189feaf345495ba2f992d91eccf5690ec7581ce
 workflow-type: tm+mt
-source-wordcount: '496'
-ht-degree: 2%
+source-wordcount: '500'
+ht-degree: 0%
 
 ---
-# Bidra till Adobe Experience Manager Documentation
+# Bidra till Adobe Experience Manager Screens Documentation
 
-Tack för att du väljer att delta i Adobe Experience Manager-dokumentationen! Adobe välkomnar bidrag från hela läsarcommunityn och från medarbetare i Adobe.
+Tack för att du väljer att delta i Adobe Experience Manager Screens-dokumentationen! Adobe välkomnar bidrag från hela läsarcommunityn och från medarbetare i Adobe.
 
-Den här filen beskriver hur du kan bidra och visar de riktlinjer som ska följas när du gör bidrag.
+I den här filen beskrivs hur du kan bidra samt vilka riktlinjer du ska följa när du gör dina bidrag.
 
 ## Adobe uppförandekod med öppen källkod
 
@@ -36,13 +36,13 @@ Vilken metod du väljer beror på hur bekväm du själv redigerar dokumentatione
 
 Har du ett förslag, synpunkter på aktuella dokument eller frågor om hur något beskrivs? Skapa sedan ett problem. Problem är också bra om du har något att bidra med, men inte känner dig bekväm med att redigera dokumenten eller göra en pull-förfrågan själv.
 
-Med hjälp av olika problem kan du enkelt beskriva din idé om hur du kan förbättra dokumenten, och en AEM Docs Team-medlem kan granska den. Klicka på **Logga ett problem** överst på den högra navigeringspanelen på en sida.
+Du kan enkelt beskriva din idé om förbättringar i dokumenten och en AEM Docs Team-medlem kan granska den. Klicka **Logga ett problem** längst upp på den högra navigeringspanelen på en sida för att skapa ett problem.
 
 ### Skapa en pull-begäran {#create-a-pull-request}
 
-Om du ser ett problem och vet exakt hur du löser det kan du skapa en pull-begäran. Dragningsbegäranden gör att du kan göra egna ändringar i dokumentationen, som sedan granskas för att inkluderas av en AEM Docs Team-medlem. Om du vill göra de föreslagna ändringarna och skapa en pull-begäran klickar du på knappen **Redigera den här sidan** överst på den högra navigeringspanelen på en sida.
+Om du ser ett problem och vet exakt hur du löser det kan du skapa en pull-begäran. Med pull-begäranden kan du göra egna ändringar i dokumentationen. En AEM Docs Team-medlem granskar ändringarna för att lägga in dem. Klicka **Redigera den här sidan** längst upp på den högra navigeringspanelen på en sida för att göra de föreslagna ändringarna och skapa pull-begäran.
 
-Alla pull-begäranden måste åtföljas av en signerad [licensavtal eller CLA](https://opensource.adobe.com/cla.html). Detta ger Adobe tillstånd att återdistribuera dina bidrag som en del av projektet. Du skickar en Adobe CLA en gång. Så om du har skickat in en tidigare, är du redo att gå!
+Alla pull-begäranden måste ha en [licensavtal eller CLA](https://opensource.adobe.com/cla.html) som är signerad. CLA ger Adobe tillstånd att återdistribuera dina bidrag som en del av projektet. Du behöver bara skicka ett Adobe CLA en gång, så om du har skickat ett tidigare är du redo att gå!
 
 ### Introduktion till snabbvideo
 
@@ -54,8 +54,8 @@ Titta på följande video för att få en snabb översikt över hur du skapar pr
 
 Om du är anställd i Adobe och har ett bidrag använder du `AdobeDocs` i företagsgit.
 
-Adobe välkomnar alla bidrag. Om den gjordes i den offentliga databasen granskas den. Det är dock enklare att behandla förfrågningar från anställda på Adobe och de kan godkännas snabbare i företagets rapport. Se till att all företagsinformation bara behandlas i företagets rapport.
+Adobe är nöjd med ditt bidrag och granskar ditt bidrag om det görs på den offentliga databasen. Det är dock enklare att behandla förfrågningar från anställda på Adobe och de kan godkännas snabbare i företagets rapport. Se till att all företagsinformation bara behandlas i företagets rapport.
 
 ## Ytterligare information
 
-Se [Adobe Docs Contributor Guide](https://experienceleague.adobe.com/en/docs/contributor/contributor-guide/introduction) för mer information om hur du använder utvecklingsplattformen GitHub.
+Se [Adobe Docs Contributor Guide](https://experienceleague.adobe.com/en/docs/contributor/contributor-guide/introduction) om du vill ha mer information om hur du använder utvecklingsplattformen GitHub.
