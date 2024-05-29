@@ -6,9 +6,9 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 3d8d8204-7e0d-44ad-b41b-6fec2689c6a6
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '910'
+source-wordcount: '924'
 ht-degree: 0%
 
 ---
@@ -42,7 +42,7 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 
 1. Dispatcher avgör att innehållet inte cachas eller behöver uppdateras.
 1. Skickaren vidarebefordrar den ursprungliga begäran till återgivningen.
-1. Renderingen anropar den AEM autentiseringsservern (det här är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
+1. Renderingen anropar den AEM auktoriserarservern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
 1. Skickaren vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
 ## Användaren är inte auktoriserad {#user-is-not-authorized}
@@ -53,7 +53,7 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 1. Dispatcher skickar ett begärandemeddelande till återgivningen som innehåller alla rubrikrader från webbläsarens begäran.
 1. Renderingen anropar Auth Checker-servern för att utföra en säkerhetskontroll som misslyckas och återgivningen vidarebefordrar den ursprungliga begäran till Dispatcher.
 1. Skickaren vidarebefordrar den ursprungliga begäran till återgivningen.
-1. Renderingen anropar den AEM autentiseringsservern (det här är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
+1. Renderingen anropar den AEM auktoriserarservern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
 1. Skickaren vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
 ## Tillämpa behörighetskänslig cachelagring {#implementing-permission-sensitive-caching}
@@ -74,7 +74,7 @@ Så här implementerar du behörighetskänslig cachelagring:
 
 ## Skapa Auth Checker-servleten {#create-the-auth-checker-servlet}
 
-Skapa och distribuera en serverdator som autentiserar och auktoriserar den användare som begär webbinnehållet. Servern kan använda vilken autentiserings- och auktoriseringsmetod som helst, t.ex. AEM användarkonto och databas-ACL:er, eller en LDAP-sökningstjänst. Du distribuerar servleten till den AEM instansen som Dispatcher använder som rendering.
+Skapa och distribuera en serverdator som autentiserar och auktoriserar den användare som begär webbinnehållet. Servern kan använda vilken autentisering som helst. Den kan också använda vilken auktoriseringsmetod som helst. Den kan till exempel använda AEM användarkonto och databas-ACL:er. Den kan också använda en LDAP-sökningstjänst. Du distribuerar servleten till den AEM instansen som Dispatcher använder som rendering.
 
 Servern måste vara tillgänglig för alla användare. Därför bör din servlet utöka `org.apache.sling.api.servlets.SlingSafeMethodsServlet` som ger skrivskyddad åtkomst till systemet.
 
@@ -161,7 +161,7 @@ När Dispatcher startas innehåller Dispatcher-loggfilen följande felsökningsn
 
 `AuthChecker: initialized with URL 'configured_url'.`
 
-I följande exempel konfigureras Dispatcher av avsnittet auth_checker så att serverpaketet för föregående ämne används. I filteravsnittet utförs behörighetskontroller endast på säkra HTML-resurser.
+I följande exempel konfigureras Dispatcher till att använda servleten för föregående ämne. I filteravsnittet utförs behörighetskontroller endast på säkra HTML-resurser.
 
 ### Exempelkonfiguration {#example-configuration}
 

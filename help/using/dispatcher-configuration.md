@@ -1,10 +1,10 @@
 ---
 title: Konfigurera AEM Dispatcher
-description: Lär dig hur du konfigurerar AEM Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
+description: Lär dig hur du konfigurerar Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 0189feaf345495ba2f992d91eccf5690ec7581ce
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '8898'
+source-wordcount: '8876'
 ht-degree: 0%
 
 ---
@@ -25,7 +25,7 @@ Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätver
 
 Som standard lagras Dispatcher-konfigurationen i `dispatcher.any` textfil, men du kan ändra namn och plats för filen under installationen.
 
-Konfigurationsfilen innehåller en serie egenskaper med ett eller flera värden som styr beteendet för AEM Dispatcher:
+Konfigurationsfilen innehåller en serie egenskaper med ett eller flera värden som styr Dispatcher-beteendet:
 
 * Egenskapsnamn föregås av ett snedstreck `/`.
 * Egenskaper med flera värden omsluter underordnade objekt med klammerparenteser `{ }`.
@@ -152,7 +152,7 @@ Använd `/name` för att ange ett unikt namn som identifierar Dispatcher-instans
 
 The `/farms` -egenskapen definierar en eller flera uppsättningar Dispatcher-beteenden, där varje uppsättning är kopplad till olika webbplatser eller URL-adresser. The `/farms` kan innehålla en eller flera grupper:
 
-* Använd en enda servergrupp när du vill att AEM Dispatcher ska hantera alla dina webbsidor eller webbplatser på samma sätt.
+* Använd en enda servergrupp när du vill att Dispatcher ska hantera alla dina webbsidor eller webbplatser på samma sätt.
 * Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteenden.
 
 The `/farms` -egenskapen är en egenskap på den översta nivån i konfigurationsstrukturen. Om du vill definiera en servergrupp lägger du till en underordnad egenskap i `/farms` -egenskap. Använd ett egenskapsnamn som unikt identifierar servergruppen i Dispatcher-instansen.
@@ -197,7 +197,7 @@ Varje gruppegenskap kan innehålla följande underordnade egenskaper:
 | [/virtualhosts](#identifying-virtual-hosts-virtualhosts) | Den här servergruppens virtuella värdar. |
 | [/sessionmanagement](#enabling-secure-sessions-sessionmanagement) | Stöd för sessionshantering och autentisering. |
 | [/renders](#defining-page-renderers-renders) | Servrarna som tillhandahåller återgivna sidor (vanligtvis AEM publiceringsinstanser). |
-| [/filter](#configuring-access-to-content-filter) | Definierar de URL:er som AEM Dispatcher aktiverar åtkomst till. |
+| [/filter](#configuring-access-to-content-filter) | Definierar de URL:er som Dispatcher aktiverar åtkomst till. |
 | [/vanity_urls](#enabling-access-to-vanity-urls-vanity-urls) | Konfigurerar åtkomst till mål-URL:er. |
 | [/propagateSyndPost](#forwarding-syndication-requests-propagatesyndpost) | Stöd för vidarebefordran av syndikeringsbegäranden. |
 | [/cache](#configuring-the-dispatcher-cache-cache) | Konfigurerar cachelagring. |
@@ -259,7 +259,7 @@ Comment Type: draft
 
 The `/clientheaders` -egenskapen definierar en lista med HTTP-huvuden som Dispatcher skickar från klientens HTTP-begäran till återgivaren (AEM instans).
 
-Som standard vidarebefordrar AEM Dispatcher standardrubrikerna för HTTP till AEM. I vissa fall kanske du vill vidarebefordra ytterligare rubriker eller ta bort specifika rubriker:
+Som standard vidarebefordrar Dispatcher standard-HTTP-rubrikerna till AEM. I vissa fall kanske du vill vidarebefordra ytterligare rubriker eller ta bort specifika rubriker:
 
 * Lägg till rubriker, t.ex. anpassade rubriker, som din AEM förväntar sig i HTTP-begäran.
 * Ta bort rubriker, t.ex. autentiseringsrubriker som bara är relevanta för webbservern.
@@ -455,7 +455,7 @@ Ett exempel på konfiguration ser ut så här:
 
 ## Definiera sidåtergivare {#defining-page-renderers-renders}
 
-The `/renders` -egenskapen definierar den URL som AEM Dispatcher skickar begäranden till för att återge ett dokument. Följande exempel `/renders` används för att identifiera en enda AEM för återgivning:
+The `/renders` -egenskapen definierar den URL som Dispatcher skickar begäranden till för att återge ett dokument. Följande exempel `/renders` används för att identifiera en enda AEM för återgivning:
 
 ```xml
 /renders
@@ -618,7 +618,7 @@ Om dina filter inte aktiveras på det sätt du förväntar dig ska du aktivera [
 
 #### Exempelfilter: Neka alla {#example-filter-deny-all}
 
-Följande exempelfilteravsnitt gör att AEM Dispatcher nekar begäranden för alla filer. Neka åtkomst till alla filer och tillåt sedan åtkomst till specifika områden.
+Följande exempelfilteravsnitt gör att Dispatcher nekar begäranden för alla filer. Neka åtkomst till alla filer och tillåt sedan åtkomst till specifika områden.
 
 ```xml
 /0001  { /type "deny" /url "*"  }
@@ -695,7 +695,7 @@ Nedan visas ett regelexempel som blockerar innehåll som hämtas från `/content
 
 ### Exempel `/filter` section {#example-filter-section}
 
-När du konfigurerar AEM Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Följande exempel ger minimal åtkomst för externa besökare:
+När du konfigurerar Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Följande exempel ger minimal åtkomst för externa besökare:
 
 * `/content`
 * olika innehåll, t.ex. design och klientbibliotek. Till exempel:
@@ -914,7 +914,7 @@ Last Modified Date: 2015-03-25T14:23:05.185-0400
 <p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;">The "com.adobe.granite.dispatcher.vanityurl.content" package needs to be made public before publishing this contnet.</p>
  -->
 
-Konfigurera AEM Dispatcher för att aktivera åtkomst till tillfälliga URL:er som är konfigurerade för dina AEM sidor.
+Konfigurera Dispatcher för att aktivera åtkomst till användar-URL:er som är konfigurerade för dina AEM.
 
 När åtkomst till tillfälliga URL:er är aktiverat anropar Dispatcher regelbundet en tjänst som körs på återgivningsinstansen för att få en lista över tillfälliga URL:er. Dispatcher lagrar den här listan i en lokal fil. När en begäran om en sida nekas på grund av ett filter i `/filter` -avsnittet söker Dispatcher igenom listan över användar-URL:er. Om den nekade URL:en finns med i listan tillåter Dispatcher åtkomst till den nekade URL:en.
 
@@ -932,7 +932,7 @@ The `/vanity_urls` -avsnittet innehåller följande egenskaper:
 
 * `/url`: Sökvägen till den vanity URL-tjänst som körs på återgivningsinstansen. Värdet för den här egenskapen måste vara `"/libs/granite/dispatcher/content/vanityUrls.html"`.
 
-* `/file`: Sökvägen till den lokala filen där Dispatcher lagrar listan över huvud-URL:er. Kontrollera att AEM Dispatcher har skrivbehörighet till den här filen.
+* `/file`: Sökvägen till den lokala filen där Dispatcher lagrar listan över huvud-URL:er. Kontrollera att Dispatcher har skrivbehörighet till den här filen.
 * `/delay`: (Sekunder) Tiden mellan anrop till tjänsten för huvud-URL.
 
 >[!NOTE]
@@ -1003,7 +1003,7 @@ The `/docroot` identifierar katalogen där cachelagrade filer lagras.
 
 >[!NOTE]
 >
->Värdet måste vara samma sökväg som dokumentroten på webbservern så att AEM Dispatcher och webbservern hanterar samma filer.\
+>Värdet måste vara samma sökväg som dokumentroten på webbservern så att Dispatcher och webbservern hanterar samma filer.\
 >Webbservern ansvarar för att leverera rätt statuskod när Dispatcher-cachefilen används, och det är därför det är viktigt att den också kan hitta den.
 
 Om du använder flera grupper måste varje grupp ha en annan dokumentrot.
@@ -1012,7 +1012,7 @@ Om du använder flera grupper måste varje grupp ha en annan dokumentrot.
 
 The `/statfile` egenskapen identifierar filen som ska användas som statfile. Dispatcher använder den här filen för att registrera tidpunkten för den senaste innehållsuppdateringen. Statfile kan vara vilken fil som helst på webbservern.
 
-Statusfilen har inget innehåll. När innehållet uppdateras uppdaterar AEM Dispatcher tidsstämpeln. Standardstatusfilen heter `.stat` och lagras i dokumentet. Dispatcher blockerar åtkomsten till statusfilen.
+Statusfilen har inget innehåll. När innehållet uppdateras uppdaterar Dispatcher tidsstämpeln. Standardstatusfilen heter `.stat` och lagras i dokumentet. Dispatcher blockerar åtkomsten till statusfilen.
 
 >[!NOTE]
 >
@@ -1020,9 +1020,9 @@ Statusfilen har inget innehåll. När innehållet uppdateras uppdaterar AEM Disp
 
 ### Hantera gamla dokument när fel uppstår {#serving-stale-documents-when-errors-occur}
 
-The `/serveStaleOnError` anger om Dispatcher returnerar ogiltiga dokument när återgivningsservern returnerar ett fel. Som standard tas det cachelagrade innehållet bort när en lägesfil ändras och det cachelagrade innehållet blir ogiltigt av AEM Dispatcher. Den här åtgärden utförs nästa gång den begärs.
+The `/serveStaleOnError` anger om Dispatcher returnerar ogiltiga dokument när återgivningsservern returnerar ett fel. Som standard tas det cachelagrade innehållet bort när en lägesfil ändras och det cachelagrade innehållet blir ogiltigt. Den här åtgärden utförs nästa gång den begärs.
 
-If `/serveStaleOnError` är inställd på `"1"`, tar inte Dispatcher bort ogiltigt innehåll från cachen. Det vill säga, om inte återgivningsservern returnerar ett lyckat svar. Ett 5xx-svar från AEM eller en timeout för anslutningen gör att AEM Dispatcher skickar det inaktuella innehållet och svarar med och HTTP-statusen 111 (förnyelsen misslyckades).
+If `/serveStaleOnError` är inställd på `"1"`, tar inte Dispatcher bort ogiltigt innehåll från cachen. Det vill säga, om inte återgivningsservern returnerar ett lyckat svar. Ett 5xx-svar från AEM eller en timeout för anslutningen gör att Dispatcher skickar det inaktuella innehållet och svarar med och HTTP-statusen 111 (förnyelsen misslyckades).
 
 ### Cachelagring när autentisering används {#caching-when-authentication-is-used}
 
@@ -1349,7 +1349,7 @@ Nedan visas ett exempel från standardkonfigurationen:
 
 >[!NOTE]
 >
->Om du behöver AEM Dispatcher för att lagra och leverera ETag-svarshuvuden från AEM gör du följande:
+>Om du vill att Dispatcher ska lagra och leverera ETag-svarshuvuden från AEM gör du följande:
 >
 >* Lägg till rubriknamnet i `/cache/headers`-avsnitt.
 >* Lägg till följande [Apache-direktiv](https://httpd.apache.org/docs/2.4/mod/core.html#fileetag) i avsnittet Dispatcher-relaterat:
@@ -1389,7 +1389,7 @@ Tidsbaserad cacheogiltigförklaring beror på `/enableTTL` och det finns regelbu
 Före Dispatcher 4.3.5 baserades logiken för TTL-ogiltigförklaring endast på det konfigurerade TTL-värdet. Med Dispatcher 4.3.5, båda de angivna TTL-värdena **och** Invalideringsreglerna för Dispatcher-cachen räknas med. För en cachelagrad fil:
 
 1. If `/enableTTL` anges till 1, filens förfallodatum kontrolleras. Om filen har gått ut enligt angiven TTL utförs inga andra kontroller och den cachelagrade filen efterfrågas igen från serverdelen.
-2. Om filen inte har gått ut, eller `/enableTTL` inte har konfigurerats, tillämpas standardreglerna för ogiltigförklaring av cachen, till exempel de regler som [`/statfileslevel`](#invalidating-files-by-folder-level) och [`/invalidate`](#automatically-invalidating-cached-files) set. Det här flödet innebär att AEM Dispatcher kan göra filer för vilka TTL-värdet inte har gått ut ogiltiga.
+2. Om filen inte har gått ut, eller `/enableTTL` inte har konfigurerats, tillämpas standardreglerna för ogiltigförklaring av cachen, till exempel de regler som [`/statfileslevel`](#invalidating-files-by-folder-level) och [`/invalidate`](#automatically-invalidating-cached-files) set. Det här flödet innebär att Dispatcher kan göra filer som TTL-värdet inte har gått ut för ogiltiga.
 
 Den nya implementeringen stöder användning där filerna har längre TTL-värden (till exempel CDN). Men filen kan fortfarande ogiltigförklaras även om TTL-värdet inte har gått ut. Det prioriterar innehållets aktualitet framför cache-träffkvoten för Dispatcher.
 
@@ -1431,7 +1431,7 @@ Dispatcher stöder högst åtta statistikkategorier. Om du definierar fler än �
 
 **Återge markering**
 
-Varje gång AEM Dispatcher kräver en återgiven sida används följande algoritm för att välja återgivningen:
+Varje gång Dispatcher kräver en återgiven sida används följande algoritm för att välja återgivningen:
 
 1. Om begäran innehåller återgivningsnamnet i en `renderid` cookie, Dispatcher använder den renderingen.
 1. Om begäran inte innehåller `renderid` cookie, Dispatcher jämför återgivningsstatistiken:
@@ -1455,7 +1455,7 @@ Definiera en kategori för varje dokumenttyp som du vill behålla statistik för
 
 Kategorin `name` måste vara unik för servergruppen. The `pattern` beskrivs i [Designa mönster för globegenskaper](#designing-patterns-for-glob-properties) -avsnitt.
 
-För att fastställa kategorin för en URI jämför AEM Dispatcher URI:n med varje kategorimönster tills en matchning hittas. Dispatcher börjar med den första kategorin i listan och fortsätter i rätt ordning. Därför bör du placera kategorier med mer specifika mönster först.
+För att fastställa kategorin för en URI jämför Dispatcher URI:n med varje kategorimönster tills en matchning hittas. Dispatcher börjar med den första kategorin i listan och fortsätter i rätt ordning. Därför bör du placera kategorier med mer specifika mönster först.
 
 Till exempel Dispatcher som standard `dispatcher.any` -filen definierar en HTML-kategori och en annan kategori. Kategorin HTML är mer specifik och visas därför först:
 
@@ -1548,7 +1548,7 @@ Använd `/health_check` för att ange en URL som kontrolleras när en 500-status
 
 ### Ange fördröjning för sidåterförsök {#specifying-the-page-retry-delay}
 
-The `/retryDelay` anger tiden (i sekunder) som Dispatcher väntar mellan anslutningsförsök med servergruppsåtergivningar. För varje rund är det högsta antalet gånger AEM Dispatcher försöker ansluta till en rendering antalet renderingar i gruppen.
+The `/retryDelay` anger tiden (i sekunder) som Dispatcher väntar mellan anslutningsförsök med servergruppsåtergivningar. För varje rund är det maximala antalet gånger Dispatcher försöker ansluta till en rendering antalet renderingar i servergruppen.
 
 Dispatcher använder värdet `"1"` if `/retryDelay` är inte explicit definierad. Standardvärdet är vanligtvis lämpligt.
 
@@ -1560,7 +1560,7 @@ Dispatcher använder värdet `"1"` if `/retryDelay` är inte explicit definierad
 
 The `/numberOfRetries` egenskapen anger det maximala antalet anslutningsförsök som Dispatcher utför med återgivningarna. Om Dispatcher inte kan ansluta till en återgivning efter detta antal försök returnerar Dispatcher ett misslyckat svar.
 
-För varje rund är det högsta antalet gånger AEM Dispatcher försöker ansluta till en rendering antalet renderingar i gruppen. Det högsta antalet gånger som AEM Dispatcher försöker ansluta är därför ( `/numberOfRetries`) x (antalet återgivningar).
+För varje rund är det maximala antalet gånger Dispatcher försöker ansluta till en rendering antalet renderingar i servergruppen. Det maximala antalet gånger som Dispatcher försöker ansluta är därför ( `/numberOfRetries`) x (antalet återgivningar).
 
 Om värdet inte definieras explicit är standardvärdet `5`.
 
@@ -1575,7 +1575,7 @@ Om du vill skicka om begäranden till olika återgivningar när den ursprungliga
 * När en begäran om en återgivning returnerar HTTP-status 503 (UNAVAILABLE), skickar Dispatcher begäran till en annan återgivning.
 * När en begäran till en återgivning returnerar HTTP-status 50x (annan än 503) skickar Dispatcher en begäran för sidan som är konfigurerad för `health_check` -egenskap.
    * Om hälsokontrollen returnerar 500 (INTERNAL_SERVER_ERROR) skickar Dispatcher den ursprungliga begäran till en annan rendering.
-   * Om hälsokontrollen returnerar HTTP-status 200 returnerar AEM Dispatcher det ursprungliga HTTP 500-felet till klienten.
+   * Om hälsokontrollen returnerar HTTP-status 200 returnerar Dispatcher det ursprungliga HTTP 500-felet till klienten.
 
 Om du vill aktivera redundans lägger du till följande rad i servergruppen (eller webbplatsen):
 

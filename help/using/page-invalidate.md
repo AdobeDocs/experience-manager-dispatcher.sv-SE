@@ -9,9 +9,9 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 90eb6a78-e867-456d-b1cf-f62f49c91851
-source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '1411'
+source-wordcount: '1407'
 ht-degree: 0%
 
 ---
@@ -124,11 +124,11 @@ När du har konfigurerat och aktiverar en sida från författaren till publiceri
 
 Om du vill göra Dispatcher-cachen ogiltig (eller tömma) utan att aktivera en sida kan du skicka en HTTP-begäran till Dispatcher. Du kan till exempel skapa ett AEM program som gör att administratörer eller andra program kan tömma cachen.
 
-HTTP-begäran gör att AEM Dispatcher tar bort specifika filer från cachen. Dispatcher kan sedan uppdatera cachen med en ny kopia.
+HTTP-begäran gör att Dispatcher tar bort specifika filer från cachen. Dispatcher kan sedan uppdatera cachen med en ny kopia.
 
 ### Ta bort cachelagrade filer {#delete-cached-files}
 
-Utfärda en HTTP-begäran som gör att AEM Dispatcher tar bort filer från cachen. Dispatcher cachelagrar filerna igen endast när de tar emot en klientbegäran för sidan. Att ta bort cachelagrade filer på det här sättet är lämpligt för webbplatser som sannolikt inte tar emot samtidiga begäranden för samma sida.
+Skicka en HTTP-begäran som gör att Dispatcher tar bort filer från cachen. Dispatcher cachelagrar filerna igen endast när de tar emot en klientbegäran för sidan. Att ta bort cachelagrade filer på det här sättet är lämpligt för webbplatser som sannolikt inte tar emot samtidiga begäranden för samma sida.
 
 HTTP-begäran har följande format:
 
@@ -151,7 +151,7 @@ Invalidering (d.v.s. beröring av .stat-filer) kan förhindras genom att en extr
 
 ### Ta bort och cacha filer {#delete-and-recache-files}
 
-Utfärda en HTTP-begäran som gör att AEM Dispatcher tar bort cachelagrade filer och omedelbart hämtar och cachelagrar filen. Ta bort och cachelagra omedelbart om filer när det är troligt att webbplatser tar emot samtidiga klientbegäranden för samma sida. Omedelbar cachelagring säkerställer att Dispatcher bara hämtar och cachelagrar sidan en gång, i stället för en gång för varje samtidig klientbegäran.
+Skicka en HTTP-begäran som får Dispatcher att ta bort cachelagrade filer och omedelbart hämta och cacha filen. Ta bort och cachelagra omedelbart om filer när det är troligt att webbplatser tar emot samtidiga klientbegäranden för samma sida. Omedelbar cachelagring säkerställer att Dispatcher bara hämtar och cachelagrar sidan en gång, i stället för en gång för varje samtidig klientbegäran.
 
 **Obs!** Borttagning och cachelagring av filer bör endast utföras på publiceringsinstansen. När det utförs från författarinstansen inträffar konkurrensförhållanden när försök att hämta resurser görs innan de har publicerats.
 
@@ -185,7 +185,7 @@ Content-Length: 36
 
 I följande kod implementeras en servlet som skickar en invalideringsbegäran till Dispatcher. Servern tar emot ett begärandemeddelande som innehåller `handle` och `page` parametrar. De här parametrarna anger värdet för `CQ-Handle` sidhuvud och sidans sökväg till cachelagring. Servern använder värdena för att konstruera HTTP-begäran för Dispatcher.
 
-När servern distribueras till publiceringsinstansen gör följande URL att AEM Dispatcher tar bort /content/geometrixx-outdoors/en.html och sedan cachelagrar en ny kopia.
+När servern distribueras till publiceringsinstansen gör följande URL att Dispatcher tar bort /content/geometrixx-outdoors/en.html och sedan cachelagrar en ny kopia.
 
 `10.36.79.223:4503/bin/flushcache/html?page=/content/geometrixx-outdoors/en.html&handle=/content/geometrixx-outdoors/en/men.html`
 

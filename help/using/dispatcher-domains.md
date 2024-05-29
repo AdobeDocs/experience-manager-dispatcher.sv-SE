@@ -7,9 +7,9 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 1470b636-7e60-48cc-8c31-899f8785dafa
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '2918'
+source-wordcount: '2929'
 ht-degree: 0%
 
 ---
@@ -38,7 +38,7 @@ Ett företag publicerar till exempel webbplatser för två av sina varumärken: 
 
 Sidor för `BrandA.com` lagras nedan `/content/sitea`. Klientförfrågningar för URL `https://BrandA.com/en.html` returneras den återgivna sidan för `/content/sitea/en` nod. På samma sätt för sidor för `BrandB.com` lagras nedan `/content/siteb`.
 
-När du använder Dispatcher för att cachelagra innehåll måste associationer göras mellan sidans URL i klientens HTTP-begäran, sökvägen till motsvarande cachelagrade fil och sökvägen till motsvarande fil i databasen.
+När du använder Dispatcher för att cachelagra innehåll skapar du kopplingar mellan sidans URL i klientens HTTP-begäran, sökvägen till motsvarande cachelagrade fil och sökvägen till motsvarande fil i databasen.
 
 ## Klientförfrågningar
 
@@ -46,7 +46,7 @@ När klienterna skickar HTTP-begäranden till webbservern måste URL:en för den
 
 ![](assets/chlimage_1-8.png)
 
-1. Domännamnssystemet upptäcker IP-adressen för webbservern som är registrerad för domännamnet i HTTP-begäran.
+1. Domännamnssystemet upptäcker IP-adressen till webbservern som är registrerad för domännamnet i HTTP-begäran.
 1. HTTP-begäran skickas till webbservern.
 1. HTTP-begäran skickas till Dispatcher.
 1. Dispatcher avgör om de cachelagrade filerna är giltiga. Om det är giltigt skickas de cachelagrade filerna till klienten.
@@ -66,7 +66,7 @@ Om du vill använda Dispatcher med flera domäner måste du konfigurera AEM, Dis
 
 ## URL-mappning {#url-mapping}
 
-Om du vill att domän-URL:er och innehållssökvägar ska kunna matcha till cachelagrade filer, måste en filsökväg eller en sidadress översättas vid något tillfälle under processen. Beskrivningar av följande gemensamma strategier tillhandahålls, där översättning av sökväg eller URL sker vid olika tidpunkter i processen:
+Om du vill att domän-URL:er och innehållssökvägar ska kunna matcha till cachelagrade filer, måste en filsökväg eller en sid-URL översättas under processen. Beskrivningar av följande gemensamma strategier tillhandahålls, där översättning av sökväg eller URL sker vid olika tidpunkter i processen:
 
 * (Rekommenderas) AEM publiceringsinstans använder Sling-mappning för resursupplösning för att implementera interna regler för URL-omskrivning. Domän-URL:er översätts till sökvägar i innehållsdatabasen. Se [AEM skriver om inkommande URL:er](#aem-rewrites-incoming-urls).
 * Webbservern använder interna URL-omskrivningsregler som översätter domän-URL:er till cachelagrade sökvägar. Se [Inkommande URL:er skrivs om på webbservern](#the-web-server-rewrites-incoming-urls).
@@ -210,7 +210,7 @@ Servergrupper för virtuella värdar måste ha följande konfigurationer så att
 * The `/virtualhosts` egenskapen är inställd på domännamnet. Med den här egenskapen kan Dispatcher associera servergruppen med domänen.
 * The `/filter` -egenskapen tillåter åtkomst till sökvägen för begärans URL trunkerad efter domännamnsdelen. För `https://branda.com/en.html` URL, sökvägen tolkas som `/en.html`så filtret måste ge åtkomst till den här sökvägen.
 
-* The `/docroot` egenskapen ställs in på sökvägen till rotkatalogen för domänens platsinnehåll i Dispatcher-cachen. Den här sökvägen används som prefix för den sammanfogade URL:en från den ursprungliga begäran. Dokumentet för `/usr/lib/apache/httpd-2.4.3/htdocs/sitea` orsakar begäran för `https://branda.com/en.html` för att lösa `/usr/lib/apache/httpd-2.4.3/htdocs/sitea/en.html` -fil.
+* The `/docroot` egenskapen ställs in på sökvägen till rotkatalogen. Det vill säga rotkatalogen för domänens platsinnehåll i Dispatcher-cachen. Den här sökvägen används som prefix för den sammanfogade URL:en från den ursprungliga begäran. Dokumentet för `/usr/lib/apache/httpd-2.4.3/htdocs/sitea` orsakar begäran för `https://branda.com/en.html` för att lösa `/usr/lib/apache/httpd-2.4.3/htdocs/sitea/en.html` -fil.
 
 Dessutom måste den AEM publiceringsinstansen anges som rendering för det virtuella värdsystemet. Konfigurera andra servergruppsegenskaper efter behov. Följande kod är en förkortad servergruppskonfiguration för domänen branda.com:
 
@@ -236,11 +236,11 @@ Dessutom måste den AEM publiceringsinstansen anges som rendering för det virtu
 
 ### Skapa en Dispatcher-servergrupp för cacheogiltigförklaring
 
-En Dispatcher-servergrupp krävs för att hantera begäranden om att göra cachelagrade filer ogiltiga. Den här servergruppen måste kunna komma åt .stat-filer i dokumentrotkatalogerna för varje virtuellt värdsystem.
+En Dispatcher-servergrupp krävs för att hantera begäranden om att göra cachelagrade filer ogiltiga. Den här servergruppen måste kunna komma åt .stat-filer i `docroot` kataloger för varje virtuellt värdsystem.
 
 Följande egenskapskonfigurationer gör att Dispatcher kan matcha filer i AEM innehållsdatabas från filer i cachen:
 
-* The `/docroot` -egenskapen är inställd på webbserverns standarddokument. Vanligtvis är det här katalogen där `/content` mappen skapas. Ett exempelvärde för Apache i Linux® är `/usr/lib/apache/httpd-2.4.3/htdocs`.
+* The `/docroot` egenskapen är inställd på standard `docroot` webbservern. Vanligtvis är /`docroot` är katalogen där `/content` mappen skapas. Ett exempelvärde för Apache i Linux® är `/usr/lib/apache/httpd-2.4.3/htdocs`.
 * The `/filter` -egenskapen tillåter åtkomst till filer under `/content` katalog.
 
 The `/statfileslevel`-egenskapen måste vara tillräckligt hög så att .stat-filer skapas i rotkatalogen för varje virtuellt värdsystem. Den här egenskapen gör att cacheminnet för varje domän kan ogiltigförklaras separat. Exempel på konfiguration: `/statfileslevel` värde för `2` skapar .stat-filer i `*docroot*/content/sitea` -katalogen och `*docroot*/content/siteb` katalog.
@@ -302,7 +302,7 @@ När du har skapat mappningen för innehållssidan använder du en webbläsare f
 
 ### Exempel på noder för resursmappning
 
-I följande tabell visas de noder som implementerar resursmappning för domänen branda.com. Liknande noder skapas för `brandb.com` domän, som `/etc/map/http/brandb.com`. I samtliga fall krävs mappningar när referenser på sidan HTML inte löses korrekt i Sling-kontexten.
+I följande tabell visas de noder som implementerar resursmappning för domänen branda.com. Liknande noder skapas för `brandb.com` domän, som `/etc/map/http/brandb.com`. I samtliga fall krävs mappningar när referenser på HTML-sidan inte tolkas korrekt i Sling-sammanhanget.
 
 | Nodsökväg | Typ | Egenskap |
 |--- |--- |--- |
@@ -344,11 +344,11 @@ Konfigurera följande aspekter på webbservern:
 
 I följande exempel konfigureras två virtuella värdar för en Apache-webbserver med filen httpd.conf:
 
-* Servernamnen (som sammanfaller med domännamnen) är `brandA.com` (rad 16) och `brandB.com` (rad 32).
+* Servernamnen (som sammanfaller med domännamnen) är `brandA.com` (Rad 16) och `brandB.com` (Rad 32).
 
-* Dokumentroten för varje virtuell domän är den katalog i Dispatcher-cachen som innehåller platsens sidor. (raderna 20 och 33)
-* Regeln för URL-omskrivning för varje virtuell domän är ett reguljärt uttryck som prefixerar sökvägen till den begärda sidan med sökvägen till sidorna i cachen. (raderna 19 och 35)
-* The `DispatherUseProcessedURL` egenskapen är inställd på `1`. (rad 10)
+* Dokumentroten för varje virtuell domän är den katalog i Dispatcher-cachen som innehåller platsens sidor. (Raderna 20 och 33)
+* URL-omskrivningsregeln för varje virtuell domän är ett reguljärt uttryck. Det reguljära uttrycket prefixerar sökvägen till den begärda sidan. Den prefixeras med sökvägen till sidorna i cachen. (Raderna 19 och 35)
+* The `DispatherUseProcessedURL` egenskapen är inställd på `1`. (Rad 10)
 
 Webbservern utför till exempel följande åtgärder när den tar emot en begäran med `https://brandA.com/en/products.html` URL:
 
@@ -417,7 +417,7 @@ När webbservern skriver om URL:er kräver Dispatcher en enda servergrupp som de
 
 Följande exempelkonfigurationsfil baseras på exemplet `dispatcher.any` som installeras med Dispatcher. Följande ändringar krävs för att ge stöd åt webbserverkonfigurationerna från föregående `httpd.conf` fil:
 
-* The `/virtualhosts` egenskapen gör att Dispatcher hanterar begäranden för `brandA.com` och `brandB.com` domäner. (rad 12)
+* The `/virtualhosts` egenskapen gör att Dispatcher hanterar begäranden för `brandA.com` och `brandB.com` domäner. (Rad 12)
 * The `/statfileslevel` egenskapen ställs in på 2, så att lägesfiler skapas i varje katalog som innehåller domänens webbinnehåll (rad 41): `/statfileslevel "2"`
 
 Som vanligt är dokumentroten i cachen densamma som dokumentroten på webbservern (rad 40): `/usr/lib/apache/httpd-2.4.3/htdocs`

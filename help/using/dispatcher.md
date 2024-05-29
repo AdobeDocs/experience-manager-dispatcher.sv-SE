@@ -5,9 +5,9 @@ pageversionid: 1193211344162
 topic-tags: dispatcher
 content-type: reference
 exl-id: c9266683-6890-4359-96db-054b7e856dd0
-source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '3083'
+source-wordcount: '3079'
 ht-degree: 0%
 
 ---
@@ -20,7 +20,7 @@ ht-degree: 0%
 
 Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och lastbalansering som används med en webbserver i företagsklass.
 
-Processen för att distribuera AEM Dispatcher är oberoende av webbservern och den OS-plattform som valts:
+Processen för att distribuera Dispatcher är oberoende av webbservern och den OS-plattform som valts:
 
 1. Läs mer om Dispatcher (den här sidan). Se även [vanliga frågor om Dispatcher](/help/using/dispatcher-faq.md).
 1. Installera en [webbserver](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements) enligt webbserverdokumentationen.
@@ -30,7 +30,7 @@ Processen för att distribuera AEM Dispatcher är oberoende av webbservern och d
 
 >[!NOTE]
 >
->Så här får du en bättre förståelse för hur AEM Dispatcher fungerar med AEM:
+>Så här får du en bättre förståelse för hur Dispatcher fungerar med AEM:
 >
 >* Se [Fråga de AEM experterna i communityn i juli 2017](https://communities.adobeconnect.com/pf0gem7igw1f/).
 >* Åtkomst [den här databasen](https://github.com/adobe/aem-dispatcher-experiments). Den innehåller en samling experiment i ett&quot;start-home&quot;-laboratorieformat.
@@ -41,7 +41,7 @@ Använd följande information efter behov:
 * [Checklistan för Dispatcher-säkerhet](security-checklist.md)
 * [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html)
 * [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
-* [Använda AEM Dispatcher med flera domäner](dispatcher-domains.md)
+* [Använda Dispatcher med flera domäner](dispatcher-domains.md)
 * [Använda SSL med Dispatcher](dispatcher-ssl.md)
 * [Implementera behörighetskänslig cachelagring](permissions-cache.md)
 * [Felsökning av Dispatcher-problem](dispatcher-troubleshooting.md)
@@ -129,7 +129,7 @@ I en innehållsuppdatering ändras ett eller flera AEM dokument. AEM skickar en 
 Följande punkter bör noteras:
 
 * Innehållsuppdateringar används vanligtvis med ett redigeringssystem som&quot;vet&quot; vad som måste ersättas.
-* En innehållsuppdatering som påverkar filer tas bort, men ersätts inte omedelbart. Nästa gång en sådan fil begärs hämtar AEM Dispatcher den nya filen från AEM och placerar den i cachen och skriver över det gamla innehållet.
+* En innehållsuppdatering som påverkar filer tas bort, men ersätts inte omedelbart. Nästa gång en sådan fil begärs hämtar Dispatcher den nya filen från AEM och placerar den i cachen och skriver över det gamla innehållet.
 * Vanligtvis lagras automatiskt genererade bilder som innehåller text från en sida i bildfiler som börjar med samma handtag, vilket säkerställer att kopplingen finns för borttagning. Du kan till exempel lagra titeltexten för sidan mypage.html som bilden mypage.titlePicture.gif i samma mapp. På så sätt tas bilden automatiskt bort från cacheminnet varje gång sidan uppdateras, så att du kan vara säker på att bilden alltid återspeglar den aktuella versionen av sidan.
 * Du kan ha flera statusfiler, till exempel en per språkmapp. Om en sida uppdateras söker AEM efter nästa överordnade mapp som innehåller en statusfil, och *beröringar* den filen.
 

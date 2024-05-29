@@ -2,9 +2,9 @@
 title: De vanligaste frågorna för Dispatcher
 description: De vanligaste problemen för Adobe Experience Manager Dispatcher.
 exl-id: 4dcc7318-aba5-4b17-8cf4-190ffefbba75
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '1542'
+source-wordcount: '1547'
 ht-degree: 0%
 
 ---
@@ -17,13 +17,13 @@ ht-degree: 0%
 
 ### Vad är Dispatcher?
 
-Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller belastningsutjämning som gör att du kan skapa en snabb och dynamisk webbmiljö. För cachelagring fungerar Dispatcher som en del av en HTTP-server, till exempel Apache. Syftet är att lagra (eller&quot;cachelagra&quot;) så mycket av det statiska webbplatsinnehållet som möjligt och att så sällan som möjligt få tillgång till layouten i webbplatsens motor. I en lastbalanserande roll distribuerar Dispatcher användarförfrågningar (inläsning) över olika AEM instanser (återgivningar).
+Dispatcher Adobe Experience Manager även cachning, eller belastningsutjämningsverktyg, eller båda, som kan förverkliga en snabb och dynamisk webbutvecklingsmiljö. För cachelagring fungerar Dispatcher som en del av en HTTP-server, till exempel Apache. Syftet är att lagra (eller&quot;cachelagra&quot;) så mycket som möjligt av det statiska webbplatsinnehållet. Och så sällan som möjligt får du tillgång till webbplatsens motor. I en lastbalanserande roll distribuerar Dispatcher användarförfrågningar (inläsning) över olika AEM instanser (återgivningar).
 
 För cachelagring använder modulen Dispatcher webbserverns förmåga att hantera statiskt innehåll. Dispatcher placerar de cachelagrade dokumenten i dokumentroten på webbservern.
 
 ### Hur utför Dispatcher cachelagring?
 
-Dispatcher använder webbserverns förmåga att hantera statiskt innehåll. Dispatcher lagrar cachelagrade dokument i webbserverns dokumentrot. Dispatcher har två primära metoder för att uppdatera cacheinnehållet när ändringar görs på webbplatsen.
+Dispatcher använder webbserverns förmåga att hantera statiskt innehåll. Dispatcher lagrar cachelagrade dokument i dokumentroten på webbservern. Dispatcher har två primära metoder för att uppdatera cacheinnehållet när ändringar görs på webbplatsen.
 
 * **Innehållsuppdateringar** ta bort sidor som har ändrats och filer som är direkt kopplade till dem.
 * **Automatisk invalidering** gör automatiskt de delar av cachen som kan vara inaktuella efter en uppdatering blir ogiltiga. Det flaggar till exempel att relevanta sidor är inaktuella, utan att något tas bort.
@@ -70,7 +70,7 @@ Läs [Använda Dispatcher med flera domäner](dispatcher-domains.md) för mer in
 
 Du kan använda [klisterlappar](dispatcher-configuration.md#identifying-a-sticky-connection-folder-stickyconnectionsfor) som ser till att alla dokument för en användare bearbetas i samma instans av AEM. Den här funktionen är viktig om du använder personaliserade sidor och sessionsdata. Data lagras på instansen. Därför måste efterföljande begäranden från samma användare returnera till den instansen, annars går data förlorade.
 
-Eftersom häftiga anslutningar begränsar Dispatcher möjlighet att optimera förfrågningar bör du bara använda den här metoden när det behövs. Du kan ange den mapp som innehåller de&quot;klisterlappande&quot; dokumenten, så att alla dokument i mappen behandlas på samma plats för en användare.
+Eftersom häftiga anslutningar begränsar Dispatcher möjlighet att optimera förfrågningar bör du bara använda den här metoden när det behövs. Du kan ange den mapp som innehåller de&quot;klisterlappande&quot; dokumenten, så att alla dokument i mappen behandlas i samma instans för en användare.
 
 ### Kan jag använda kladdiga anslutningar och cachelagring tillsammans?
 
@@ -119,7 +119,7 @@ Se [Dispatcher Security Checklist](security-checklist.md) och [AEM](https://expe
 
 ### Skickaproblem `jcr:content` ändrat till `jcr%3acontent`
 
-**Fråga**: Företaget har nyligen stött på ett problem på Dispatcher-nivå. En av AJAX samtal som fick data från CQ-databasen hade `jcr:content` i den. Det blev kodat till `jcr%3acontent` vilket resulterar i fel resultatmängd.
+**Fråga**: Företaget har nyligen stött på ett problem på Dispatcher-nivå. Ett av AJAX samtal som fick data från CQ-databasen hade `jcr:content` i den. Det blev kodat till `jcr%3acontent` vilket resulterar i fel resultatmängd.
 
 **Svar**: Använd `ResourceResolver.map()` metod för att hämta en Friendly-URL som ska användas/utfärdas, hämta begäranden från och även för att lösa cachelagringsproblemet med Dispatcher. Metoden map() kodar `:` kolon till understreck och metoden resolve() avkodar dem tillbaka till SLING JCR-läsbart format. Använd metoden map() för att generera den URL som används i Ajax-anropet.
 
@@ -139,12 +139,13 @@ Om Delete-åtgärderna får Dispatcher att tömmas, [använd lösningen i det h�
 
 ### Hur tömmer jag DAM-resurser från Dispatcher-cachen?
 
-Du kan använda funktionen &quot;kedjereplikering&quot;. När den här funktionen är aktiverad skickar Dispatcher-agenten en tömningsbegäran när en replikering tas emot från författaren.
+Du kan använda funktionen &quot;kedjereplikering&quot;. När den här funktionen är aktiverad skickar Dispatcher&#39;s flush Agent en tömningsbegäran när en replikering tas emot från Author-instansen.
 
 Så här aktiverar du den:
 
 1. [Följ stegen här](page-invalidate.md#invalidating-dispatcher-cache-from-a-publishing-instance) för att skapa tömningsagenter vid publicering
-1. Gå till varje agentes konfiguration och på **Utlösare** -fliken, kontrollera **Vid mottagning** box.
+1. Gå till varje agentes konfiguration.
+1. På **Utlösare** -fliken, kontrollera **Vid mottagning** box.
 
 ## Diverse
 

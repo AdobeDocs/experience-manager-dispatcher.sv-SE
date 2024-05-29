@@ -1,14 +1,14 @@
 ---
 title: Installerar Dispatcher
-description: Lär dig hur du installerar modulen Dispatcher på Microsoft&reg; Internet Information Server, Apache Web Server och Sun Java&trade; Web Server-iPlanet.
+description: Lär dig hur du installerar modulen Dispatcher på Microsoft&reg; Internet Information Server, Apache Web Server och Sun Java &trade; Web Server-iPlanet.
 contentOwner: User
 converted: true
 topic-tags: dispatcher
 content-type: reference
 exl-id: 9375d1c0-8d9e-46cb-9810-fa4162a8c1ba
-source-git-commit: 2d90738d01fef6e37a2c25784ed4d1338c037c23
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '3751'
+source-wordcount: '3748'
 ht-degree: 0%
 
 ---
@@ -82,7 +82,7 @@ Comment Type: draft
 
 Comment Type: draft
 
-<p>The following sections detail the specific web server installation procedures.</p>
+<p>The following sections detail the specific Web server installation procedures.</p>
 
  -->
 
@@ -116,7 +116,7 @@ ZIP-filen innehåller följande filer:
 | `dispatcher.any` | En exempelkonfigurationsfil för Dispatcher. |
 | `author_dispatcher.any` | En exempelkonfigurationsfil för Dispatcher som arbetar med författarinstansen. |
 | README | Viktigt-fil som innehåller installationsinstruktioner och sista-minuten-information. **Anteckning**: Kontrollera den här filen innan du startar installationen. |
-| ÄNDRINGAR | Ändrar filen som listar problem som har åtgärdats i aktuella och tidigare versioner. |
+| ÄNDRINGAR | Ändrar en fil med en lista över problem som har åtgärdats i aktuella och tidigare versioner. |
 
 Använd följande procedur för att kopiera Dispatcher-filerna till rätt plats.
 
@@ -126,7 +126,7 @@ Använd följande procedur för att kopiera Dispatcher-filerna till rätt plats.
 
    * `disp_iis.dll`
    * `disp_iis.ini`
-   * En av följande filer beroende på om Dispatcher arbetar med en AEM författarinstans eller publiceringsinstans:
+   * En av följande filer beroende på om Dispatcher fungerar med en AEM författarinstans eller publiceringsinstans:
       * Författarinstans: `author_dispatcher.any`
       * Publiceringsinstans: `dispatcher.any`
 
@@ -146,12 +146,12 @@ I följande tabell beskrivs varje egenskap.
 
 | Parameter | Beskrivning |
 |--- |--- |
-| configpath | Platsen för `dispatcher.any` i det lokala filsystemet (absolut sökväg). |
-| loggfil | Platsen för `dispatcher.log` -fil. Om detta inte är inställt går loggmeddelanden till Windows-händelseloggen. |
-| loggnivå | Definierar loggnivån som används för att skicka meddelanden till händelseloggen. Följande värden kan anges på loggnivå för loggfilen: <br/>0 - endast felmeddelanden. <br/>1 - fel och varningar. <br/>2 - fel, varningar och informationsmeddelanden <br/>3 - fel, varningar, informationsmeddelanden och felsökningsmeddelanden. <br/>**Anteckning**: Ställ in loggnivån på 3 under installation och testning och sedan på 0 när du kör i en produktionsmiljö. |
-| replaceauthorized | Anger hur auktoriseringshuvuden i HTTP-begäran hanteras. Följande värden är giltiga:<br/>0 - Autentiseringsrubriker ändras inte. <br/>1 - Ersätter alla rubriker med namnet&quot;Authorization&quot; som inte är&quot;Basic&quot; med rubriken `Basic <IIS:LOGON\_USER>` motsvarande.<br/> |
-| servervariabler | Definierar hur servervariabler behandlas.<br/>0 - IIS-servervariabler skickas varken till Dispatcher eller AEM. <br/>1 - alla IIS-servervariabler (till exempel `LOGON\_USER, QUERY\_STRING, ...`) skickas till Dispatcher tillsammans med begäranderubrikerna (och även till AEM om de inte cachelagras).  <br/>Servervariablerna inkluderar `AUTH\_USER, LOGON\_USER, HTTPS\_KEYSIZE` och många andra. I IIS-dokumentationen finns en fullständig lista med variabler, med information. |
-| enable_chunked_transfer | Definierar om segmentöverföring ska aktiveras (1) eller inaktiveras (0) för klientsvaret. Standardvärdet är 0. |
+| `configpath` | Platsen för `dispatcher.any` i det lokala filsystemet (absolut sökväg). |
+| `logfile` | Platsen för `dispatcher.log` -fil. Om den här platsen inte är inställd går loggmeddelanden till Windows-händelseloggen. |
+| `loglevel` | Definierar loggnivån som används för att skicka meddelanden till händelseloggen. Följande värden kan anges på loggnivå för loggfilen: <br/>0 - endast felmeddelanden. <br/>1 - fel och varningar. <br/>2 - fel, varningar och informationsmeddelanden <br/>3 - fel, varningar, informationsmeddelanden och felsökningsmeddelanden. <br/>**Anteckning**: Ställ in loggnivån på 3 under installation och testning och sedan på 0 när du kör i en produktionsmiljö. |
+| `replaceauthorization` | Anger hur auktoriseringshuvuden i HTTP-begäran hanteras. Följande värden är giltiga:<br/>0 - Autentiseringsrubriker ändras inte. <br/>1 - Ersätter alla rubriker med namnet&quot;Authorization&quot; som inte är&quot;Basic&quot; med rubriken `Basic <IIS:LOGON\_USER>` motsvarande.<br/> |
+| `servervariables` | Definierar hur servervariabler behandlas.<br/>0 - IIS-servervariabler skickas inte till Dispatcher eller AEM. <br/>1 - alla IIS-servervariabler (till exempel `LOGON\_USER, QUERY\_STRING, ...`) skickas till Dispatcher tillsammans med begäranderubrikerna (och även till AEM om de inte cachelagras).  <br/>Servervariablerna inkluderar `AUTH\_USER, LOGON\_USER, HTTPS\_KEYSIZE` och många andra. I IIS-dokumentationen finns en fullständig lista med variabler, med information. |
+| `enable_chunked_transfer` | Definierar om segmentöverföring ska aktiveras (1) eller inaktiveras (0) för klientsvaret. Standardvärdet är 0. |
 
 En exempelkonfiguration:
 
@@ -190,13 +190,13 @@ Använd följande procedur för att lägga till Dispatcher ISAPI-modulen i IIS.
    * Körbar fil: Den absoluta sökvägen för filen disp_iis.dll, till exempel `C:\inetpub\Scripts\disp_iis.dll`.
    * Namn: Ett beskrivande namn för hanterarmappningen, till exempel `Dispatcher`.
 
-1. Klicka på Ja om du vill lägga till biblioteket disp_iis.dll i listan ISAPI- och CGI-begränsningar i dialogrutan som visas.
+1. Klicka på i dialogrutan som visas för att lägga till biblioteket disp_iis.dll i listan ISAPI- och CGI-begränsningar **Ja**.
 
    För IIS 7.0 och 7.5 har konfigurationen slutförts. Fortsätt med de återstående stegen om du konfigurerar IIS 8.0.
 
 1. (IIS 8.0) I listan med hanterarmappningar markerar du den som du skapade och klickar på Redigera i åtgärdsområdet.
 1. (IIS 8.0) I dialogrutan Redigera skriptmappning klickar du på knappen Begär begränsningar.
-1. (IIS 8.0) Om du vill vara säker på att hanteraren används för filer och mappar som ännu inte är cachelagrade avmarkerar du Anropa endast hanterare om begäran är mappad till och klickar sedan på OK.
+1. (IIS 8.0) Om du vill vara säker på att hanteraren används för filer och mappar som ännu inte är cachelagrade avmarkerar du **Anropa endast hanterare om begäran har mappats till**. Klicka **OK**.
 1. (IIS 8.0) Klicka på OK i dialogrutan Redigera skriptmappning.
 
 ### Konfigurera åtkomst till cachen - IIS 8.5 och 10 {#configuring-access-to-the-cache-iis-and}
@@ -215,13 +215,13 @@ Ge standardanvändaren av programpoolen skrivåtkomst till den mapp som används
    `IIS AppPool\DefaultAppPool`
 
 1. Klicka på knappen Kontrollera namn. När Windows löser användarkontot klickar du på OK.
-1. I dialogrutan Behörigheter för mappen Dispatcher väljer du det konto du just lade till och aktiverar alla behörigheter för kontot  **utom Fullständig kontroll** och klicka på OK. Klicka på OK så att du kan stänga dialogrutan Mappegenskaper.
+1. I dialogrutan Behörigheter för mappen Dispatcher väljer du det konto du just lade till och aktiverar alla behörigheter för kontot **utom Fullständig kontroll** och klicka på OK. Klicka på OK så att du kan stänga dialogrutan Mappegenskaper.
 
 ### Registrerar JSON Mime-typen - IIS 8.5 och 10 {#registering-the-json-mime-type-iis-and}
 
 Använd följande procedur för att registrera JSON MIME-typen när du vill att Dispatcher ska tillåta JSON-anrop.
 
-1. I IIS Manager markerar du din webbplats och dubbelklickar på MIME-typer i Funktioner-vyn.
+1. I IIS Manager väljer du din webbplats och dubbelklickar på Mime Types med hjälp av funktionsvyn.
 1. Om JSON-tillägget inte finns med i listan klickar du på Lägg till på åtgärdspanelen, anger följande egenskapsvärden och klickar sedan på OK:
 
    * Filnamnstillägg: `.json`
@@ -231,7 +231,7 @@ Använd följande procedur för att registrera JSON MIME-typen när du vill att 
 
 Ta bort `bin` dolt segment. Webbplatser som inte är nya kan innehålla detta dolda segment.
 
-1. I IIS Manager markerar du din webbplats och dubbelklickar på Begär filtrering med hjälp av funktionsvyn.
+1. I IIS Manager väljer du din webbplats och dubbelklickar på Begär filtrering med hjälp av funktionsvyn.
 1. Välj `bin` klickar du på Ta bort och i bekräftelsedialogrutan klickar du på Ja.
 
 ### Logga IIS-meddelanden till en fil - IIS 8.5 och 10 {#logging-iis-messages-to-a-file-iis-and}
@@ -240,8 +240,9 @@ Använd följande procedur för att skriva Dispatcher-loggmeddelanden till en lo
 
 1. Skapa en mapp med namnet i Utforskaren `dispatcher` nedanför loggmappen för IIS-installationen. Sökvägen till den här mappen för en vanlig installation är `C:\inetpub\logs\dispatcher`.
 
-1. Högerklicka på mappen Dispatcher och klicka på Properties.
-1. Klicka på Redigera på fliken Dokumentskydd och sedan på Lägg till i dialogrutan Behörigheter. En dialogruta öppnas där du kan välja användarkonton. Klicka på knappen Platser, markera datornamnet och klicka sedan på OK.
+1. Högerklicka på mappen Dispatcher och klicka på **Egenskaper**.
+1. Klicka på fliken Säkerhet **Redigera**.
+1. I dialogrutan Behörigheter klickar du på **Lägg till**. En dialogruta öppnas där du kan välja användarkonton. Klicka på knappen Platser, markera datornamnet och klicka sedan på OK.
 
    Håll den här dialogrutan öppen medan du slutför nästa steg.
 
@@ -279,7 +280,7 @@ Information om hur du installerar en Apache-webbserver finns i installationsmanu
 
 >[!CAUTION]
 >
->Om du skapar en Apache-binär genom att kompilera källfilerna måste du se till att aktivera **`dynamic modules support`**. Detta kan du göra genom att använda någon av **—enable-shared** alternativ. Ta med `mod_so` -modul.
+>Om du skapar en Apache-binär genom att kompilera källfilerna måste du se till att aktivera **`dynamic modules support`**. Du kan aktivera det här alternativet med hjälp av någon av **—enable-shared** alternativ. Ta med `mod_so` -modul.
 >
 >Mer information finns i installationsguiden för Apache Web Server.
 
@@ -302,7 +303,7 @@ Installationsarkivfilerna innehåller följande filer - beroende på om du har v
 | http.conf.disp&lt;x> | En exempelkonfigurationsfil för Apache-servern. |
 | dispatcher.any | En exempelkonfigurationsfil för Dispatcher. |
 | README | Viktigt-fil som innehåller installationsinstruktioner och sista-minuten-information. **Anteckning**: Kontrollera den här filen innan du startar installationen. |
-| ÄNDRINGAR | Ändrar filen som listar problem som har korrigerats i den aktuella och tidigare versionen. |
+| ÄNDRINGAR | Ändrar en fil med en lista över problem som har korrigerats i den aktuella och tidigare versionen. |
 
 Följ de här stegen för att lägga till Dispatcher på Apache-webbservern:
 
@@ -324,7 +325,7 @@ Om du kör Dispatcher på Red Hat® Linux® Kernel 2.6 med SELinux aktiverat kan
 
 `Mon Jun 30 00:03:59 2013] [E] [16561(139642697451488)] Unable to connect to backend rend01 (10.122.213.248:4502): Permission denied`
 
-Detta beror troligen på en aktiverad SELinux-säkerhet. Sedan behöver du utföra följande uppgifter:
+Detta fel beror troligen på en aktiverad SELinux-säkerhet. Gör i så fall följande:
 
 * Konfigurera SELinux-kontexten för Dispatcher-modulfilen.
 * Aktivera HTTPD-skript och -moduler för att skapa nätverksanslutningar.
@@ -409,8 +410,8 @@ De enskilda konfigurationsparametrarna:
 | DispatcherLog | Loggfilens plats och namn. |
 | DispatcherLogLevel | Loggnivå för loggfilen: <br/>0 - Fel <br/>1 - Varningar <br/>2 - Infos <br/>3 - Felsök <br/>**Anteckning**: Ställ in loggnivån på 3 under installation och testning och sedan på 0 när du kör i en produktionsmiljö. |
 | DispatcherNoServerHeader | *Den här parametern är föråldrad och ineffektiv.*<br/><br/> Definierar den serverrubrik som ska användas: <br/><ul><li>undefined eller 0 - HTTP-serverhuvudet innehåller AEM. </li><li>1 - Apache-serverhuvudet används.</li></ul> |
-| DispatcherDeclineRoot | Definierar om begäranden till roten &quot;/&quot; ska nekas: <br/>**0** - acceptera begäranden till / <br/>**1** - begäranden till / hanteras inte av Dispatcher; använd mod_alias för korrekt mappning. |
-| DispatcherUseProcsedURL | Definierar om förbearbetade URL:er ska användas för all vidare bearbetning av Dispatcher: <br/>**0** - använd den ursprungliga URL-adressen som skickas till webbservern. <br/>**1** - Dispatcher använder den URL som redan har bearbetats av hanterarna som föregår Dispatcher (d.v.s. `mod_rewrite`) i stället för den ursprungliga URL-adress som skickades till webbservern. Till exempel matchar antingen den ursprungliga eller den bearbetade URL:en med Dispatcher-filter. URL:en används också som bas för cachefilens struktur. Information om mod_rewrite; till exempel Apache 2.4 finns i dokumentationen för Apache-webbplatsen. När du använder mod_rewrite använder du flaggan genomgång (skicka till nästa hanterare) för att tvinga omskrivningsmotorn att ställa in URI-fältet för den interna strukturen request_rec till värdet för filnamnsfältet. |
+| DispatcherDeclineRoot | Definierar om begäranden till roten &quot;/&quot; ska nekas: <br/>**0** - acceptera begäranden till / <br/>**1** - Dispatcher hanterar inte begäranden till /. Använd i stället mod_alias för korrekt mappning. |
+| DispatcherUseProcsedURL | Definierar om förbearbetade URL:er ska användas för all vidare bearbetning av Dispatcher: <br/>**0** - använd den ursprungliga URL-adressen som skickas till webbservern. <br/>**1** - Dispatcher använder den URL som redan har bearbetats av hanterarna som föregår Dispatcher (d.v.s. `mod_rewrite`) i stället för den ursprungliga URL-adress som skickades till webbservern. Till exempel matchar antingen den ursprungliga eller den bearbetade URL:en med Dispatcher-filter. URL:en används också som bas för cachefilens struktur. Information om mod_rewrite; till exempel Apache 2.4 finns i dokumentationen för Apache-webbplatsen. När du använder mod_rewrite använder du flaggan genomgång (skicka till nästa hanterare) för att tvinga omskrivningsmotorn att ange URI-fältet för den interna strukturen request_rec till värdet för filnamnsfältet. |
 | DispatcherPassError | Definierar hur felkoder ska stödjas för ErrorDocument-hantering: <br/>**0** - Dispatcher buffrar alla felsvar till klienten. <br/>**1** - Dispatcher buffrar inte ett felsvar till klienten (där statuskoden är större än eller lika med 400). I stället skickas statuskoden till Apache, vilket gör att ett ErrorDocument-direktiv kan bearbeta en sådan statuskod. <br/>**Kodintervall** - Ange ett intervall med felkoder som svaret skickas till Apache för. Andra felkoder skickas till klienten. Följande konfiguration skickar till exempel svar för fel 412 till klienten och alla andra fel skickas till Apache: DispatcherPassError 400-411,413-417 |
 | DispatcherKeepAliveTimeout | Anger tidsgränsen för keep-alive i sekunder. Från och med Dispatcher version 4.2.0 är standardvärdet 60. Värdet 0 inaktiverar keep-alive. |
 | DispatcherNoCanonURL | Om du anger den här parametern som På skickas den rå URL:en till serverdelen i stället för till den kanoniserade URL:en och inställningarna för DispatcherUseProcsedURL åsidosätts. Standardvärdet är Av. <br/>**Anteckning**: Filterreglerna i Dispatcher-konfigurationen utvärderas alltid mot den sanerade URL:en, inte mot den rå URL:en. |
@@ -490,7 +491,7 @@ AllowOverride None
 
 >[!NOTE]
 >
->Parametern för **SetHandler** programsats måste skrivas *exakt som i exemplen ovan*, eftersom det här är namnet på hanteraren som definieras i modulen.
+>Parametern för **SetHandler** programsats måste skrivas *exakt samma som i exemplen ovan* eftersom det är namnet på hanteraren som definieras i modulen.
 >
 >Se exempelkonfigurationsfilerna och dokumentationen för Apache Web Server för mer information om det här kommandot.
 
@@ -502,13 +503,13 @@ Efter **SetHandler** -programsats, du bör även lägga till **ModMimeUsePathInf
 >
 >Använd och konfigurera `ModMimeUsePathInfo` om du använder Dispatcher version 4.0.9 eller senare.
 >
->(Dispatcher version 4.0.9 släpptes 2011. Om du använder en äldre version bör du uppgradera till en senare Dispatcher-version).
+>Dispatcher version 4.0.9 släpptes 2011. Om du använder en äldre version bör du uppgradera till en senaste Dispatcher-version.
 
 The **ModMimeUsePathInfo** parameter ska anges `On` för alla Apache-konfigurationer:
 
 `ModMimeUsePathInfo On`
 
-Modulen mod_mime (till exempel [Apache Module mod_mime](https://httpd.apache.org/docs/2.4/mod/mod_mime.html)) används för att tilldela innehållsmetadata till det innehåll som valts för ett HTTP-svar. Standardinställningen innebär att när mod_mime bestämmer innehållstypen beaktas endast den del av URL:en som mappar till en fil eller katalog.
+Modulen mod_mime (till exempel [Apache Module mod_mime](https://httpd.apache.org/docs/2.4/mod/mod_mime.html)) används för att tilldela innehållsmetadata till det innehåll som valts för ett HTTP-svar. Standardinställningen innebär att `mod_mime` bestämmer innehållstypen. Därför beaktas endast den del av URL:en som mappar till en fil eller katalog.
 
 När `On`, `ModMimeUsePathInfo` parametern anger att `mod_mime` är att bestämma innehållstypen baserat på *complete* URL; det innebär att metadata för virtuella resurser används baserat på deras tillägg.
 
@@ -590,7 +591,7 @@ Installationsarkivfilerna innehåller följande filer - beroende på om du har v
 | `obj.conf.disp` | En exempelkonfigurationsfil för webbservern iPlanet/Sun Java™ System. |
 | `dispatcher.any` | En exempelkonfigurationsfil för Dispatcher. |
 | README | Viktigt-fil som innehåller installationsinstruktioner och sista-minuten-information. **Obs!** Kontrollera den här filen innan du startar installationen. |
-| ÄNDRINGAR | Ändrar filen som listar problem som har korrigerats i den aktuella och tidigare versionen. |
+| ÄNDRINGAR | Ändrar en fil med en lista över problem som har korrigerats i den aktuella och tidigare versionen. |
 
 Gör så här för att lägga till Dispatcher på webbservern:
 
@@ -618,7 +619,7 @@ Webbservern måste konfigureras med `obj.conf`. I Dispatcher-installationspakete
 
 >[!NOTE]
 >
->Följande konfigurationer ska vara på en rad och `$(SERVER_ROOT)` och `$(PRODUCT_SUBDIR)` måste ersättas med respektive värden.
+>Följande konfigurationer ska vara på en rad. Dessutom finns `$(SERVER_ROOT)` och `$(PRODUCT_SUBDIR)` måste ersättas med deras respektive värden.
 
 **Init**
 
@@ -638,10 +639,10 @@ Var:
 
 | Parameter | Beskrivning |
 |--- |--- |
-| config | Konfigurationsfilens plats och namn `dispatcher.any.` |
-| loggfil | Loggfilens plats och namn. |
-| loggnivå | Loggnivå för när meddelanden skrivs till loggfilen: <br/>**0** Fel <br/>**1** Varning <br/>**2** Infos <br/>**3** Felsök <br/>**Obs!** Ställ in loggnivån på 3 under installation och testning och på 0 när du kör i en produktionsmiljö. |
-| keepalivetimeout | Anger tidsgränsen för keep-alive i sekunder. Från och med Dispatcher version 4.2.0 är standardvärdet 60. Värdet 0 inaktiverar keep-alive. |
+| `config` | Konfigurationsfilens plats och namn `dispatcher.any.` |
+| `logfile` | Loggfilens plats och namn. |
+| `loglevel` | Loggnivå för när meddelanden skrivs till loggfilen: <br/>**0** Fel <br/>**1** Varning <br/>**2** Infos <br/>**3** Felsök <br/>**Obs!** Ställ in loggnivån på 3 under installation och testning och på 0 när du kör i en produktionsmiljö. |
+| `keepalivetimeout` | Anger tidsgränsen för keep-alive i sekunder. Från och med Dispatcher version 4.2.0 är standardvärdet 60. Värdet 0 inaktiverar keep-alive. |
 
 Beroende på dina behov kan du definiera Dispatcher som en tjänst för dina objekt. Om du vill konfigurera Dispatcher för hela webbplatsen redigerar du standardobjektet:
 

@@ -10,10 +10,10 @@ feature-set: Experience Manager
 feature: Dispatcher
 topic: Administration
 role: Admin
-source-git-commit: d8e224401e5ab041bb297b99a99c71a69ca6deac
+source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
 workflow-type: tm+mt
-source-wordcount: '83'
-ht-degree: 28%
+source-wordcount: '82'
+ht-degree: 29%
 
 ---
 
@@ -26,7 +26,7 @@ ht-degree: 28%
    + [Checklistan för Dispatcher-säkerhet](security-checklist.md)
    + [AEM Dispatcher Release Notes](release-notes.md)
 + Konfigurerar {#configuring}
-   + [Konfigurera AEM Dispatcher](dispatcher-configuration.md)
+   + [Konfigurera Dispatcher](dispatcher-configuration.md)
    + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
    + [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
    + [Cachelagra skyddat innehåll](permissions-cache.md)
