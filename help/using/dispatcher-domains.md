@@ -7,7 +7,7 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 1470b636-7e60-48cc-8c31-899f8785dafa
-source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
+source-git-commit: 3b24e3eb54aa48c4891943b7458c57525897517f
 workflow-type: tm+mt
 source-wordcount: '2929'
 ht-degree: 0%
@@ -348,7 +348,7 @@ I följande exempel konfigureras två virtuella värdar för en Apache-webbserve
 
 * Dokumentroten för varje virtuell domän är den katalog i Dispatcher-cachen som innehåller platsens sidor. (Raderna 20 och 33)
 * URL-omskrivningsregeln för varje virtuell domän är ett reguljärt uttryck. Det reguljära uttrycket prefixerar sökvägen till den begärda sidan. Den prefixeras med sökvägen till sidorna i cachen. (Raderna 19 och 35)
-* The `DispatherUseProcessedURL` egenskapen är inställd på `1`. (Rad 10)
+* The `DispatcherUseProcessedURL` egenskapen är inställd på `1`. (Rad 10)
 
 Webbservern utför till exempel följande åtgärder när den tar emot en begäran med `https://brandA.com/en/products.html` URL:
 
