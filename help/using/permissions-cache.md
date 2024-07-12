@@ -17,13 +17,13 @@ ht-degree: 0%
 
 Behörighetskänslig cachelagring gör att du kan cachelagra skyddade sidor. Dispatcher kontrollerar användarens åtkomstbehörighet för en sida innan den cachelagrade sidan levereras.
 
-Dispatcher innehåller AuthChecker-modulen som implementerar behörighetskänslig cachelagring. När modulen är aktiverad anropar Dispatcher en AEM för att utföra användarautentisering och behörighet för det begärda innehållet. Serversvaret avgör om innehållet levereras till webbläsaren från cachen eller inte.
+Dispatcher innehåller modulen AuthChecker som implementerar behörighetskänslig cachelagring. När modulen aktiveras anropar Dispatcher en AEM för att utföra användarautentisering och behörighet för det begärda innehållet. Serversvaret avgör om innehållet levereras till webbläsaren från cachen eller inte.
 
 Eftersom autentiserings- och auktoriseringsmetoderna är specifika för den AEM distributionen måste du skapa serverpaketet.
 
 >[!NOTE]
 >
->Använd `deny` filter för att tillämpa generella säkerhetsbegränsningar. Använd behörighetskänslig cachelagring för sidor som är konfigurerade för att ge åtkomst till en delmängd av användare eller grupper.
+>Använd filtren `deny` för att framtvinga begränsningar för skydd av filtret. Använd behörighetskänslig cachelagring för sidor som är konfigurerade för att ge åtkomst till en delmängd av användare eller grupper.
 
 I följande diagram visas ordningen för händelser som inträffar när en webbläsare begär en sida som använder behörighetskänslig cachelagring.
 
@@ -31,7 +31,7 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 
 ![](assets/chlimage_1.png)
 
-1. Dispatcher avgör att det begärda innehållet är cache-lagrat och giltigt.
+1. Dispatcher fastställer att det begärda innehållet är cache-lagrat och giltigt.
 1. Dispatcher skickar ett begärandemeddelande till återgivningen. Avsnittet HEAD innehåller alla rubrikrader från webbläsarbegäran.
 1. Renderingen anropar auth checker-servern för att utföra säkerhetskontrollen och svarar på Dispatcher. Svarsmeddelandet innehåller en HTTP-statuskod på 200 som anger att användaren är behörig.
 1. Dispatcher skickar ett svarsmeddelande till webbläsaren som består av rubrikraderna från återgivningssvaret och det cachelagrade innehållet i brödtexten.
@@ -40,10 +40,10 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 
 ![](assets/chlimage_1-1.png)
 
-1. Dispatcher avgör att innehållet inte cachas eller behöver uppdateras.
-1. Skickaren vidarebefordrar den ursprungliga begäran till återgivningen.
+1. Dispatcher fastställer att innehållet inte cachas eller behöver uppdateras.
+1. Dispatcher vidarebefordrar den ursprungliga begäran till återgivningen.
 1. Renderingen anropar den AEM auktoriserarservern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
-1. Skickaren vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
+1. Dispatcher vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
 ## Användaren är inte auktoriserad {#user-is-not-authorized}
 
@@ -52,9 +52,9 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 1. Dispatcher kontrollerar cachen.
 1. Dispatcher skickar ett begärandemeddelande till återgivningen som innehåller alla rubrikrader från webbläsarens begäran.
 1. Renderingen anropar Auth Checker-servern för att utföra en säkerhetskontroll som misslyckas och återgivningen vidarebefordrar den ursprungliga begäran till Dispatcher.
-1. Skickaren vidarebefordrar den ursprungliga begäran till återgivningen.
+1. Dispatcher vidarebefordrar den ursprungliga begäran till återgivningen.
 1. Renderingen anropar den AEM auktoriserarservern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
-1. Skickaren vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
+1. Dispatcher vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
 ## Tillämpa behörighetskänslig cachelagring {#implementing-permission-sensitive-caching}
 
@@ -70,15 +70,15 @@ Så här implementerar du behörighetskänslig cachelagring:
 >[!NOTE]
 >
 >När det finns ett CDN (eller något annat cache-minne) framför Dispatcher bör du ställa in cache-rubrikerna så att CDN inte cachelagrar det privata innehållet. Till exempel: `Header always set Cache-Control private`.
->AEM as a Cloud Service finns i [Cachning](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching) om du vill ha mer information om hur du ställer in privata cachelagringsrubriker.
+>För AEM as a Cloud Service finns mer information om hur du anger privata cachelagringshuvuden på sidan [Caching](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching).
 
 ## Skapa Auth Checker-servleten {#create-the-auth-checker-servlet}
 
 Skapa och distribuera en serverdator som autentiserar och auktoriserar den användare som begär webbinnehållet. Servern kan använda vilken autentisering som helst. Den kan också använda vilken auktoriseringsmetod som helst. Den kan till exempel använda AEM användarkonto och databas-ACL:er. Den kan också använda en LDAP-sökningstjänst. Du distribuerar servleten till den AEM instansen som Dispatcher använder som rendering.
 
-Servern måste vara tillgänglig för alla användare. Därför bör din servlet utöka `org.apache.sling.api.servlets.SlingSafeMethodsServlet` som ger skrivskyddad åtkomst till systemet.
+Servern måste vara tillgänglig för alla användare. Därför bör din servlet utöka klassen `org.apache.sling.api.servlets.SlingSafeMethodsServlet` som ger skrivskyddad åtkomst till systemet.
 
-Servern tar endast emot HEAD-begäranden från återgivningen, så du behöver bara implementera `doHead` -metod.
+Servern tar endast emot HEAD-begäranden från återgivningen, så du behöver bara implementera metoden `doHead`.
 
 Renderingen innehåller URI:n för den begärda resursen som en parameter i HTTP-begäran. En auktoriseringsserver är till exempel tillgänglig via `/bin/permissioncheck`. Om du vill utföra en säkerhetskontroll på /content/geometrixx-outdoors/en.html innehåller återgivningen följande URL i HTTP-begäran:
 
@@ -88,7 +88,7 @@ Serletens svarsmeddelande måste innehålla följande HTTP-statuskoder:
 
 * 200: Autentisering och auktorisering lyckades.
 
-Följande exempelserver hämtar URL:en för den begärda resursen från HTTP-begäran. Koden använder Felix SCR `Property` anteckning för att ange värdet för `sling.servlet.paths` till /bin/permissionsCheck. I `doHead` -metoden hämtar servern sessionsobjektet och använder `checkPermission` metod för att fastställa lämplig svarskod.
+Följande exempelserver hämtar URL:en för den begärda resursen från HTTP-begäran. Koden använder Felix SCR `Property`-anteckningen för att ange värdet för egenskapen `sling.servlet.paths` till /bin/permissionsCheck. I metoden `doHead` hämtar servern sessionsobjektet och använder metoden `checkPermission` för att fastställa lämplig svarskod.
 
 >[!NOTE]
 >
@@ -147,17 +147,17 @@ public class AuthcheckerServlet extends SlingSafeMethodsServlet {
 
 >[!NOTE]
 >
->Om dina krav tillåter cachelagring av autentiserade dokument anger du egenskapen /allowAuthorized under avsnittet /cache till `/allowAuthorized 1`. Se ämnet [Cachelagring när autentisering används](/help/using/dispatcher-configuration.md) för mer information.
+>Om dina krav tillåter cachelagring av autentiserade dokument anger du egenskapen /allowAuthorized under avsnittet /cache till `/allowAuthorized 1`. Mer information finns i avsnittet [Cachelagring när autentisering används](/help/using/dispatcher-configuration.md).
 
 Avsnittet auth_checker i dispatchern.any-filen styr beteendet för behörighetskänslig cachelagring. Avsnittet auth_checker innehåller följande underavsnitt:
 
-* `url`: Värdet för `sling.servlet.paths` egenskapen för den servlet som utför säkerhetskontrollen.
+* `url`: Värdet för egenskapen `sling.servlet.paths` för serverutrymmet som utför säkerhetskontrollen.
 
-* `filter`: Filter som anger vilka mappar som behörighetsstyrd cachelagring ska användas på. Oftast är `deny` filtret tillämpas på alla mappar, och `allow` filter tillämpas på skyddade mappar.
+* `filter`: Filter som anger de mappar som behörighetskänslig cachelagring används på. Vanligtvis tillämpas ett `deny`-filter på alla mappar och `allow`-filter tillämpas på skyddade mappar.
 
-* `headers`: Anger de HTTP-huvuden som åtkomstservern inkluderar i svaret.
+* `headers`: Anger de HTTP-huvuden som auktoriseringsservern inkluderar i svaret.
 
-När Dispatcher startas innehåller Dispatcher-loggfilen följande felsökningsnivåmeddelande:
+När Dispatcher startas innehåller Dispatcher loggfil följande felsökningsnivåmeddelande:
 
 `AuthChecker: initialized with URL 'configured_url'.`
 

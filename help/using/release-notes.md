@@ -1,6 +1,6 @@
 ---
-title: AEM Dispatcher Release Notes
-description: Versionsinformation om Adobe Experience Manager Dispatcher
+title: Versionsinformation för AEM Dispatcher
+description: Versionsinformation för Adobe Experience Manager Dispatcher
 topic-tags: release-notes
 content-type: reference
 products: SG_EXPERIENCEMANAGER/6.4
@@ -12,7 +12,7 @@ ht-degree: 1%
 
 ---
 
-# AEM Dispatcher Release Notes{#aem-dispatcher-release-notes}
+# Versionsinformation för AEM Dispatcher{#aem-dispatcher-release-notes}
 
 ## Versionsinformation {#release-information}
 
@@ -27,13 +27,13 @@ ht-degree: 1%
 
 ## Systemkrav och krav {#system-requirements-and-prerequisites}
 
-Se [Plattformar som stöds](https://experienceleague.adobe.com/en/docs/experience-manager-64/deploying/introduction/technical-requirements) för mer information om krav och krav.
+Mer information om krav och krav finns i [Plattformar som stöds](https://experienceleague.adobe.com/en/docs/experience-manager-64/deploying/introduction/technical-requirements).
 
-Adobe rekommenderar att du använder den senaste versionen av AEM Dispatcher för att få tillgång till den senaste funktionen, de senaste felkorrigeringarna och bästa möjliga prestanda.
+Adobe rekommenderar att du använder den senaste versionen av AEM Dispatcher för att få tillgång till de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
 
 ## Installationsanvisningar {#installation-instructions}
 
-Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
+Mer information finns i [Installera Dispatcher](dispatcher-install.md).
 
 ## Versionshistorik {#release-history}
 
@@ -59,7 +59,7 @@ Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 **Förbättringar**:
 
 * DISP-954 - Supportogiltigförklaring även om utgångsdatum inte har passerats
-* DISP-949 - Dispatcher returnerar 200 i stället för 404, även om filterblocksbegäran har gjorts för POSTEN
+* DISP-949 - Dispatcher returnerar 200 i stället för 404, även om filterblocksbegäran har POSTEN
 
 ### Version 4.3.4 (2021-Nov-29) {#nov}
 
@@ -70,17 +70,17 @@ Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 
 **Förbättringar**:
 
-* DISP-874 - Skapar en Dispatcher-konfiguration som aktiverar eller inaktiverar implementering av DISP-818 via en flagga `DispatcherRestrictUncacheableContent`. Standardvärdet är Av. När På tas alla cachelagringshuvuden som anges med mod bort för innehåll som inte kan cachelagras. Den här inställningen skiljer sig från beteendet i version 4.3.3 (där standardinställningen var På), men det är samma som i tidigare versioner än 4.3.3 (där standardinställningen var Av). Keeping `DispatcherRestrictUncacheableContent`Vi rekommenderar att webbläsarens cacheminne är avstängt som standard, vilket ger större flexibilitet. När du uppgraderar från version 4.3.3 till 4.3.4 måste du uttryckligen ställa in om du vill behålla samma beteende som i version 4.3.3 `DispatcherRestrictUncacheableContent` till På.
+* DISP-874 - Skapar en Dispatcher-konfiguration som aktiverar eller inaktiverar implementering av DISP-818 via flaggan `DispatcherRestrictUncacheableContent`. Standardvärdet är Av. När På tas alla cachelagringshuvuden som anges med mod bort för innehåll som inte kan cachelagras. Den här inställningen skiljer sig från beteendet i version 4.3.3 (där standardinställningen var På), men det är samma som i tidigare versioner än 4.3.3 (där standardinställningen var Av). Det rekommenderas att standardinställningen Av för `DispatcherRestrictUncacheableContent` behålls så att webbläsarcachen blir mer flexibel. Om du uppgraderar från version 4.3.3 till 4.3.4 och vill behålla samma beteende som i version 4.3.3 måste du uttryckligen ange `DispatcherRestrictUncacheableContent` till På.
 * DISP-841 - Dispatcher respekterar inte /serverStaleOnError för 504-svarskod
-* DISP-874 - Skapa en Dispatcher-konfiguration för att aktivera eller inaktivera implementeringen av DISP-818
-* DISP-883 - Spåra som visar URL-begäran, disposition i Dispatcher
+* DISP-874 - Skapa en Dispatcher-konfiguration för att aktivera eller inaktivera implementering av DISP-818
+* DISP-883 - Spårning som visar URL-begäran Disposition i Dispatcher
 * DISP-944 - preload-vanity urls
 
 ### Version 4.3.3 (2019-Oct-18) {#october}
 
 **Felkorrigeringar**:
 
-* DISP-739 - LogLevel Dispatcher: **nivå** fungerar inte
+* DISP-739 - LogLevel Dispatcher: **level** fungerar inte
 * DISP-749 - Alpine Linux® Dispatcher kraschar med spårloggsnivå
 
 **Förbättringar**:
@@ -89,7 +89,7 @@ Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 * DISP-814 - Apache 40x-fel under cachetömningar
 * DISP-818 - mod_expirres lägger till Cache-Control-rubriker för innehåll som inte kan cache-lagras
 * DISP-821 - Lagra inte loggkontexten i socketen
-* DISP-822 - Dispatcher ska använda `ppoll` i stället för `pselect`
+* DISP-822 - Dispatcher bör använda `ppoll` i stället för `pselect`
 * DISP-824 - Secure DispatcherUseForwardedHost
 * DISP-825 - Logga ett specialmeddelande när det inte finns mer utrymme på disken
 * DISP-826 - Stöder URI:er för uppdatering med en frågesträng
@@ -106,7 +106,7 @@ Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 
 * DISP-734 - Dispatcher orsakar krasch i insert_output_filter om det inte anges som hanterare
 * DISP-735 - REs fungerar inte i Alpine Linux®
-* DISP-740 - Inläsning av dispatcher i macOS Mojave är inaktiverat som standard
+* DISP-740 - Inläsning av Dispatcher i macOS Mojave är inaktiverat som standard
 * DISP-742 - Blockerade begäranden kan läcka information för att autentisera skyddade resurser
 
 **Förbättringar**:
@@ -121,25 +121,25 @@ Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 
 **Felkorrigeringar**:
 
-* DISP-656 - Dispatcher returnerar fel ETag Header
+* DISP-656 - Dispatcher har fel ETag Header
 * DISP-694 - Utelämna varningar när aktiva anslutningar förblir oförändrade
 * DISP-714 - Cookie-baserad sessionshantering fungerar inte i IIS
 * DISP-715 - Säker flagga för återgiven cookie
 * DISP-720 - Temporära filer som inte stängs kan leda till att filen blir slut (för många öppna filer)
-* DISP-721 - Dispatcher avbryter poll() när Apache startar om underordnat
+* DISP-721 - Dispatcher avbryter poll() när Apache startar om underordnad
 * DISP-722 - Cachefiler skapas med oktalt läge 0600
 * DISP-723 - implicit 10-minuters timeout (och försök igen) när återgivningens tidsgräns är 0
 * DISP-725 - Efterföljande tecken efter strängar konverteras tyst till ett namnlöst värde
 * DISP-726 - Logga en varning när ingen servergrupp faktiskt matchar den inkommande värden
 * DISP-727 - Dispatcher kontrollerar innehållslängden för begäranden om tomma cachefiler
 * DISP-730-404 vid försök att komma åt en rubrikfil via Dispatcher
-* DISP-731 - Dispatcher är sårbar för Log Injection
+* DISP-731 - Dispatcher är känsligt för Log Injection
 * DISP-732 - Dispatcher ska ta bort efterföljande &#39;/&#39; i URL:en
 * DISP-733 - Dispatcher ska ange (beräkna) en åldersrubrik
 
 **Förbättringar**:
 
-* DISP-656 - Dispatcher returnerar fel ETag Header
+* DISP-656 - Dispatcher har fel ETag Header
 * DISP-694 - Utelämna varningar när aktiva anslutningar förblir oförändrade
 * DISP-715 - Säker flagga för återgiven cookie
 * DISP-722 - Cachefiler skapas med oktalt läge 0600
@@ -151,26 +151,26 @@ Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 
 * DISP-682 - Numerisk loggnivå används felaktigt
 * DISP-685 - 32-bitars Solaris™ SPARC®-binärfiler har en odefinierad referens till __divdi3
-* DISP-688 - Dispatcher returnerar inte X-Cache-Info-huvudet på 404-svar
+* DISP-688 - Dispatcher returnerar inte &quot;X-Cache-Info&quot;-huvudet på 404-svar
 * DISP-690 - Rubriken Senast ändrad är inte tillgänglig
 * DISP-691 - åtkomstfel i w3wp.exe
-* DISP-693 - Behöver uppdatera arkitekturinformation för Solaris™-servrar på hämtningssidan för Dispatcher
-* DISP-695 - Problem med DispatcherLog-nivån i Dispatcher-modulen 4.2.3
+* DISP-693 - Behöver uppdatera arkitekturinformation för Solaris™-servrar på Dispatcher nedladdningssida
+* DISP-695 - Problem med DispatcherLog-nivån i Dispatcher-modul 4.2.3
 * DISP-698 - Dispatcher TTL måste stödja s-maxage och privata direktiv
 * DISP-700 - Modulen fungerar inte korrekt i Alpine Linux®
 * DISP-704 - Webbläsarbegäranden som innehåller %2b skickas till utgivaren utan kodning
-* DISP-705 - Dispatcher kraschar på grund av att programmet är dubbelt ledigt eller skadat (snabbast)
-* DISP-706 - Vid ogiltigförklaring följer Dispatcher tillbaka referenssymboler som kan orsaka en oändlig slinga
+* DISP-705 - Dispatcher kraschar på grund av att programmet är dubbelt kostnadsfritt eller skadat (snabbast)
+* DISP-706 - Vid ogiltigförklaring följer Dispatcher bakåtreferenssymboler som kan orsaka en oändlig slinga
 * DISP-709 - Blockera vissa tillägg för innehålls-URL
 * DISP-710 - Bygger för Linux® som inte kan användas i Cent OS 6
 
 **Förbättringar**:
 
-* DISP-652 - Dispatcher visar fel datumhuvud
+* DISP-652 - Dispatcher har fel datumhuvud
 
 ## Användbara resurser {#helpful-resources}
 
-* [AEM Dispatcher - översikt](dispatcher.md)
+* [AEM Dispatcher Overview](dispatcher.md)
 
 ## Nedladdningar {#downloads}
 

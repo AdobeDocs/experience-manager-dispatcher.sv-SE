@@ -49,7 +49,7 @@ Dispatcher har flera inbyggda mekanismer som du kan använda för att optimera p
 HTTP-begäranrubriker cachelagras inte, vilket innebär att problem kan uppstå om du lagrar sidkodningsinformation i sidhuvudet. I det här fallet används webbserverns standardkodning för sidan när Dispatcher skickar en sida från cachen. Det finns två sätt att undvika det här problemet:
 
 * Om du bara använder en kodning kontrollerar du att den kodning som används på webbservern är densamma som standardkodningen för den AEM webbplatsen.
-* Om du vill ställa in kodningen använder du `<META>` -taggen i HTML `head` -avsnittet, som i följande exempel:
+* Om du vill ställa in kodningen använder du en `<META>`-tagg i HTML `head` -avsnittet, som i följande exempel:
 
 ```xml
         <META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
@@ -57,7 +57,7 @@ HTTP-begäranrubriker cachelagras inte, vilket innebär att problem kan uppstå 
 
 ## Undvik URL-parametrar {#avoid-url-parameters}
 
-Undvik om möjligt URL-parametrar för sidor som du vill cachelagra. Om du till exempel har ett bildgalleri cachelagras aldrig följande URL (såvida inte Dispatcher är [konfigurerad](dispatcher-configuration.md#main-pars_title_24)):
+Undvik om möjligt URL-parametrar för sidor som du vill cachelagra. Om du till exempel har ett bildgalleri cachelagras aldrig följande URL (såvida inte Dispatcher [har konfigurerats därefter](dispatcher-configuration.md#main-pars_title_24)):
 
 ```xml
 www.myCompany.com/pictures/gallery.html?event=christmas&amp;page=1
@@ -77,7 +77,7 @@ www.myCompany.com/pictures/gallery.christmas.1.html
 
 Om du tillåter användare att ändra teckensnittsstorleken (eller annan layoutanpassning) kontrollerar du att de olika anpassningarna återspeglas i webbadressen.
 
-Till exempel cachelagras inte cookies, så om du sparar teckensnittsstorleken i en cookie (eller på liknande sätt) bevaras inte teckensnittsstorleken för den cachelagrade sidan. Därför returnerar Dispatcher dokument med valfri teckenstorlek på måfå.
+Till exempel cachelagras inte cookies, så om du sparar teckensnittsstorleken i en cookie (eller på liknande sätt) bevaras inte teckensnittsstorleken för den cachelagrade sidan. Därför returnerar Dispatcher dokument med valfri teckensnittsstorlek på måfå.
 
 Om du tar med teckensnittsstorleken i URL:en som väljare undviker du det här problemet:
 
@@ -122,9 +122,9 @@ Det är viktigt att du skapar de här bilderna med samma namngivningshandtag som
 
 För sidor som inte ändras finns bilderna kvar i cacheminnet, även om själva sidorna är automatiskt ogiltiga.
 
-## Personalisering {#personalization}
+## Personalization {#personalization}
 
-Dispatcher kan inte cachelagra anpassade data, så vi rekommenderar att du begränsar personaliseringen till där det är nödvändigt. Så här visar du varför:
+Dispatcher kan inte cachelagra personaliserade data, så vi rekommenderar att du begränsar personaliseringen till där det är nödvändigt. Så här visar du varför:
 
 * Om du använder en fritt anpassningsbar startsida måste den sidan sammanställas varje gång en användare begär den.
 * Om du däremot erbjuder ett alternativ på tio olika startsidor kan du cachelagra var och en av dem, vilket förbättrar prestandan.
@@ -136,12 +136,12 @@ Dispatcher kan inte cachelagra anpassade data, så vi rekommenderar att du begr�
 >Om du måste kan du dock göra följande:
 >
 >* Använd iFrames för att dela upp sidan i en del som är densamma för alla användare och en del som är densamma för alla sidor i användaren. Du kan sedan cachelagra båda dessa delar.
->* använda JavaScript på klientsidan för att visa personlig information. Du måste dock se till att sidan fortfarande visas korrekt om en användare stänger av JavaScript.
+>* använda JavaScript på klientsidan för att visa personaliserad information. Du måste dock se till att sidan fortfarande visas korrekt om en användare stänger av JavaScript.
 >
 
 ## Fästiga anslutningar {#sticky-connections}
 
-[Fästanslutningar](dispatcher.md#TheBenefitsofLoadBalancing) se till att dokumenten för en användare är sammansatta på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp så att den kan innehålla alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Om du gör det påverkas belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
+[Antagliga anslutningar](dispatcher.md#TheBenefitsofLoadBalancing) säkerställer att dokumenten för en användare är sammansatta på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp så att den kan innehålla alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Om du gör det påverkas belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
 
 ## MIME-typer {#mime-types}
 
@@ -157,10 +157,10 @@ För de flesta filer används MIME-typen i filtillägget:
 
 Om filnamnet saknar filtillägg visas det som oformaterad text.
 
-MIME-typen är en del av HTTP-huvudet och Dispatcher cachelagrar den därför inte. Ditt AEM kan returnera filer som inte har ett känt filtillägg. Om filerna i stället använder MIME-typen kan dessa filer visas felaktigt.
+MIME-typen är en del av HTTP-huvudet och därför cachelagras den inte av Dispatcher. Ditt AEM kan returnera filer som inte har ett känt filtillägg. Om filerna i stället använder MIME-typen kan dessa filer visas felaktigt.
 
 Följ dessa riktlinjer för att vara säker på att filerna cachelagras korrekt:
 
 * Kontrollera att filerna alltid har rätt filtillägg.
-* Undvik generiska filserverskript med URL-adresser som download.jsp?file=2214. Skriv om skriptet så att det använder URL:er som innehåller filspecifikationen. I föregående exempel är det `download.2214.pdf`.
+* Undvik generiska filserverskript med URL-adresser som download.jsp?file=2214. Skriv om skriptet så att det använder URL:er som innehåller filspecifikationen. I föregående exempel skulle det vara `download.2214.pdf`.
 

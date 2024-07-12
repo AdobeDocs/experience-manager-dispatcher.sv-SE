@@ -22,9 +22,9 @@ ht-degree: 29%
 
 + [Ökning](dispatcher.md)
 + Komma igång {#getting-started}
-   + [Installerar Dispatcher](dispatcher-install.md)
-   + [Checklistan för Dispatcher-säkerhet](security-checklist.md)
-   + [AEM Dispatcher Release Notes](release-notes.md)
+   + [Installera Dispatcher](dispatcher-install.md)
+   + [Dispatcher Security Checklist](security-checklist.md)
+   + [Versionsinformation för AEM Dispatcher](release-notes.md)
 + Konfigurerar {#configuring}
    + [Konfigurera Dispatcher](dispatcher-configuration.md)
    + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
@@ -35,4 +35,4 @@ ht-degree: 29%
    + [Konfigurera AEM Dispatcher för att förhindra CSRF-attacker](configuring-dispatcher-to-prevent-csrf.md)
 + Felsökning {#troubleshooting}
    + [Felsökning av Dispatcher-problem](dispatcher-troubleshooting.md)
-   + [Vanliga frågor och svar om Dispatcher](dispatcher-faq.md)
+   + [Vanliga frågor om Dispatcher](dispatcher-faq.md)

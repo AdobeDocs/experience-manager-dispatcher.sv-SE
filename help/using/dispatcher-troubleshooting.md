@@ -20,20 +20,20 @@ ht-degree: 0%
 
 >[!NOTE]
 >
->Dispatcher-versionerna är oberoende av AEM. Dispatcher-dokumentationen är dock inbäddad i AEM. Använd alltid Dispatcher-dokumentationen som är inbäddad i dokumentationen för den senaste versionen av AEM.
+>Dispatcher-versionerna är oberoende av AEM. Dispatcher-dokumentationen är dock inbäddad i AEM. Använd alltid den Dispatcher-dokumentation som är inbäddad i dokumentationen för den senaste versionen av AEM.
 >
 >Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen. Länken är inbäddad i dokumentationen för en tidigare version av AEM.
 
 >[!NOTE]
 >
->Kontrollera [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), [Felsökning av problem med att tömma dispatcher](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager])och [Vanliga frågor och svar om Dispatcher](dispatcher-faq.md) för ytterligare information.
+>Mer information finns i [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), [Troubleshooting Dispatcher Flushing Issues](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager]) och i [Dispatcher Top Issues FAQ](dispatcher-faq.md).
 
 ## Kontrollera den grundläggande konfigurationen {#check-the-basic-configuration}
 
 Som alltid är de första stegen att kontrollera grunderna:
 
 * [Bekräfta grundläggande åtgärd](/help/using/dispatcher-configuration.md#confirming-basic-operation)
-* Kontrollera alla loggfiler för webbservern och Dispatcher. Öka `loglevel` används för Dispatcher [loggning](/help/using/dispatcher-configuration.md#logging).
+* Kontrollera alla loggfiler för webbservern och Dispatcher. Öka `loglevel` som används för Dispatcher [log](/help/using/dispatcher-configuration.md#logging) om det behövs.
 
 * [Kontrollera konfigurationen](/help/using/dispatcher-configuration.md):
 
@@ -56,33 +56,33 @@ De här verktygen kan hjälpa dig att övervaka aktiviteten.
 
 ## IIS och 404 hittades inte {#iis-and-not-found}
 
-När du använder IIS kan du uppleva `404 Not Found` returneras i olika scenarier. Om så är fallet, se följande artiklar i kunskapsbasen.
+När du använder IIS kanske `404 Not Found` returneras i olika scenarier. Om så är fallet, se följande artiklar i kunskapsbasen.
 
-* [IIS 6/7: POSTEN returnerar 404](https://helpx.adobe.com/experience-manager/kb/IIS6IsapiFilters.html)
-* [IIS 6: Begäranden till URL:er som innehåller bassökvägen `/bin` returnera en `404 Not Found`](https://helpx.adobe.com/experience-manager/kb/RequestsToBinDirectoryFailInIIS6.html)
+* [IIS 6/7: POSTEN returnerar 404 ](https://helpx.adobe.com/experience-manager/kb/IIS6IsapiFilters.html)
+* [IIS 6: Begäranden till URL:er som innehåller bassökvägen `/bin` returnerar `404 Not Found`](https://helpx.adobe.com/experience-manager/kb/RequestsToBinDirectoryFailInIIS6.html)
 
-Kontrollera också att Dispatcher-cacheroten och IIS-dokumentroten är inställda på samma katalog.
+Kontrollera också att Dispatcher cacherot och IIS-dokumentroten är inställda på samma katalog.
 
 ## Problem med att ta bort arbetsflödesmodeller {#problems-deleting-workflow-models}
 
-**Symtom**
+**Symtomen**
 
 Problem med att ta bort arbetsflödesmodeller vid åtkomst till en AEM författarinstans via Dispatcher.
 
-**Steg som ska återskapas:**
+**Steg att återskapa:**
 
 1. Logga in på din författarinstans (bekräfta att begäranden dirigeras via Dispatcher).
 1. Skapa ett arbetsflöde, till exempel med titeln inställd på workflowToDelete.
 1. Bekräfta att arbetsflödet har skapats.
 1. Markera och högerklicka på arbetsflödet och klicka sedan på **Ta bort**.
 
-1. Klicka **Ja** för att bekräfta.
+1. Bekräfta genom att klicka på **Ja**.
 1. En felmeddelanderuta med följande information visas:\
    `ERROR 'Could not delete workflow model!!`.
 
 **Upplösning**
 
-Lägg till följande rubriker i `/clientheaders` i `dispatcher.any` fil:
+Lägg till följande rubriker i avsnittet `/clientheaders` i `dispatcher.any`-filen:
 
 * `x-http-method-override`
 * `x-requested-with`
@@ -100,27 +100,27 @@ Lägg till följande rubriker i `/clientheaders` i `dispatcher.any` fil:
 
 ## Interferens med mod_dir (Apache) {#interference-with-mod-dir-apache}
 
-Den här processen beskriver hur Dispatcher interagerar med `mod_dir` inuti Apache-webbservern eftersom den kan ge upphov till olika, potentiellt oväntade effekter:
+Den här processen beskriver hur Dispatcher interagerar med `mod_dir` i Apache-webbservern, eftersom den kan ge olika, potentiellt oväntade effekter:
 
 ### Apache 1.3 {#apache}
 
-I Apache 1.3 `mod_dir` hanterar varje begäran där URL:en mappar till en katalog i filsystemet.
+I Apache 1.3 hanterar `mod_dir` varje begäran där URL:en mappas till en katalog i filsystemet.
 
 Den kommer antingen att
 
-* omdirigera begäran till en befintlig `index.html` fil
+* omdirigera begäran till en befintlig `index.html`-fil
 * generera en kataloglista
 
-När Dispatcher är aktiverad bearbetar den sådana förfrågningar genom att registrera sig själv som en hanterare för innehållstypen `httpd/unix-directory`.
+När Dispatcher är aktiverat bearbetar den sådana förfrågningar genom att registrera sig själv som hanterare för innehållstypen `httpd/unix-directory`.
 
 ### Apache 2.x {#apache-x}
 
-I Apache 2.x är det annorlunda. En modul kan hantera olika faser av begäran, t.ex. URL-korrigering. The `mod_dir` hanterar det här steget genom att dirigera om en begäran (när URL:en mappar till en katalog) till URL:en med en `/` tillagd.
+I Apache 2.x är det annorlunda. En modul kan hantera olika faser av begäran, t.ex. URL-korrigering. `mod_dir` hanterar det här steget genom att dirigera om en begäran (när URL:en mappar till en katalog) till URL:en med `/` tillagt.
 
-Dispatcher fångar inte upp `mod_dir` korrigering, men hanterar begäran fullständigt till den omdirigerade URL:en (det vill säga med `/` tillagd). Den här processen kan utgöra ett problem om fjärrservern (till exempel AEM) hanterar begäranden till `/a_path` skiljer sig från förfrågningar till `/a_path/` (när `/a_path` mappar till en befintlig katalog).
+Dispatcher fångar inte upp korrigeringen `mod_dir`, men hanterar begäran fullständigt till den omdirigerade URL:en (d.v.s. med `/` tillagd). Den här processen kan utgöra ett problem om fjärrservern (till exempel AEM) hanterar begäranden till `/a_path` på ett annat sätt än förfrågningar till `/a_path/` (när `/a_path` mappar till en befintlig katalog).
 
 Om detta händer måste du antingen:
 
-* disable `mod_dir` för `Directory` eller `Location` underträd som hanteras av Dispatcher
+* inaktivera `mod_dir` för underträdet `Directory` eller `Location` som hanteras av Dispatcher
 
-* use `DirectorySlash Off` konfigurera `mod_dir` inte att lägga till `/`
+* använd `DirectorySlash Off` för att konfigurera `mod_dir` att inte lägga till `/`

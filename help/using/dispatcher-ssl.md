@@ -1,6 +1,6 @@
 ---
 title: Använda SSL med Dispatcher
-description: Lär dig hur du konfigurerar Dispatcher för att kommunicera med AEM via SSL-anslutningar.
+description: Lär dig hur du konfigurerar Dispatcher att kommunicera med AEM via SSL-anslutningar.
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
@@ -27,11 +27,11 @@ Använd SSL-anslutningar mellan Dispatcher och återgivningsdatorn:
 >
 >Åtgärder som rör SSL-certifikat är bundna till produkter från tredje part. De omfattas inte av Adobe Platinum Maintenance and Support-avtalet.
 
-## Använd SSL när Dispatcher ansluts till AEM {#use-ssl-when-dispatcher-connects-to-aem}
+## Använd SSL när Dispatcher ansluter till AEM {#use-ssl-when-dispatcher-connects-to-aem}
 
 Konfigurera Dispatcher för att kommunicera med AEM eller CQ-återgivningsinstansen med SSL-anslutningar.
 
-Innan du konfigurerar Dispatcher måste du konfigurera AEM eller CQ så att SSL används:
+Konfigurera AEM eller CQ att använda SSL innan du konfigurerar Dispatcher:
 
 * AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
 * AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
@@ -39,7 +39,7 @@ Innan du konfigurerar Dispatcher måste du konfigurera AEM eller CQ så att SSL 
 
 ### SSL-relaterade begärandehuvuden {#ssl-related-request-headers}
 
-När Dispatcher tar emot en HTTPS-begäran inkluderar Dispatcher följande huvuden i den efterföljande begäran som skickas till AEM eller CQ:
+När Dispatcher tar emot en HTTPS-begäran inkluderar Dispatcher följande rubriker i den efterföljande begäran som skickas till AEM eller CQ:
 
 * `X-Forwarded-SSL`
 * `X-Forwarded-SSL-Cipher`
@@ -56,15 +56,15 @@ X-Forwarded-SSL-Session-ID: 814825E8CD055B4C166C2EF6D75E1D0FE786FFB29DEB6DE1E239
 
 ### Konfigurera Dispatcher att använda SSL {#configuring-dispatcher-to-use-ssl}
 
-Om du vill konfigurera Dispatcher att ansluta till AEM eller CQ via SSL, kan du [dispatcher.any](dispatcher-configuration.md) filen kräver följande egenskaper:
+[dispatcher.any](dispatcher-configuration.md)-filen kräver följande egenskaper för att konfigurera Dispatcher att ansluta till AEM eller CQ över SSL:
 
 * En virtuell värd som hanterar HTTPS-begäranden.
-* The `renders` -avsnittet i den virtuella värden innehåller ett objekt som identifierar värdnamnet och porten för CQ- eller AEM-instansen som använder HTTPS.
-* The `renders` objektet innehåller en egenskap med namnet `secure` värde `1`.
+* Avsnittet `renders` i den virtuella värden innehåller ett objekt som identifierar värdnamnet och porten för CQ- eller AEM-instansen som använder HTTPS.
+* Objektet `renders` innehåller egenskapen `secure` för värdet `1`.
 
 Obs! Skapa en annan virtuell värd för att hantera HTTP-begäranden, om det behövs.
 
-Följande exempel `dispatcher.any` filen visar egenskapsvärden för anslutning med HTTPS till en CQ-instans som körs på värden `localhost` och port `8443`:
+I följande exempelfil `dispatcher.any` visas egenskapsvärden för anslutning med HTTPS till en CQ-instans som körs på värden `localhost` och port `8443`:
 
 ```
 /farms
@@ -112,9 +112,9 @@ Följande exempel `dispatcher.any` filen visar egenskapsvärden för anslutning 
 }
 ```
 
-## Konfigurera ömsesidig SSL mellan Dispatcher och AEM {#configuring-mutual-ssl-between-dispatcher-and-aem}
+## Konfigurera ömsesidigt SSL mellan Dispatcher och AEM {#configuring-mutual-ssl-between-dispatcher-and-aem}
 
-Konfigurera anslutningarna mellan Dispatcher och återgivningsdatorn (vanligtvis en AEM- eller CQ-publiceringsinstans) om du vill använda ömsesidig SSL:
+Konfigurera anslutningarna mellan Dispatcher och återgivningsdatorn (vanligtvis en AEM eller CQ-publiceringsinstans) om du vill använda ömsesidig SSL:
 
 * Dispatcher ansluter till återgivningsinstansen via SSL.
 * Återgivningsinstansen verifierar giltigheten för Dispatcher-certifikatet.
@@ -129,10 +129,10 @@ Om du vill konfigurera gemensam SSL måste du ha certifikat som är signerade me
 
 Så här konfigurerar du gemensam SSL:
 
-1. [Installera](dispatcher-install.md) den senaste versionen av Dispatcher för din plattform. Använd en Dispatcher-binär som har stöd för SSL (SSL) i filnamnet, till exempel `dispatcher-apache2.4-linux-x86-64-ssl10-4.1.7.tar`).
+1. [Installera](dispatcher-install.md) den senaste versionen av Dispatcher för din plattform. Använd en binär Dispatcher som stöder SSL (SSL finns i filnamnet, till exempel `dispatcher-apache2.4-linux-x86-64-ssl10-4.1.7.tar`).
 1. [Skapa eller hämta ett CA-signerat certifikat](dispatcher-ssl.md#main-pars-title-3) för Dispatcher och återgivningsinstansen.
 1. [Skapa en nyckelbehållare som innehåller återgivningscertifikatet](dispatcher-ssl.md#main-pars-title-6) och konfigurera återgivningens HTTP-tjänst.
-1. [Konfigurera webbservermodulen Dispatcher](dispatcher-ssl.md#main-pars-title-4) för gemensam SSL.
+1. [Konfigurera Dispatcher webbservermodul](dispatcher-ssl.md#main-pars-title-4) för gemensam SSL.
 
 ### Skapa eller hämta CA-signerade certifikat {#creating-or-obtaining-ca-signed-certificates}
 
@@ -140,9 +140,9 @@ Skapa eller hämta de CA-signerade certifikat som autentiserar publiceringsinsta
 
 #### Skapar din certifikatutfärdare {#creating-your-ca}
 
-Om du agerar som certifikatutfärdare ska du använda [OpenSSL](https://www.openssl.org/) för att skapa certifikatutfärdaren som signerar servern och klientcertifikaten. (Du måste ha OpenSSL-biblioteken installerade.) Utför inte den här proceduren om du använder en tredjeparts certifikatutfärdare.
+Om du fungerar som certifikatutfärdare använder du [OpenSSL](https://www.openssl.org/) för att skapa certifikatutfärdaren som signerar servern och klientcertifikaten. (Du måste ha OpenSSL-biblioteken installerade.) Utför inte den här proceduren om du använder en tredjeparts certifikatutfärdare.
 
-1. Öppna en terminal och ändra den aktuella katalogen till katalogen som innehåller `CA.sh` fil, som `/usr/local/ssl/misc`.
+1. Öppna en terminal och ändra den aktuella katalogen till katalogen som innehåller filen `CA.sh`, till exempel `/usr/local/ssl/misc`.
 1. Om du vill skapa certifikatutfärdaren anger du följande kommando och anger sedan värden när du uppmanas till det:
 
    ```shell
@@ -151,13 +151,13 @@ Om du agerar som certifikatutfärdare ska du använda [OpenSSL](https://www.open
 
    >[!NOTE]
    >
-   >Flera egenskaper i `openssl.cnf` -filen styr beteendet för skriptet CA.sh. Redigera den här filen efter behov innan du skapar din certifikatutfärdare.
+   >Flera egenskaper i filen `openssl.cnf` styr beteendet för skriptet CA.sh. Redigera den här filen efter behov innan du skapar din certifikatutfärdare.
 
 #### Skapa certifikaten {#creating-the-certificates}
 
 Använd OpenSSL för att skapa de certifikatbegäranden som ska skickas till certifikatutfärdaren från tredje part eller för att signera med din certifikatutfärdare.
 
-När du skapar ett certifikat använder OpenSSL egenskapen Gemensamt namn för att identifiera certifikatinnehavaren. För återgivningsinstansens certifikat använder du instansdatorns värdnamn som gemensamt namn om du konfigurerar Dispatcher att acceptera certifikatet. Gör bara den här proceduren om den matchar värdnamnet för Publishing-instansen. Se [DispatcherCheckPeerCN](dispatcher-ssl.md#main-pars-title-11) -egenskap.
+När du skapar ett certifikat använder OpenSSL egenskapen Gemensamt namn för att identifiera certifikatinnehavaren. För återgivningsinstansens certifikat använder du instansdatorns värdnamn som Gemensamt namn om du konfigurerar Dispatcher att acceptera certifikatet. Gör bara den här proceduren om den matchar värdnamnet för Publishing-instansen. Se egenskapen [DispatcherCheckPeerCN](dispatcher-ssl.md#main-pars-title-11).
 
 1. Öppna en terminal och ändra den aktuella katalogen till den katalog som innehåller CH.sh-filen för dina OpenSSL-bibliotek.
 1. Ange följande kommando och ange värden när du uppmanas till det. Om det behövs använder du värdnamnet för publiceringsinstansen som Gemensamt namn. Värdnamnet är ett DNS-matchningsbart namn för återgivningens IP-adress:
@@ -174,15 +174,15 @@ När du skapar ett certifikat använder OpenSSL egenskapen Gemensamt namn för a
    ./CA.sh -sign
    ```
 
-   Två filer namngivna `newcert.pem` och `newkey.pem` skapas i den katalog som innehåller dina CA-hanteringsfiler. Dessa två filer är det offentliga certifikatet och den privata nyckeln för återgivningsdatorn.
+   Två filer med namnen `newcert.pem` och `newkey.pem` skapas i katalogen som innehåller dina CA-hanteringsfiler. Dessa två filer är det offentliga certifikatet och den privata nyckeln för återgivningsdatorn.
 
-1. Byt namn `newcert.pem` till `rendercert.pem`och byta namn `newkey.pem` till `renderkey.pem`.
+1. Byt namn på `newcert.pem` till `rendercert.pem` och byt namn på `newkey.pem` till `renderkey.pem`.
 1. Upprepa steg 2 och 3 för att skapa ett certifikat och en offentlig nyckel för Dispatcher-modulen. Se till att du använder ett gemensamt namn som är specifikt för Dispatcher-instansen.
-1. Byt namn `newcert.pem` till `dispcert.pem`och byta namn `newkey.pem` till `dispkey.pem`.
+1. Byt namn på `newcert.pem` till `dispcert.pem` och byt namn på `newkey.pem` till `dispkey.pem`.
 
 ### Konfigurera SSL på återgivningsdatorn {#configuring-ssl-on-the-render-computer}
 
-Konfigurera SSL på återgivningsinstansen med `rendercert.pem` och `renderkey.pem` filer.
+Konfigurera SSL på återgivningsinstansen med hjälp av filerna `rendercert.pem` och `renderkey.pem`.
 
 #### Konvertera återgivningscertifikatet till JKS-format (Java™ KeyStore) {#converting-the-render-certificate-to-jks-format}
 
@@ -247,7 +247,7 @@ Last Modified Date: 2014-08-12T13:11:21.401-0400
 
 #### Konfigurera återgivningsinstansen {#configuring-the-render-instance}
 
-Om du vill konfigurera HTTP-tjänsten för återgivningsinstansen så att den använder SSL använder du återgivningscertifikatet med instruktionerna i *`Enable SSL on the Publish Instance`* avsnitt:
+Om du vill konfigurera HTTP-tjänsten för återgivningsinstansen så att den använder SSL använder du återgivningscertifikatet med instruktionerna i avsnittet *`Enable SSL on the Publish Instance`*:
 
 * AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
 * AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
@@ -255,11 +255,11 @@ Om du vill konfigurera HTTP-tjänsten för återgivningsinstansen så att den an
 
 ### Konfigurera SSL för Dispatcher Module {#configuring-ssl-for-the-dispatcher-module}
 
-Om du vill konfigurera Dispatcher så att ömsesidig SSL används, förbereder du Dispatcher-certifikatet och konfigurerar sedan webbservermodulen.
+Om du vill konfigurera Dispatcher att använda gemensam SSL förbereder du Dispatcher-certifikatet och konfigurerar sedan webbservermodulen.
 
-### Skapa ett enhetligt utskickscertifikat {#creating-a-unified-dispatcher-certificate}
+### Skapa ett enhetligt Dispatcher-certifikat {#creating-a-unified-dispatcher-certificate}
 
-Kombinera Dispatcher-certifikatet och den okrypterade privata nyckeln till en enda PEM-fil. Använda en textredigerare eller `cat` för att skapa en fil som liknar följande exempel:
+Kombinera Dispatcher-certifikatet och den okrypterade privata nyckeln till en enda PEM-fil. Använd en textredigerare eller kommandot `cat` för att skapa en fil som liknar följande exempel:
 
 1. Öppna en terminal och ändra den aktuella katalogen till platsen för filen diskey.pem.
 1. Om du vill dekryptera den privata nyckeln anger du följande kommando:
@@ -268,7 +268,7 @@ Kombinera Dispatcher-certifikatet och den okrypterade privata nyckeln till en en
    openssl rsa -in dispkey.pem -out dispkey_unencrypted.pem
    ```
 
-1. Använda en textredigerare eller `cat` om du vill kombinera den okrypterade privata nyckeln och certifikatet i en enda fil som liknar följande exempel:
+1. Använd en textredigerare eller kommandot `cat` för att kombinera den okrypterade privata nyckeln och certifikatet i en enda fil som liknar följande exempel:
 
    ```xml
    -----BEGIN RSA PRIVATE KEY-----
@@ -283,11 +283,11 @@ Kombinera Dispatcher-certifikatet och den okrypterade privata nyckeln till en en
 
 ### Ange vilket certifikat som ska användas för Dispatcher {#specifying-the-certificate-to-use-for-dispatcher}
 
-Lägg till följande egenskaper i [Dispatcher-modulens konfiguration](dispatcher-install.md#main-pars-55-35-1022) (in `httpd.conf`):
+Lägg till följande egenskaper i [Dispatcher-modulkonfigurationen](dispatcher-install.md#main-pars-55-35-1022) (i `httpd.conf`):
 
-* `DispatcherCertificateFile`: Sökvägen till den enhetliga certifikatfilen Dispatcher, som innehåller det offentliga certifikatet och den okrypterade privata nyckeln. Den här filen används när SSL-servern begär Dispatcher-klientcertifikatet.
+* `DispatcherCertificateFile`: Sökvägen till den enhetliga Dispatcher-certifikatfilen som innehåller det offentliga certifikatet och den okrypterade privata nyckeln. Den här filen används när SSL-servern begär Dispatcher-klientcertifikatet.
 * `DispatcherCACertificateFile`: Sökvägen till certifikatutfärdarens certifikatfil. Används om SSL-servern visar en certifikatutfärdare som en rotutfärdare inte litar på.
-* `DispatcherCheckPeerCN`: Om aktivering ska ske ( `On`) eller inaktivera ( `Off`) värdnamnskontroll för fjärrservercertifikat.
+* `DispatcherCheckPeerCN`: Om värdnamnskontroll ska aktiveras ( `On`) eller inaktiveras ( `Off`) för fjärrservercertifikat.
 
 Följande kod är en exempelkonfiguration:
 
