@@ -9,9 +9,9 @@ index: y
 internal: n
 snippet: y
 exl-id: ec378409-ddb7-4917-981d-dbf2198aca98
-source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
+source-git-commit: 971cffd4f7ba8b1fa88a8af620a723ce59957007
 workflow-type: tm+mt
-source-wordcount: '1310'
+source-wordcount: '1305'
 ht-degree: 0%
 
 ---
@@ -31,11 +31,10 @@ Använd SSL-anslutningar mellan Dispatcher och återgivningsdatorn:
 
 Konfigurera Dispatcher för att kommunicera med AEM eller CQ-återgivningsinstansen med SSL-anslutningar.
 
-Konfigurera AEM eller CQ att använda SSL innan du konfigurerar Dispatcher:
+Konfigurera AEM eller CQ att använda SSL innan du konfigurerar Dispatcher. Mer information finns i:
 
-* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
-* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
-* Äldre AEM: se [den här sidan](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions).
+* [SSL/TLS som standard](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/ssl-by-default)
+* [Använd SSL-guiden i AEM](https://experienceleague.adobe.com/en/docs/experience-manager-learn/foundation/security/use-the-ssl-wizard)
 
 ### SSL-relaterade begärandehuvuden {#ssl-related-request-headers}
 
