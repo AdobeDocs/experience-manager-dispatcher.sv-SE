@@ -2,9 +2,9 @@
 title: Konfigurera AEM Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
+source-git-commit: 23dde3b2ebc6a63d5e1c50e5877338c3bd09d5d2
 workflow-type: tm+mt
-source-wordcount: '8876'
+source-wordcount: '8938'
 ht-degree: 0%
 
 ---
@@ -945,6 +945,21 @@ Använd följande procedur för att aktivera åtkomst till mål-URL:er.
 1. Kontrollera att konfigurationen av [`/filter`](#configuring-access-to-content-filter) nekar URL:en för varje mål-URL som du har konfigurerat för en AEM- eller CQ-sida. Om det behövs lägger du till ett filter som nekar URL-adressen.
 1. Lägg till avsnittet `/vanity_urls` nedanför `/farms`.
 1. Starta om Apache-webbservern.
+
+Med Dispatcher **version 4.3.6** har en ny `/loadOnStartup`-parameter lagts till. Genom att använda den här parametern kan du konfigurera inläsningen av mål-URL:er vid start enligt följande:
+
+Genom att lägga till `/loadOnStartup 0` (se exemplet nedan) kan du inaktivera inläsningen av mål-URL:er vid start.
+
+```
+/vanity_urls {
+        /url "/libs/granite/dispatcher/content/vanityUrls.html"
+        /file "/tmp/vanity_urls"
+        /loadOnStartup 0
+        /delay 60
+      } 
+```
+
+När `/loadOnStartup 1` läser in URL:er för vanity vid start. Tänk på att `/loadOnStartup 1` är det aktuella standardvärdet för den här parametern.
 
 ## Vidarebefordrar syndikeringsbegäranden - `/propagateSyndPost` {#forwarding-syndication-requests-propagatesyndpost}
 
