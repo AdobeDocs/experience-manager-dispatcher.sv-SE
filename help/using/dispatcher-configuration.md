@@ -2,7 +2,7 @@
 title: Konfigurera AEM Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 23dde3b2ebc6a63d5e1c50e5877338c3bd09d5d2
+source-git-commit: da9bf0c1f4cceccfc6be9f4871a21d2bb703f0a4
 workflow-type: tm+mt
 source-wordcount: '8938'
 ht-degree: 0%
@@ -355,7 +355,7 @@ Dispatcher hittar det mest matchande virtuella värdvärdet på följande sätt:
 * Om inga `virtualhosts`-värden har `scheme` och `uri` delar som matchar både `scheme` och `uri` i begäran, används den första påträffade virtuella värden som matchar `host` i begäran.
 * Om inga `virtualhosts`-värden har en värddel som matchar värddatorn för begäran, används den översta virtuella värddatorn för den översta servergruppen.
 
-Därför bör du placera din virtuella standardvärd högst upp i egenskapen `virtualhosts`. Lägg till den i den översta servergruppen för din `dispatcher.any`-fil.
+Därför bör du placera din virtuella standardvärd högst upp i egenskapen `virtualhosts`. Placera den i den översta servergruppen för din `dispatcher.any`-fil.
 
 ### Exempel på virtuell värdupplösning {#example-virtual-host-resolution}
 
