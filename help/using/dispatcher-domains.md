@@ -7,9 +7,9 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 1470b636-7e60-48cc-8c31-899f8785dafa
-source-git-commit: 3b24e3eb54aa48c4891943b7458c57525897517f
+source-git-commit: b8dc67a9633c1a459a2851f4be99a5fcbec7fe79
 workflow-type: tm+mt
-source-wordcount: '2929'
+source-wordcount: '3008'
 ht-degree: 0%
 
 ---
@@ -18,11 +18,11 @@ ht-degree: 0%
 
 >[!NOTE]
 >
->Dispatcher-versionerna är oberoende av AEM. Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i AEM eller CQ-dokumentationen.
+>Dispatcher-versionerna är oberoende av AEM. Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i AEM- eller CQ-dokumentationen.
 
 Använd Dispatcher för att bearbeta sidförfrågningar i flera webbdomäner samtidigt som följande villkor stöds:
 
-* Webbinnehåll för båda domänerna lagras i en enda AEM.
+* Webbinnehåll för båda domänerna lagras i en enda AEM-databas.
 * Filerna i Dispatcher-cachen kan göras ogiltiga separat för varje domän.
 
 Ett företag publicerar till exempel webbplatser för två av sina varumärken: Varumärke A och Varumärke B. Innehållet för webbplatssidorna skapas i AEM och lagras på samma databasarbetsyta:
@@ -50,7 +50,7 @@ När klienterna skickar HTTP-begäranden till webbservern måste URL:en för den
 1. HTTP-begäran skickas till webbservern.
 1. HTTP-begäran skickas till Dispatcher.
 1. Dispatcher avgör om de cachelagrade filerna är giltiga. Om det är giltigt skickas de cachelagrade filerna till klienten.
-1. Om cachelagrade filer inte är giltiga begär Dispatcher nyligen återgivna sidor från den AEM publiceringsinstansen.
+1. Om cachelagrade filer inte är giltiga begär Dispatcher nyligen återgivna sidor från AEM publiceringsinstans.
 
 ## Cacheinvalidering
 
@@ -62,33 +62,33 @@ När replikeringsagenter för Dispatcher Flush begär att Dispatcher ogiltigför
 * b - Dispatcher Flush Agent anropar Dispatcher för att ogiltigförklara cachen för det replikerade innehållet.
 * c - Dispatcher vidrör en eller flera .stat-filer för att göra de cachelagrade filerna ogiltiga.
 
-Om du vill använda Dispatcher med flera domäner måste du konfigurera AEM, Dispatcher och webbservern. Lösningarna som beskrivs på den här sidan är allmänna och gäller de flesta miljöer. På grund av komplexiteten hos vissa AEM topologier kan din lösning kräva ytterligare anpassade konfigurationer för att lösa särskilda problem. Du måste antagligen anpassa exemplen för att uppfylla din befintliga IT-infrastruktur och hanteringspolicy.
+Om du vill använda Dispatcher med flera domäner måste du konfigurera AEM, Dispatcher och webbservern. Lösningarna som beskrivs på den här sidan är allmänna och gäller de flesta miljöer. På grund av komplexiteten i vissa AEM-topologier kan din lösning kräva ytterligare anpassade konfigurationer för att lösa vissa problem. Du måste antagligen anpassa exemplen för att uppfylla din befintliga IT-infrastruktur och hanteringspolicy.
 
 ## URL-mappning {#url-mapping}
 
 Om du vill att domän-URL:er och innehållssökvägar ska kunna matcha till cachelagrade filer, måste en filsökväg eller en sid-URL översättas under processen. Beskrivningar av följande gemensamma strategier tillhandahålls, där översättning av sökväg eller URL sker vid olika tidpunkter i processen:
 
-* (Rekommenderas) AEM publiceringsinstans använder Sling-mappning för resursupplösning för att implementera interna regler för URL-omskrivning. Domän-URL:er översätts till sökvägar i innehållsdatabasen. Se [AEM Skriver om inkommande URL:er](#aem-rewrites-incoming-urls).
+* (Rekommenderas) AEM publiceringsinstans använder Sling-mappning för resursupplösning för att implementera interna regler för URL-omskrivning. Domän-URL:er översätts till sökvägar i innehållsdatabasen. Se [Inkommande URL:er skrivs om i AEM](#aem-rewrites-incoming-urls).
 * Webbservern använder interna URL-omskrivningsregler som översätter domän-URL:er till cachelagrade sökvägar. Se [Inkommande URL:er skrivs om på webbservern](#the-web-server-rewrites-incoming-urls).
 
-Du bör använda korta URL-adresser för webbsidor. Vanligtvis speglar sid-URL:er strukturen för databasmapparna som innehåller webbinnehållet. URL-adresserna visar dock inte de översta databasnoderna, till exempel `/content`. Klienten är inte nödvändigtvis medveten om strukturen i AEM.
+Du bör använda korta URL-adresser för webbsidor. Vanligtvis speglar sid-URL:er strukturen för databasmapparna som innehåller webbinnehållet. URL-adresserna visar dock inte de översta databasnoderna, till exempel `/content`. Klienten är inte nödvändigtvis medveten om strukturen i AEM-databasen.
 
 ## Allmänna krav {#general-requirements}
 
 Din miljö måste implementera följande konfigurationer för att stödja Dispatcher som arbetar med flera domäner:
 
 * Innehåll för varje domän finns i olika grenar av databasen (se exempelmiljön nedan).
-* Replikeringsagenten för Dispatcher Flush har konfigurerats på AEM publiceringsinstans. (Se [Invaliderar Dispatcher-cache från en publiceringsinstans](page-invalidate.md).)
+* Replikeringsagenten Dispatcher Flush är konfigurerad på AEM publiceringsinstans. (Se [Invaliderar Dispatcher-cache från en publiceringsinstans](page-invalidate.md).)
 * Domännamnssystemet tolkar domännamnen med webbserverns IP-adress.
-* Dispatcher-cachen speglar katalogstrukturen i AEM. Filsökvägarna under webbserverns dokumentrot är samma som sökvägarna till filerna i databasen.
+* Dispatcher-cachen speglar katalogstrukturen i AEM innehållslager. Filsökvägarna under webbserverns dokumentrot är samma som sökvägarna till filerna i databasen.
 
 ## Miljö för de angivna exemplen {#environment-for-the-provided-examples}
 
 De exempellösningar som finns gäller för en miljö med följande egenskaper:
 
-* AEM författare och publiceringsinstanser finns i Linux®-system.
+* Skribenten och publiceringsinstanserna för AEM körs i Linux®-system.
 * Apache HTTPD är den webbserver som används i ett Linux®-system.
-* I AEM och dokumentroten på webbservern används följande filstrukturer (dokumentroten för Apache-webbservern är /`usr/lib/apache/httpd-2.4.3/htdocs)`):
+* AEM innehållsdatabas och dokumentroten för webbservern använder följande filstrukturer (dokumentroten för Apache-webbservern är /`usr/lib/apache/httpd-2.4.3/htdocs)`:
 
   **Databas**
 
@@ -115,9 +115,9 @@ De exempellösningar som finns gäller för en miljö med följande egenskaper:
                  | - content nodes
 ```
 
-## AEM skriver om inkommande URL:er {#aem-rewrites-incoming-urls}
+## Inkommande URL-adresser skrivs om i AEM {#aem-rewrites-incoming-urls}
 
-Genom att avbilda resursmatchningar kan du associera inkommande URL:er med AEM innehållssökvägar. Skapa mappningar på den AEM publiceringsinstansen så att återgivningsbegäranden från Dispatcher kan matchas med rätt innehåll i databasen.
+Genom att avbilda resursmatchningar kan du koppla inkommande URL:er till AEM innehållssökvägar. Skapa mappningar på AEM publiceringsinstans så att återgivningsbegäranden från Dispatcher kan matchas med rätt innehåll i databasen.
 
 Dispatcher-begäranden om sidåtergivning identifierar sidan med den URL som den skickas från webbservern. När URL:en innehåller ett domännamn tolkas URL:en till innehållet med Sling-mappningar. Följande bild visar en mappning av URL:en `branda.com/en.html` till noden `/content/sitea/en`.
 
@@ -196,6 +196,10 @@ DocumentRoot "/usr/lib/apache/httpd-2.4.3/htdocs"
 
 Virtuella värdar ärver egenskapsvärdet [DispatcherConfig](dispatcher-install.md#main-pars-67-table-7) som har konfigurerats i huvudserveravsnittet. Virtuella värdar kan inkludera sin egen DispatcherConfig-egenskap för att åsidosätta huvudserverkonfigurationen.
 
+>[!NOTE]
+>
+>I AEM as a Cloud Service måste en separat värdkonfiguration användas med en DocumentRoot på en högre nivå än var och en av undersidorna. Detta hanteras som standard i arkivtypen, men när flera DocumentRoots används måste en högre prioritetsvärdkonfiguration användas så att cacheogiltigförklaringen kan hanteras för hela cachen eftersom den inte kan konfigureras separat för varje plats. ServerAlias för den här nya konfigurationen måste acceptera värdhuvudet &quot;localhost&quot;.
+
 ### Konfigurera Dispatcher för hantering av flera domäner {#configure-dispatcher-to-handle-multiple-domains}
 
 Ange följande Dispatcher-grupper om du vill ha stöd för URL:er som innehåller domännamn och motsvarande virtuella värdar:
@@ -212,7 +216,7 @@ Servergrupper för virtuella värdar måste ha följande konfigurationer så att
 
 * Egenskapen `/docroot` är inställd på sökvägen till rotkatalogen. Det vill säga rotkatalogen för domänens webbplatsinnehåll i Dispatcher-cachen. Den här sökvägen används som prefix för den sammanfogade URL:en från den ursprungliga begäran. Dokumentet för `/usr/lib/apache/httpd-2.4.3/htdocs/sitea` orsakar till exempel att begäran för `https://branda.com/en.html` tolkas till filen `/usr/lib/apache/httpd-2.4.3/htdocs/sitea/en.html`.
 
-Dessutom måste den AEM publiceringsinstansen anges som rendering för det virtuella värdsystemet. Konfigurera andra servergruppsegenskaper efter behov. Följande kod är en förkortad servergruppskonfiguration för domänen branda.com:
+Dessutom måste publiceringsinstansen för AEM anges som rendering för det virtuella värdsystemet. Konfigurera andra servergruppsegenskaper efter behov. Följande kod är en förkortad servergruppskonfiguration för domänen branda.com:
 
 ```xml
 /farm_sitea  {     
@@ -280,7 +284,7 @@ Dispatcher initializing (build 4.1.2)
 
 ### Konfigurera delningskarta för resursupplösning {#configure-sling-mapping-for-resource-resolution}
 
-Använd Sling-mappning för resursupplösning så att domänbaserade URL:er kan matchas med innehåll på AEM publiceringsinstans. Resursmappningen översätter inkommande URL:er från Dispatcher (ursprungligen från klientens HTTP-begäranden) till innehållsnoder.
+Använd Sling-mappning för resursupplösning så att domänbaserade URL:er kan matcha innehåll i AEM publiceringsinstans. Resursmappningen översätter inkommande URL:er från Dispatcher (ursprungligen från klientens HTTP-begäranden) till innehållsnoder.
 
 Mer information om Sling-resursmappning finns i [Mappningar för resursupplösning](https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html) i Sling-dokumentationen.
 
@@ -298,7 +302,7 @@ När du har skapat mappningen för innehållssidan använder du en webbläsare f
 
 >[!NOTE]
 >
->Länkkontrolleraromformaren för standardomskrivaren för Apache Sling ändrar automatiskt hyperlänkar på sidan för att förhindra brutna länkar. Länkskrivningen utförs dock endast när länkmålet är en HTML- eller HTML-fil. Om du vill uppdatera länkar till andra filtyper skapar du en transformatorkomponent och lägger till den i en pipeline för omskrivning från HTML.
+>Länkkontrolleraromformaren för standardomskrivaren för Apache Sling ändrar automatiskt hyperlänkar på sidan för att förhindra brutna länkar. Länkskrivningen utförs dock endast när länkmålet är en HTML- eller HTML-fil. Om du vill uppdatera länkar till andra filtyper skapar du en transformerarkomponent och lägger till den i en pipeline för HTML-omskrivare.
 
 ### Exempel på noder för resursmappning
 
@@ -314,7 +318,7 @@ I följande tabell visas de noder som implementerar resursmappning för domänen
 
 ## Konfigurera Dispatcher Flush-replikeringsagenten {#configuring-the-dispatcher-flush-replication-agent}
 
-Replikeringsagenten Dispatcher Flush på den AEM publiceringsinstansen måste skicka invalideringsbegäranden till rätt Dispatcher-servergrupp. Om du vill använda en servergrupp som mål använder du egenskapen URI för replikeringsagenten Dispatcher Flush (på fliken Transport). Inkludera värdet för egenskapen `/virtualhost` för Dispatcher-servergruppen som har konfigurerats för att göra cachen ogiltig:
+Replikeringsagenten Dispatcher Flush på AEM publiceringsinstans måste skicka ogiltigförklaringsbegäranden till rätt Dispatcher-servergrupp. Om du vill använda en servergrupp som mål använder du egenskapen URI för replikeringsagenten Dispatcher Flush (på fliken Transport). Inkludera värdet för egenskapen `/virtualhost` för Dispatcher-servergruppen som har konfigurerats för att göra cachen ogiltig:
 
 `https://*webserver_name*:*port*/*virtual_host*/dispatcher/invalidate.cache`
 
@@ -496,7 +500,7 @@ Som vanligt är dokumentroten i cachen densamma som dokumentroten på webbserver
 >
 >Eftersom en enda Dispatcher-servergrupp är definierad behöver Dispatcher Flush-replikeringsagenten på AEM publiceringsinstans inga särskilda konfigurationer.
 
-## Skriva om länkar till filer som inte är HTML {#rewriting-links-to-non-html-files}
+## Skriva om länkar till filer som inte är från HTML {#rewriting-links-to-non-html-files}
 
 Om du vill skriva om referenser till filer som har andra tillägg än .html eller .htm skapar du en Sling-omskrivartransformeringskomponent och lägger till den i standardförskrivningsflödet.
 
@@ -510,11 +514,11 @@ Skriv om referenser när resurssökvägar inte löses korrekt i webbserverkontex
 
 ![](assets/chlimage_1-15.png)
 
-### AEM förinställd skrivarpipeline {#the-aem-default-rewriter-pipeline}
+### AEM förinställda skrivarpipeline {#the-aem-default-rewriter-pipeline}
 
 AEM använder en standardomskrivare för pipeline som bearbetar dokument av typen text/html:
 
-* Generatorn tolkar HTML-dokument och genererar SAX-händelser när den påträffar elementen a, img, area, form, base, link, script och body. Generatoralias är `htmlparser`.
+* Generatorn tolkar HTML-dokument och genererar SAX-händelser när den stöter på elementen a, img, area, form, base, link, script och body. Generatoralias är `htmlparser`.
 * Pipelinen innehåller följande transformatorer: `linkchecker`, `mobile`, `mobiledebug`, `contentsync`. Transformeraren `linkchecker` externaliserar sökvägar till refererade HTML- eller HTML-filer för att förhindra brutna länkar.
 * Serialiseraren skriver HTML-utdata. Serialiaset är htmlwriter.
 
@@ -527,7 +531,7 @@ Så här skapar du en transformatorkomponent och använder den i en pipeline:
 1. Implementera gränssnittet `org.apache.sling.rewriter.TransformerFactory`. Den här klassen skapar instanser av klassen Transformer. Ange värden för egenskapen `transformer.type` (transformatoraliaset) och konfigurera klassen som en OSGi-tjänstkomponent.
 1. Implementera gränssnittet `org.apache.sling.rewriter.Transformer`. Om du vill minimera arbetet kan du utöka klassen `org.apache.cocoon.xml.sax.AbstractSAXPipe`. Om du vill anpassa omskrivningsbeteendet åsidosätter du metoden startElement. Den här metoden anropas för varje SAX-händelse som skickas till transformatorn.
 1. Paketera och distribuera klasserna.
-1. Om du vill lägga till transformatorn i pipeline lägger du till en konfigurationsnod i AEM.
+1. Om du vill lägga till transformatorn i pipeline lägger du till en konfigurationsnod i ditt AEM-program.
 
 >[!TIP]
 >Du kan i stället konfigurera TransformerFactory så att transformatorn infogas i alla definierade omskrivare. Därför behöver du inte konfigurera en pipeline:
@@ -643,7 +647,7 @@ public class MyRewriterTransformer extends AbstractSAXPipe implements Transforme
 
 ### Lägga till transformatorn i en skrivarpipeline {#adding-the-transformer-to-a-rewriter-pipeline}
 
-Skapa en JCR-nod som definierar en pipeline som använder din transformator. Följande noddefinition skapar en pipeline som bearbetar text-/html-filer. Standardgeneratorn AEM och tolken för HTML används.
+Skapa en JCR-nod som definierar en pipeline som använder din transformator. Följande noddefinition skapar en pipeline som bearbetar text-/html-filer. AEM standardgenerator och -parser för HTML används.
 
 >[!NOTE]
 >
@@ -664,6 +668,6 @@ Skapa en JCR-nod som definierar en pipeline som använder din transformator. Fö
 </jcr:root>
 ```
 
-I följande bild visas nodens CRXDE Lite-representation:
+I följande bild visas CRXDE Lite-representationen av noden:
 
 ![](assets/chlimage_1-16.png)
