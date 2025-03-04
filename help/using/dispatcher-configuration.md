@@ -2,9 +2,9 @@
 title: Konfigurera AEM Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: da9bf0c1f4cceccfc6be9f4871a21d2bb703f0a4
+source-git-commit: a9ef9d7d2fe5c421cd8039579fd84961ea901def
 workflow-type: tm+mt
-source-wordcount: '8938'
+source-wordcount: '8941'
 ht-degree: 0%
 
 ---
@@ -133,7 +133,7 @@ Om till exempel filen dispatcher.any finns i samma katalog som cachekatalogen ka
 /docroot "${PWD}/cache"
 ```
 
-Om du till exempel skapar en miljövariabel med namnet `PUBLISH_IP` som lagrar värdnamnet för den AEM publiceringsinstansen kan följande konfiguration av egenskapen [`/renders`](#defining-page-renderers-renders) användas:
+Om du till exempel skapar en miljövariabel med namnet `PUBLISH_IP` som lagrar värdnamnet för AEM-publiceringsinstansen kan följande konfiguration av egenskapen [`/renders`](#defining-page-renderers-renders) användas:
 
 ```xml
 /renders {
@@ -196,7 +196,7 @@ Varje gruppegenskap kan innehålla följande underordnade egenskaper:
 | [/clientheaders](#specifying-the-http-headers-to-pass-through-clientheaders) | Rubrikerna från klientens HTTP-begäran som ska skickas. |
 | [/virtualhosts](#identifying-virtual-hosts-virtualhosts) | Den här servergruppens virtuella värdar. |
 | [/sessionmanagement](#enabling-secure-sessions-sessionmanagement) | Stöd för sessionshantering och autentisering. |
-| [/renders](#defining-page-renderers-renders) | Servrarna som tillhandahåller återgivna sidor (vanligtvis AEM publiceringsinstanser). |
+| [/renders](#defining-page-renderers-renders) | Servrarna som innehåller återgivna sidor (vanligtvis AEM publiceringsinstanser). |
 | [/filter](#configuring-access-to-content-filter) | Definierar de URL:er som Dispatcher aktiverar åtkomst till. |
 | [/vanity_urls](#enabling-access-to-vanity-urls-vanity-urls) | Konfigurerar åtkomst till mål-URL:er. |
 | [/spridateSyndPost](#forwarding-syndication-requests-propagatesyndpost) | Stöd för vidarebefordran av syndikeringsbegäranden. |
@@ -257,11 +257,11 @@ Comment Type: draft
 
 ## Ange vilka HTTP-huvuden som ska passera igenom {#specifying-the-http-headers-to-pass-through-clientheaders}
 
-Egenskapen `/clientheaders` definierar en lista med HTTP-huvuden som Dispatcher skickar från klientens HTTP-begäran till återgivaren (AEM instans).
+Egenskapen `/clientheaders` definierar en lista med HTTP-rubriker som Dispatcher skickar från klientens HTTP-begäran till återgivaren (AEM-instansen).
 
-Som standard vidarebefordrar Dispatcher standardrubrikerna för HTTP till AEM. I vissa fall kanske du vill vidarebefordra ytterligare rubriker eller ta bort specifika rubriker:
+Som standard vidarebefordrar Dispatcher standardrubrikerna för HTTP till AEM-instansen. I vissa fall kanske du vill vidarebefordra ytterligare rubriker eller ta bort specifika rubriker:
 
-* Lägg till rubriker, t.ex. anpassade rubriker, som din AEM förväntar sig i HTTP-begäran.
+* Lägg till rubriker, t.ex. anpassade rubriker, som din AEM-instans förväntar sig i HTTP-begäran.
 * Ta bort rubriker, t.ex. autentiseringsrubriker som bara är relevanta för webbservern.
 
 Om du anpassar uppsättningen rubriker som ska skickas måste du ange en uttömmande lista över rubriker, inklusive de rubriker som normalt inkluderas som standard.
@@ -455,7 +455,7 @@ Ett exempel på konfiguration ser ut så här:
 
 ## Definiera sidåtergivare {#defining-page-renderers-renders}
 
-Egenskapen `/renders` definierar den URL som Dispatcher skickar begäranden till för att återge ett dokument. I följande exempel `/renders` identifieras en enda AEM för återgivning:
+Egenskapen `/renders` definierar den URL som Dispatcher skickar begäranden till för att återge ett dokument. I följande exempel `/renders` identifieras en enda AEM-instans för återgivning:
 
 ```xml
 /renders
@@ -472,7 +472,7 @@ Egenskapen `/renders` definierar den URL som Dispatcher skickar begäranden till
   }
 ```
 
-I följande exempelavsnitt `/renders` identifieras en AEM som körs på samma dator som Dispatcher:
+I följande exempelavsnitt `/renders` identifieras en AEM-instans som körs på samma dator som Dispatcher:
 
 ```xml
 /renders
@@ -485,7 +485,7 @@ I följande exempelavsnitt `/renders` identifieras en AEM som körs på samma da
   }
 ```
 
-I följande exempel `/renders` distribueras återgivningsbegäranden lika mellan två AEM instanser:
+I följande exempel `/renders` distribueras återgivningsbegäranden lika mellan två AEM-instanser:
 
 ```xml
 /renders
@@ -507,7 +507,7 @@ I följande exempel `/renders` distribueras återgivningsbegäranden lika mellan
 
 **/timeout**
 
-Anger timeout för anslutningen som använder AEM i millisekunder. Standardvärdet är `"0"`, vilket gör att Dispatcher väntar oändligt.
+Anger timeout för anslutningen som ansluter till AEM-instansen i millisekunder. Standardvärdet är `"0"`, vilket gör att Dispatcher väntar oändligt.
 
 **/receiveTimeout**
 
@@ -525,7 +525,7 @@ Amazon Elastic Load Balancing (ELB) är en tjänst som svarar på getaddrinfo me
 
 **/säker**
 
-Om egenskapen `/secure` har värdet `"1"` använder Dispatcher HTTPS för att kommunicera med AEM. Mer information finns i [Konfigurera Dispatcher att använda SSL](dispatcher-ssl.md#configuring-dispatcher-to-use-ssl).
+Om egenskapen `/secure` har värdet `"1"` använder Dispatcher HTTPS för att kommunicera med AEM-instansen. Mer information finns i [Konfigurera Dispatcher att använda SSL](dispatcher-ssl.md#configuring-dispatcher-to-use-ssl).
 
 **/always-resolve**
 
@@ -555,7 +555,7 @@ Använd avsnittet `/filter` för att ange de HTTP-begäranden som Dispatcher god
 
 >[!CAUTION]
 >
->Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM installation.
+>Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM-installation.
 
 Avsnittet `/filter` består av en serie regler som antingen nekar eller tillåter åtkomst till innehåll enligt mönster i begärandoradsdelen av HTTP-begäran. Använd en tillåtelselista-strategi för ditt `/filter`-avsnitt:
 
@@ -634,9 +634,9 @@ Med filter kan du också neka åtkomst till olika element, till exempel ASP-sido
 /0002  { /type "deny" /url "*.asp"  }
 ```
 
-#### Exempelfilter: Aktivera begäranden om POST {#example-filter-enable-post-requests}
+#### Exempelfilter: Aktivera POST-begäranden {#example-filter-enable-post-requests}
 
-Följande exempelfilter tillåter att formulärdata skickas med metoden POST:
+Följande exempelfilter tillåter att formulärdata skickas med POST-metoden:
 
 ```xml
 /filter {
@@ -703,7 +703,7 @@ Begränsa den externa åtkomsten så mycket som möjligt när du konfigurerar Di
    * `/etc/designs/default*`
    * `/etc/designs/mydesign*`
 
-När du har skapat filter [testar du sidåtkomst](#testing-dispatcher-security) för att kontrollera att AEM är säker.
+När du har skapat filter [testar du sidåtkomst](#testing-dispatcher-security) för att se till att din AEM-instans är säker.
 
 Följande `/filter`-avsnitt i `dispatcher.any`-filen kan användas som bas i din [Dispatcher-konfigurationsfil.](#dispatcher-configuration-files)
 
@@ -838,7 +838,7 @@ En enskild post kan ha antingen `glob` eller en kombination av `method`, `url`, 
 
 ### Testa Dispatcher Security {#testing-dispatcher-security}
 
-Dispatcher-filter bör blockera åtkomst till följande sidor och skript AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 404 returneras. Justera filtren om du får andra resultat.
+Dispatcher-filter bör blockera åtkomsten till följande sidor och skript på AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 404 returneras. Justera filtren om du får andra resultat.
 
 Du bör se normal sidåtergivning för `/content/add_valid_page.html?debug=layout`.
 
@@ -914,7 +914,7 @@ Last Modified Date: 2015-03-25T14:23:05.185-0400
 <p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;">The "com.adobe.granite.dispatcher.vanityurl.content" package needs to be made public before publishing this contnet.</p>
  -->
 
-Konfigurera Dispatcher så att du kan få åtkomst till URL:er som är konfigurerade för dina AEM.
+Konfigurera Dispatcher för att aktivera åtkomst till tillfälliga URL:er som är konfigurerade för dina AEM-sidor.
 
 När åtkomst till tillfälliga URL:er är aktiverat, anropar Dispatcher regelbundet en tjänst som körs på återgivningsinstansen för att få en lista över tillfälliga URL:er. Dispatcher sparar listan i en lokal fil. När en begäran om en sida nekas på grund av ett filter i avsnittet `/filter`, läser Dispatcher igenom listan med användar-URL:er. Om den nekade URL:en finns med i listan, tillåter Dispatcher åtkomst till fågel-URL:en.
 
@@ -941,7 +941,7 @@ Avsnittet `/vanity_urls` innehåller följande egenskaper:
 
 Använd följande procedur för att aktivera åtkomst till mål-URL:er.
 
-1. Om din renderingstjänst är en AEM instans installerar du paketet `com.adobe.granite.dispatcher.vanityurl.content` på publiceringsinstansen (se anmärkningen ovan).
+1. Om din renderingstjänst är en AEM-instans installerar du paketet `com.adobe.granite.dispatcher.vanityurl.content` på publiceringsinstansen (se anteckningen ovan).
 1. Kontrollera att konfigurationen av [`/filter`](#configuring-access-to-content-filter) nekar URL:en för varje mål-URL som du har konfigurerat för en AEM- eller CQ-sida. Om det behövs lägger du till ett filter som nekar URL-adressen.
 1. Lägg till avsnittet `/vanity_urls` nedanför `/farms`.
 1. Starta om Apache-webbservern.
@@ -963,9 +963,9 @@ När `/loadOnStartup 1` läser in URL:er för vanity vid start. Tänk på att `/
 
 ## Vidarebefordrar syndikeringsbegäranden - `/propagateSyndPost` {#forwarding-syndication-requests-propagatesyndpost}
 
-Syndikeringsbegäranden är endast avsedda för Dispatcher, så som standard skickas de inte till återgivaren (till exempel en AEM).
+Syndikeringsbegäranden är endast avsedda för Dispatcher, så som standard skickas de inte till återgivaren (till exempel en AEM-instans).
 
-Om det behövs ställer du in egenskapen `/propagateSyndPost` på `"1"` för att vidarebefordra syndikeringsbegäranden till Dispatcher. Om den är inställd måste du se till att begäranden om POST inte nekas i filteravsnittet.
+Om det behövs ställer du in egenskapen `/propagateSyndPost` på `"1"` för att vidarebefordra syndikeringsbegäranden till Dispatcher. Om den anges måste du se till att POST-begäranden inte nekas i filteravsnittet.
 
 ## Konfigurerar Dispatcher-cachen - `/cache` {#configuring-the-dispatcher-cache-cache}
 
@@ -1037,7 +1037,7 @@ Statusfilen har inget innehåll. När innehållet uppdateras uppdaterar Dispatch
 
 Egenskapen `/serveStaleOnError` styr om Dispatcher returnerar ogiltiga dokument när återgivningsservern returnerar ett fel. Som standard tas det cachelagrade innehållet bort när en lägesfil ändras och det cachelagrade innehållet blir ogiltigt. Den här åtgärden utförs nästa gång den begärs.
 
-Om `/serveStaleOnError` är inställt på `"1"` tar Dispatcher inte bort ogiltigt innehåll från cachen. Det vill säga, om inte återgivningsservern returnerar ett lyckat svar. Ett 5xx-svar från AEM eller en timeout för anslutningen gör att Dispatcher skickar det inaktuella innehållet och svarar med och HTTP-statusen 111 (förnyelsen misslyckades).
+Om `/serveStaleOnError` är inställt på `"1"` tar Dispatcher inte bort ogiltigt innehåll från cachen. Det vill säga, om inte återgivningsservern returnerar ett lyckat svar. Ett 502-, 503- eller 504-svar från AEM eller en timeout för anslutningen gör att Dispatcher skickar det inaktuella innehållet och svarar med HTTP-statusen 111 (förnyelsen misslyckades).
 
 ### Cachelagring när autentisering används {#caching-when-authentication-is-used}
 
@@ -1066,7 +1066,7 @@ Egenskapen `/rules` styr vilka dokument som cachelagras enligt dokumentsökväge
 * Filtillägget saknas.
    * Webbservern behöver tillägget för att kunna avgöra dokumenttypen (MIME-typen).
 * Autentiseringshuvudet är inställt (konfigurerbart).
-* Om AEM svarar med följande rubriker:
+* Om AEM-instansen svarar med följande rubriker:
 
    * `no-cache`
    * `no-store`
@@ -1074,7 +1074,7 @@ Egenskapen `/rules` styr vilka dokument som cachelagras enligt dokumentsökväge
 
 >[!NOTE]
 >
->Metoderna GET och HEAD (för HTTP-huvudet) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i avsnittet [Caching HTTP Response Headers](#caching-http-response-headers).
+>GET- eller HEAD-metoderna (för HTTP-rubriken) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i avsnittet [Caching HTTP Response Headers](#caching-http-response-headers).
 
 Varje objekt i egenskapen `/rules` innehåller ett [`glob`](#designing-patterns-for-glob-properties)-mönster och en typ:
 
@@ -1194,7 +1194,7 @@ Egenskapen `/invalidate` definierar de dokument som automatiskt görs ogiltiga n
 
 Med automatisk ogiltigförklaring tar Dispatcher inte bort cachelagrade filer efter en innehållsuppdatering, utan kontrollerar deras giltighet nästa gång de begärs. Dokument i cacheminnet som inte ogiltigförklaras automatiskt finns kvar i cacheminnet tills en innehållsuppdatering tar bort dem explicit.
 
-Automatisk ogiltigförklaring används vanligtvis för HTML-sidor. HTML sidor innehåller ofta länkar till andra sidor, vilket gör det svårt att avgöra om en innehållsuppdatering påverkar en sida. Om du vill vara säker på att alla relevanta sidor blir ogiltiga när innehållet uppdateras, gör du alla sidor i HTML automatiskt ogiltiga. Följande konfiguration gör alla HTML sidor ogiltiga:
+Automatisk ogiltigförklaring används vanligtvis för HTML-sidor. HTML-sidor innehåller ofta länkar till andra sidor, vilket gör det svårt att avgöra om en innehållsuppdatering påverkar en sida. Om du vill vara säker på att alla relevanta sidor blir ogiltiga när innehållet uppdateras, gör du alla HTML-sidor automatiskt ogiltiga. Följande konfiguration gör alla HTML-sidor ogiltiga:
 
 ```xml
   /invalidate
@@ -1224,7 +1224,7 @@ Om du erbjuder automatiskt genererade PDF- och ZIP-filer för nedladdning kan du
   }
 ```
 
-Integreringen AEM Adobe Analytics levererar konfigurationsdata i en `analytics.sitecatalyst.js`-fil på din webbplats. Exempelfilen `dispatcher.any` som tillhandahålls med Dispatcher innehåller följande ogiltighetsregel för den här filen:
+AEM-integreringen med Adobe Analytics levererar konfigurationsdata i en `analytics.sitecatalyst.js`-fil på din webbplats. Exempelfilen `dispatcher.any` som tillhandahålls med Dispatcher innehåller följande ogiltighetsregel för den här filen:
 
 ```xml
 {
@@ -1616,7 +1616,7 @@ Använd parametern `/ignoreEINTR` om instansen har en sådan konfiguration och l
 
 `Error while reading response: Interrupted system call`
 
-Internt läser Dispatcher svaret från fjärrservern (d.v.s. AEM) med en slinga som kan representeras som:
+Internt läser Dispatcher svaret från fjärrservern (dvs. AEM) med en slinga som kan representeras som:
 
 ```text
 while (response not finished) {  
@@ -1803,19 +1803,19 @@ Och en händelse loggas när en fil som matchar en blockeringsregel begärs:
 
 ## Bekräfta grundläggande åtgärd {#confirming-basic-operation}
 
-Så här bekräftar du grundläggande åtgärder och interaktion för webbservern, Dispatcher och AEM:
+Så här bekräftar du grundläggande åtgärder och interaktion för webbservern, Dispatcher- och AEM-instansen:
 
 1. Ange `loglevel` som `3`.
 
 1. Starta webbservern. När du gör det startar även Dispatcher.
-1. Starta AEM.
+1. Starta AEM-instansen.
 1. Kontrollera loggen och felfilerna för webbservern och Dispatcher.
    * Beroende på webbservern bör du se meddelanden som:
       * `[Thu May 30 05:16:36 2002] [notice] Apache/2.0.50 (Unix) configured` och
       * `[Fri Jan 19 17:22:16 2001] [I] [19096] Dispatcher initialized (build XXXX)`
 
 1. Surfa på webbplatsen via webbservern. Bekräfta att innehållet visas som det ska.\
-   På en lokal installation där AEM körs på port `4502` och webbservern på `80` får du åtkomst till webbplatskonsolen med båda:
+   På en lokal installation där AEM körs på port `4502` och webbservern på `80` kan du till exempel komma åt webbplatskonsolen med hjälp av båda:
    * `https://localhost:4502/libs/wcm/core/content/siteadmin.html`
    * `https://localhost:80/libs/wcm/core/content/siteadmin.html`
    * Resultaten ska vara identiska. Bekräfta åtkomst till andra sidor med samma mekanism.
@@ -1831,7 +1831,7 @@ I komplexa inställningar kan du använda flera Dispatcher. Du kan till exempel 
 * en Dispatcher för att publicera en webbplats på intranätet
 * en andra Dispatcher, med en annan adress och olika säkerhetsinställningar, för att publicera samma innehåll på Internet.
 
-I så fall måste du se till att varje begäran endast går igenom en Dispatcher. En Dispatcher hanterar inte begäranden som kommer från andra Dispatcher. Kontrollera därför att båda utskickarna har direktåtkomst till den AEM webbplatsen.
+I så fall måste du se till att varje begäran endast går igenom en Dispatcher. En Dispatcher hanterar inte begäranden som kommer från andra Dispatcher. Kontrollera därför att båda utskickarna har direktåtkomst till AEM webbplats.
 
 ## Felsökning {#debugging}
 
@@ -1878,8 +1878,8 @@ Servergruppens konfiguration innehåller inte någon dokumentrot (konfigurations
   Mallen för tillfälligt filnamn överskrider det längsta möjliga filnamnet på systemet. Dispatcher skapar först en temporär fil innan den cachelagrade filen faktiskt skapas eller skrivs över. Det tillfälliga filnamnet är målfilens namn med tecknen `_YYYYXXXXXX` tillagda, där `Y` och `X` ersätts för att skapa ett unikt namn.
 * **kan inte nås: URL för begäran saknar tillägg**\
   Begär-URL:en har inget tillägg, eller så finns det en sökväg som följer filtillägget, till exempel: `/test.html/a/path`.
-* **kan inte nås: begäran måste vara GET eller HEAD**
-HTTP-metoden är inte GET eller HEAD. Dispatcher förutsätter att utdata innehåller dynamiska data som inte ska cachelagras.
+* **går inte att komma åt: begäran måste vara en GET eller HEAD**
+HTTP-metoden är inte en GET eller en HEAD. Dispatcher förutsätter att utdata innehåller dynamiska data som inte ska cachelagras.
 * **kunde inte nås: begäran innehöll en frågesträng**\
   Begäran innehöll en frågesträng. Dispatcher förutsätter att utdata är beroende av den frågesträng som har angetts och därför inte cachelagras.
 * **kan inte nås: sessionshanteraren måste autentisera**\
