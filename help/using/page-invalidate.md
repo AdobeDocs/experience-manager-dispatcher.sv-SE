@@ -24,9 +24,9 @@ När du använder Dispatcher med AEM måste interaktionen konfigureras för att 
 
 Standardanvändarkontot `admin` används för att autentisera de replikeringsagenter som är installerade som standard. Skapa ett dedikerat användarkonto som kan användas med replikeringsagenter.
 
-Mer information finns i avsnittet [Konfigurera replikerings- och transportanvändare](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#VerificationSteps) i AEM säkerhetschecklista.
+Mer information finns i avsnittet [Konfigurera replikerings- och transportanvändare](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#VerificationSteps) i AEM säkerhetschecklista.
 
-<!-- OLD URL from above https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#VerificationSteps -->
+<!-- OLD URL from above https://helpx.adobe.com/se/experience-manager/6-3/sites/administering/using/security-checklist.html#VerificationSteps -->
 
 ## Invaliderar Dispatcher-cache från redigeringsmiljön {#invalidating-dispatcher-cache-from-the-authoring-environment}
 
@@ -66,7 +66,7 @@ Använd följande procedur för att konfigurera en replikeringsagent på AEM fö
 1. Konfigurera andra parametrar efter behov.
 1. Klicka på OK så att du kan aktivera agenten.
 
-Du kan också komma åt och konfigurera Dispatcher Flush-agenten från [AEM Touch-gränssnittet](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/replication#configuring-a-dispatcher-flush-agent).
+Du kan också komma åt och konfigurera Dispatcher Flush-agenten från [AEM Touch-gränssnittet](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/configuring/replication#configuring-a-dispatcher-flush-agent).
 
 Mer information om hur du aktiverar åtkomst till mål-URL:er finns i [Aktivera åtkomst till Vanity-URL:er](dispatcher-configuration.md#enabling-access-to-vanity-urls-vanity-urls).
 

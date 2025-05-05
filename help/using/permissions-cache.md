@@ -70,7 +70,7 @@ Så här implementerar du behörighetskänslig cachelagring:
 >[!NOTE]
 >
 >När det finns ett CDN (eller något annat cache-minne) framför Dispatcher bör du ställa in cache-rubrikerna så att CDN inte cachelagrar det privata innehållet. Till exempel: `Header always set Cache-Control private`.
->För AEM as a Cloud Service finns mer information om hur du anger privata cachelagringshuvuden på sidan [Caching](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching).
+>För AEM as a Cloud Service finns mer information om hur du anger privata cachelagringshuvuden på sidan [Caching](https://experienceleague.adobe.com/sv/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching).
 
 ## Skapa Auth Checker-servleten {#create-the-auth-checker-servlet}
 

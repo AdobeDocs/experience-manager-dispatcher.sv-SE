@@ -23,7 +23,7 @@ Dispatcher är Adobe Experience Manager verktyg för cachning och belastningsutj
 Processen för att distribuera Dispatcher är oberoende av webbservern och den OS-plattform som valts:
 
 1. Läs mer om Dispatcher (här). Se även [vanliga frågor om Dispatcher](/help/using/dispatcher-faq.md).
-1. Installera en [stödd webbserver](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements) enligt webbserverns dokumentation.
+1. Installera en [stödd webbserver](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements) enligt webbserverns dokumentation.
 1. [Installera Dispatcher-modulen](dispatcher-install.md) på webbservern och konfigurera webbservern i enlighet med detta.
 1. [Konfigurera Dispatcher](dispatcher-configuration.md) (filen dispatcher.any).
 1. [Konfigurera AEM](page-invalidate.md) så att innehållsuppdateringar gör cachen ogiltig.
@@ -40,7 +40,7 @@ Använd följande information efter behov:
 
 * [Dispatcher Security Checklist](security-checklist.md)
 * [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html)
-* [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
+* [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
 * [Använda Dispatcher med flera domäner](dispatcher-domains.md)
 * [Använda SSL med Dispatcher](dispatcher-ssl.md)
 * [Implementera behörighetskänslig cachelagring](permissions-cache.md)
@@ -99,7 +99,7 @@ Med det här arbetsflödet kan du skapa mer avancerat dynamiskt innehåll, vilke
 
 >[!NOTE]
 >
->Om konfigurationen för HTTP Header Caching saknas lagrar Dispatcher bara HTML-koden för sidan - den lagrar inte HTTP-rubrikerna. Detta scenario kan vara ett problem om du använder olika kodningar på webbplatsen, eftersom dessa sidor kan gå förlorade. Information om hur du aktiverar cachelagring av HTTP-huvud finns i [Konfigurera Dispatcher-cachen.](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration)
+>Om konfigurationen för HTTP Header Caching saknas lagrar Dispatcher bara HTML-koden för sidan - den lagrar inte HTTP-rubrikerna. Detta scenario kan vara ett problem om du använder olika kodningar på webbplatsen, eftersom dessa sidor kan gå förlorade. Information om hur du aktiverar cachelagring av HTTP-huvud finns i [Konfigurera Dispatcher-cachen.](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration)
 
 >[!NOTE]
 >
@@ -153,7 +153,7 @@ Dispatcher har en lista över filer som kan ogiltigförklaras automatiskt. När 
 
 ### Bestämma om ett dokument ska cachelagras
 
-Du kan [definiera vilka dokument Dispatcher cachelagrar i konfigurationsfilen](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration). Dispatcher kontrollerar begäran mot listan med cachelagrade dokument. Om dokumentet inte finns med i den här listan begär Dispatcher dokumentet från AEM.
+Du kan [definiera vilka dokument Dispatcher cachelagrar i konfigurationsfilen](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration). Dispatcher kontrollerar begäran mot listan med cachelagrade dokument. Om dokumentet inte finns med i den här listan begär Dispatcher dokumentet från AEM.
 
 Dispatcher begär alltid dokumentet direkt från AEM i följande fall:
 
@@ -163,7 +163,7 @@ Dispatcher begär alltid dokumentet direkt från AEM i följande fall:
 
 >[!NOTE]
 >
->Metoderna GET och HEAD (för HTTP-huvudet) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i avsnittet [Caching HTTP Response Headers](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration).
+>Metoderna GET och HEAD (för HTTP-huvudet) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i avsnittet [Caching HTTP Response Headers](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration).
 
 ### Bestämma om ett dokument cache-lagras
 
@@ -281,13 +281,13 @@ API-baserad ogiltigförklaring gör att du kan ogiltigförklara ett CDN-cachemin
 
 >[!NOTE]
 >
->Se även [AEM (CQ) Dispatcher Security och CDN+Browser Caching](https://www.slideshare.net/andrewmkhoury/dispatcher-caching-aemgemspart2jan2015) och inspelad presentation i [Dispatcher Caching](https://experienceleague.adobe.com/en/docs/events/experience-manager-gems-recordings/gems2015/aem-dispatcher-caching-new-features-and-optimizations).
+>Se även [AEM (CQ) Dispatcher Security och CDN+Browser Caching](https://www.slideshare.net/andrewmkhoury/dispatcher-caching-aemgemspart2jan2015) och inspelad presentation i [Dispatcher Caching](https://experienceleague.adobe.com/sv/docs/events/experience-manager-gems-recordings/gems2015/aem-dispatcher-caching-new-features-and-optimizations).
 
 ## Använda en Dispatcher med en författarserver {#using-a-dispatcher-with-an-author-server}
 
 >[!CAUTION]
 >
->Om du använder [AEM med Touch-gränssnittet](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/developing/introduction/touch-ui-concepts) ska du **inte** cachelagra författarinstansinnehåll. Om cachelagring har aktiverats för författarinstansen måste du inaktivera den och ta bort innehållet i cachekatalogen. Om du vill inaktivera cachelagring redigerar du filen `author_dispatcher.any` och ändrar egenskapen `/rule` i avsnittet `/cache` enligt följande:
+>Om du använder [AEM med Touch-gränssnittet](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/developing/introduction/touch-ui-concepts) ska du **inte** cachelagra författarinstansinnehåll. Om cachelagring har aktiverats för författarinstansen måste du inaktivera den och ta bort innehållet i cachekatalogen. Om du vill inaktivera cachelagring redigerar du filen `author_dispatcher.any` och ändrar egenskapen `/rule` i avsnittet `/cache` enligt följande:
 
 ```xml
 /rules
@@ -306,7 +306,7 @@ En Dispatcher kan användas framför en författarinstans för att förbättra r
 1. Öppna `author_dispatcher.any` i en textredigerare och gör följande ändringar:
 
    1. Ändra `/hostname` och `/port` för avsnittet `/renders` så att de pekar på författarinstansen.
-   1. Ändra `/docroot` för avsnittet `/cache` så att de pekar på en cachekatalog. Om du använder [AEM med Touch-gränssnittet](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/developing/introduction/touch-ui-concepts) kan du läsa varningen ovan.
+   1. Ändra `/docroot` för avsnittet `/cache` så att de pekar på en cachekatalog. Om du använder [AEM med Touch-gränssnittet](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/developing/introduction/touch-ui-concepts) kan du läsa varningen ovan.
    1. Spara ändringarna.
 
 1. Ta bort alla befintliga filer i katalogen `/cache` > `/docroot` som du konfigurerade ovan.

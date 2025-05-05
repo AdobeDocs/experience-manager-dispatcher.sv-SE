@@ -27,7 +27,7 @@ ht-degree: 1%
 
 ## Systemkrav och krav {#system-requirements-and-prerequisites}
 
-Mer information om krav och krav finns i [Plattformar som stöds](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#dispatcher-platforms-web-servers).
+Mer information om krav och krav finns i [Plattformar som stöds](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#dispatcher-platforms-web-servers).
 
 Adobe rekommenderar att du använder den senaste versionen av AEM Dispatcher för att få tillgång till de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
 

@@ -28,7 +28,7 @@ ht-degree: 29%
 + Konfigurerar {#configuring}
    + [Konfigurera Dispatcher](dispatcher-configuration.md)
    + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
-   + [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
+   + [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
    + [Cachelagra skyddat innehåll](permissions-cache.md)
    + [Använda AEM Dispatcher med flera domäner](dispatcher-domains.md)
    + [Använda SSL med AEM Dispatcher](dispatcher-ssl.md)

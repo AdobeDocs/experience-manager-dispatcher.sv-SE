@@ -37,7 +37,7 @@ Undantag från den här regeln gäller versionsinformationen där kända problem
 
 Alla idéer du behöver för att förbättra AEM dokumentation är välkomna som bidrag. Alla kommentarer, problem och pull-förfrågningar är avsedda som *avgifter* endast. De ska inte besvara dina frågor om hur du använder AEM, implementerar ditt AEM eller löser tekniska problem.
 
-Du kan rapportera frågor om AEM eller tekniska fel. Använd den normala supportprocessen via [Experience Cloud Enterprise Support Portal](https://experienceleague.adobe.com/?support-solution=General#support) eller diskuteras i [Experience Manager community](https://experienceleaguecommunities.adobe.com/t5/adobe-experience-manager/ct-p/adobe-experience-manager-community).
+Du kan rapportera frågor om AEM eller tekniska fel. Använd den normala supportprocessen via [Experience Cloud Enterprise Support Portal](https://experienceleague.adobe.com/sv?support-solution=General#support) eller diskuteras i [Experience Manager community](https://experienceleaguecommunities.adobe.com/t5/adobe-experience-manager/ct-p/adobe-experience-manager-community).
 
 ***AEM bidrag till dokumentationen ersätter inte Adobe kundtjänst*** och alla sådana bidrag som söker svar på frågor som rör stöd avvisas.
 

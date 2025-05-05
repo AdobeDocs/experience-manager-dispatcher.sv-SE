@@ -26,7 +26,7 @@ ht-degree: 0%
 
 >[!NOTE]
 >
->Mer information finns i [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), [Troubleshooting Dispatcher Flushing Issues](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager]) och i [Dispatcher Top Issues FAQ](dispatcher-faq.md).
+>Mer information finns i [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), [Troubleshooting Dispatcher Flushing Issues](https://experienceleague.adobe.com/search.html?lang=sv-SE#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager]) och i [Dispatcher Top Issues FAQ](dispatcher-faq.md).
 
 ## Kontrollera den grundläggande konfigurationen {#check-the-basic-configuration}
 
