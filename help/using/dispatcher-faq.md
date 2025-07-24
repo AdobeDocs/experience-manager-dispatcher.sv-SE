@@ -115,7 +115,7 @@ Se sidan [Cachelagra säkert innehåll](permissions-cache.md).
 
 ### Hur skyddar jag kommunikationen mellan Dispatcher och CQ-instanserna?
 
-Se [Dispatcher Security Checklist](security-checklist.md) och [AEM Security Checklist](https://experienceleague.adobe.com/en/docs/experience-manager-64/administering/security/security-checklist) .
+Se [Dispatcher Security Checklist](security-checklist.md) och [AEM Security Checklist](https://experienceleague.adobe.com/sv/docs/experience-manager-64/administering/security/security-checklist) .
 
 ### Dispatcher-utgåva `jcr:content` har ändrats till `jcr%3acontent`
 
@@ -129,11 +129,11 @@ Läs mer: [https://sling.apache.org/documentation/the-sling-engine/mappings-for-
 
 ### Hur konfigurerar jag Dispatcher push-agenter på en Publish-instans?
 
-Se sidan [Replikering](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/replication#configuring-your-replication-agents).
+Se sidan [Replikering](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/configuring/replication#configuring-your-replication-agents).
 
 ### Hur felsöker jag Dispatcher problem med tömning?
 
-[Se de här felsökningsartiklarna](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&sort=relevancy&f:el_product=[Experience%20Manager]).
+[Se de här felsökningsartiklarna](https://experienceleague.adobe.com/search.html?lang=sv-SE#q=troubleshooting%20dispatcher%20flushing%20issues&sort=relevancy&f:el_product=[Experience%20Manager]).
 
 Om raderingsåtgärderna gör att Dispatcher rensas [använder du lösningen i det här community-blogginlägget av Sensei Martin](https://mkalugin-cq.blogspot.com/2012/04/i-have-been-working-on-following.html).
 

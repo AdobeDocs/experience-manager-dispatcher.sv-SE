@@ -506,7 +506,7 @@ Som vanligt är dokumentroten i cachen densamma som dokumentroten på webbserver
 
 Om du vill skriva om referenser till filer som har andra tillägg än .html eller .htm skapar du en Sling-omskrivartransformeringskomponent och lägger till den i standardförskrivningsflödet.
 
-Skriv om referenser när resurssökvägar inte löses korrekt i webbserverkontexten. En omformare krävs till exempel när bildgenererande komponenter skapar länkar som /content/sitea/en/products.navimage.png. Komponenten `topnav` i [Så här skapar du en webbplats med alla funktioner](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/developing/introduction/the-basics).
+Skriv om referenser när resurssökvägar inte löses korrekt i webbserverkontexten. En omformare krävs till exempel när bildgenererande komponenter skapar länkar som /content/sitea/en/products.navimage.png. Komponenten `topnav` i [Så här skapar du en webbplats med alla funktioner](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/developing/introduction/the-basics).
 
 [`Sling` rewriter](https://sling.apache.org/documentation/bundles/output-rewriting-pipelines-org-apache-sling-rewriter.html) är en modul som efterbearbetar `Sling`-utdata. implementeringar av rewriter-pipeline består av en generator, en eller flera transformatorer och en serialiserare:
 
@@ -544,7 +544,7 @@ Så här skapar du en transformatorkomponent och använder den i en pipeline:
 
 >[!NOTE]
 >
->Om du vill skapa ditt Maven-projekt använder du [multimodule](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)-arketypen i innehållspaketets plugin-program Maven. Strukturlister skapar och installerar automatiskt ett innehållspaket.
+>Om du vill skapa ditt Maven-projekt använder du [multimodule](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)-arketypen i innehållspaketets plugin-program Maven. Strukturlister skapar och installerar automatiskt ett innehållspaket.
 
 I följande exempel implementeras en transformator som skriver om referenser till bildfiler.
 

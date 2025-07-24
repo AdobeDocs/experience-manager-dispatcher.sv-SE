@@ -33,8 +33,8 @@ Konfigurera Dispatcher för att kommunicera med AEM- eller CQ-återgivningsinsta
 
 Konfigurera AEM eller CQ att använda SSL innan du konfigurerar Dispatcher. Mer information finns i:
 
-* [SSL/TLS som standard](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/ssl-by-default)
-* [Använd SSL-guiden i AEM](https://experienceleague.adobe.com/en/docs/experience-manager-learn/foundation/security/use-the-ssl-wizard)
+* [SSL/TLS som standard](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/ssl-by-default)
+* [Använd SSL-guiden i AEM](https://experienceleague.adobe.com/sv/docs/experience-manager-learn/foundation/security/use-the-ssl-wizard)
 
 ### SSL-relaterade begäranderubriker {#ssl-related-request-headers}
 
@@ -248,9 +248,9 @@ Last Modified Date: 2014-08-12T13:11:21.401-0400
 
 Om du vill konfigurera HTTP-tjänsten för återgivningsinstansen så att den använder SSL använder du återgivningscertifikatet med instruktionerna i avsnittet *`Enable SSL on the Publish Instance`*:
 
-* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
-* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
-* Äldre versioner av AEM: se [den här sidan.](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* Äldre versioner av AEM: se [den här sidan.](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
 
 ### Konfigurera SSL för Dispatcher-modulen {#configuring-ssl-for-the-dispatcher-module}
 
