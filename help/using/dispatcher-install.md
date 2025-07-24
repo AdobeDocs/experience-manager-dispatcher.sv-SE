@@ -641,7 +641,7 @@ Var:
 |--- |--- |
 | `config` | Konfigurationsfilens plats och namn `dispatcher.any.` |
 | `logfile` | Loggfilens plats och namn. |
-| `loglevel` | Loggnivå för när meddelanden skrivs till loggfilen: <br/>**0** Fel <br/>**1** Varning <br/>**** <br/>**Information**  Felsökning <br/>**Obs!** Ange loggnivån till 3 under installation och testning och till 0 vid körning i en produktionsmiljö. |
+| `loglevel` | Loggnivå för när meddelanden skrivs till loggfilen: <br/>**0** Fel <br/>**1** Varning <br/>**&#x200B;** <br/>**Information**  Felsökning <br/>**Obs!** Ange loggnivån till 3 under installation och testning och till 0 vid körning i en produktionsmiljö. |
 | `keepalivetimeout` | Anger tidsgränsen för keep-alive i sekunder. Från och med Dispatcher version 4.2.0 är standardvärdet 60. Värdet 0 inaktiverar keep-alive. |
 
 Beroende på dina behov kan du definiera Dispatcher som en tjänst för dina objekt. Om du vill konfigurera Dispatcher för hela webbplatsen redigerar du standardobjektet:
