@@ -1,11 +1,11 @@
 ---
-title: Versionsinformation för AEM Dispatcher
+title: Versionsinformation om AEM Dispatcher
 description: Versionsinformation för Adobe Experience Manager Dispatcher
 topic-tags: release-notes
 content-type: reference
 products: SG_EXPERIENCEMANAGER/6.4
 exl-id: b55c7a34-d57b-4d45-bd83-29890f1524de
-source-git-commit: 5f743be9c143e1e720e59304feebaa2e272dad87
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
 source-wordcount: '1062'
 ht-degree: 1%
@@ -27,9 +27,9 @@ ht-degree: 1%
 
 ## Systemkrav och krav {#system-requirements-and-prerequisites}
 
-Mer information om krav och krav finns i [Plattformar som stöds](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#dispatcher-platforms-web-servers).
+Mer information om krav och krav finns i [Plattformar som stöds](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#dispatcher-platforms-web-servers).
 
-Adobe rekommenderar att du använder den senaste versionen av AEM Dispatcher för att få tillgång till de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
+Adobe rekommenderar att du använder den senaste versionen av AEM Dispatcher för att utnyttja de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
 
 ## Installationsanvisningar {#installation-instructions}
 
@@ -59,7 +59,7 @@ Mer information finns i [Installera Dispatcher](dispatcher-install.md).
 **Förbättringar**:
 
 * DISP-954 - Supportogiltigförklaring även om utgångsdatum inte har passerats
-* DISP-949 - Dispatcher returnerar 200 i stället för 404, även om filterblocksbegäran har POSTEN
+* DISP-949 - Dispatcher returnerar 200 i stället för 404, även om filterblocken POST-begäran
 
 ### Version 4.3.4 (2021-Nov-29) {#nov}
 
@@ -170,7 +170,7 @@ Mer information finns i [Installera Dispatcher](dispatcher-install.md).
 
 ## Användbara resurser {#helpful-resources}
 
-* [AEM Dispatcher Overview](dispatcher.md)
+* [AEM Dispatcher - översikt](dispatcher.md)
 
 ## Nedladdningar {#downloads}
 

@@ -1,5 +1,5 @@
 ---
-title: Invaliderar cachelagrade sidor från AEM
+title: Invalidera cachelagrade sidor från AEM
 description: Lär dig hur du konfigurerar interaktionen mellan Dispatcher och AEM för att säkerställa effektiv cachehantering.
 cmgrlastmodified: 01.11.2007 08 22 29 [aheimoz]
 pageversionid: 1193211344162
@@ -9,28 +9,28 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 90eb6a78-e867-456d-b1cf-f62f49c91851
-source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
 source-wordcount: '1407'
 ht-degree: 0%
 
 ---
 
-# Invaliderar cachelagrade sidor från AEM {#invalidating-cached-pages-from-aem}
+# Invalidera cachelagrade sidor från AEM {#invalidating-cached-pages-from-aem}
 
 När du använder Dispatcher med AEM måste interaktionen konfigureras för att säkerställa effektiv cachehantering. Beroende på din miljö kan konfigurationen även öka prestandan.
 
-## Konfigurera AEM användarkonton {#setting-up-aem-user-accounts}
+## Konfigurera AEM-användarkonton {#setting-up-aem-user-accounts}
 
 Standardanvändarkontot `admin` används för att autentisera de replikeringsagenter som är installerade som standard. Skapa ett dedikerat användarkonto som kan användas med replikeringsagenter.
 
-Mer information finns i avsnittet [Konfigurera replikerings- och transportanvändare](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#VerificationSteps) i AEM säkerhetschecklista.
+Mer information finns i avsnittet [Konfigurera replikerings- och transportanvändare](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#VerificationSteps) i checklistan för AEM-säkerhet.
 
-<!-- OLD URL from above https://helpx.adobe.com/se/experience-manager/6-3/sites/administering/using/security-checklist.html#VerificationSteps -->
+<!-- OLD URL from above https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#VerificationSteps -->
 
-## Invaliderar Dispatcher-cache från redigeringsmiljön {#invalidating-dispatcher-cache-from-the-authoring-environment}
+## Invalidera Dispatcher-cachen från författarmiljön {#invalidating-dispatcher-cache-from-the-authoring-environment}
 
-En replikeringsagent på AEM författarinstans skickar en cacheogiltigförklaring till Dispatcher när en sida publiceras. Dispatcher uppdaterar filen så småningom i cachen när nytt innehåll publiceras.
+En replikeringsagent på AEM-författarinstansen skickar en cacheogiltigförklaring till Dispatcher när en sida publiceras. Dispatcher uppdaterar filen så småningom i cachen när nytt innehåll publiceras.
 
 <!-- 
 
@@ -50,9 +50,9 @@ Last Modified Date: 2017-05-25T10:37:23.679-0400
 
  -->
 
-Använd följande procedur för att konfigurera en replikeringsagent på AEM författarinstans. Konfigurationen gör Dispatcher-cachen ogiltig vid sidaktivering:
+Använd följande procedur för att konfigurera en replikeringsagent på AEM-författarinstansen. Konfigurationen gör Dispatcher-cachen ogiltig vid sidaktivering:
 
-1. Öppna AEM verktygskonsol. (`https://localhost:4502/miscadmin#/etc`)
+1. Öppna AEM Tools Console. (`https://localhost:4502/miscadmin#/etc`)
 1. Öppna den nödvändiga replikeringsagenten under Verktyg/replikering/Agenter på författare. Du kan använda Dispatcher Flush-agenten som är installerad som standard.
 1. Klicka på Redigera och kontrollera att **Aktiverad** är markerat på fliken Inställningar.
 
@@ -66,7 +66,7 @@ Använd följande procedur för att konfigurera en replikeringsagent på AEM fö
 1. Konfigurera andra parametrar efter behov.
 1. Klicka på OK så att du kan aktivera agenten.
 
-Du kan också komma åt och konfigurera Dispatcher Flush-agenten från [AEM Touch-gränssnittet](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/configuring/replication#configuring-a-dispatcher-flush-agent).
+Du kan också komma åt och konfigurera Dispatcher Flush-agenten från [AEM Touch-gränssnittet](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/replication#configuring-a-dispatcher-flush-agent).
 
 Mer information om hur du aktiverar åtkomst till mål-URL:er finns i [Aktivera åtkomst till Vanity-URL:er](dispatcher-configuration.md#enabling-access-to-vanity-urls-vanity-urls).
 
@@ -80,9 +80,9 @@ Det finns två möjliga problem med den här metoden:
 
 * Publicering och cacheminnet blir ogiltiga samtidigt. Beroende på tidpunkten kan en användare begära en sida precis efter att den tagits bort från cachen, och precis innan den nya sidan publiceras. AEM returnerar nu den gamla sidan och Dispatcher cachelagrar den igen. Det här är mer en fråga för stora sajter.
 
-## Invaliderar Dispatcher-cache från en publiceringsinstans {#invalidating-dispatcher-cache-from-a-publishing-instance}
+## Invalidera Dispatcher-cachen från en publiceringsinstans {#invalidating-dispatcher-cache-from-a-publishing-instance}
 
-Under vissa omständigheter kan du göra prestandavinster genom att överföra cachehantering från redigeringsmiljön till en publiceringsinstans. Det är då publiceringsmiljön (inte den AEM redigeringsmiljön) som skickar en cacheogiltigförklaring till Dispatcher när en publicerad sida tas emot.
+Under vissa omständigheter kan du göra prestandavinster genom att överföra cachehantering från redigeringsmiljön till en publiceringsinstans. Det är då publiceringsmiljön (inte AEM-redigeringsmiljön) som skickar en cacheogiltigförklaring till Dispatcher när en publicerad sida tas emot.
 
 Dessa omständigheter omfattar följande:
 
@@ -99,11 +99,11 @@ Comment Type: draft
 
 >[!NOTE]
 >
->En erfaren AEM bör fatta beslut om att använda den här metoden.
+>En erfaren AEM-administratör bör fatta beslut om att använda den här metoden.
 
 En replikeringsagent som körs på publiceringsinstansen styr Dispatcher-tömningen. Konfigurationen görs dock i redigeringsmiljön och överförs sedan genom att agenten aktiveras:
 
-1. Öppna AEM verktygskonsol.
+1. Öppna AEM Tools Console.
 1. Öppna den nödvändiga replikeringsagenten under Verktyg/replikering/Agenter vid publicering. Du kan använda Dispatcher Flush-agenten som är installerad som standard.
 1. Klicka på Redigera och kontrollera att **Aktiverad** är markerat på fliken Inställningar.
 1. (valfritt) Markera alternativet **Aliasuppdatering** om du vill aktivera ogiltiga aliassökvägar eller ogiltiga huvudsökvägar.
@@ -120,9 +120,9 @@ När du har konfigurerat och aktiverar en sida från författaren till publiceri
 
 1. `<publishserver> 13:29:47 127.0.0.1 POST /dispatcher/invalidate.cache 200`
 
-## Invalidera Dispatcher-cachen manuellt {#manually-invalidating-the-dispatcher-cache}
+## Gör Dispatcher-cachen ogiltig manuellt {#manually-invalidating-the-dispatcher-cache}
 
-Om du vill göra Dispatcher-cachen ogiltig (eller tömma) utan att aktivera en sida kan du skicka en HTTP-begäran till Dispatcher. Du kan till exempel skapa ett AEM program som gör att administratörer eller andra program kan tömma cachen.
+Om du vill göra Dispatcher-cachen ogiltig (eller tömma) utan att aktivera en sida kan du skicka en HTTP-begäran till Dispatcher. Du kan till exempel skapa ett AEM-program som gör att administratörer eller andra program kan tömma cachen.
 
 HTTP-begäran gör att Dispatcher tar bort specifika filer från cachen. Dispatcher uppdaterar sedan cacheminnet med en ny kopia.
 
@@ -191,7 +191,7 @@ När servern distribueras till publiceringsinstansen gör följande URL att Disp
 
 >[!NOTE]
 >
->Denna exempelserver är inte säker och visar bara hur förfrågningsmeddelandet för HTTP Post används. Lösningen bör skydda åtkomsten till serverutrymmet.
+>Den här exempelservern är inte säker och visar bara hur HTTP Post-begärandemeddelandet används. Lösningen bör skydda åtkomsten till serverutrymmet.
 >
 
 ```java

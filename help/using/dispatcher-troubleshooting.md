@@ -1,5 +1,5 @@
 ---
-title: Felsökning av Dispatcher-problem
+title: Felsöka problem med Dispatcher
 description: Lär dig att felsöka Dispatcher-problem.
 cmgrlastmodified: 01.11.2007 08 22 29 [aheimoz]
 pageversionid: 1193211344162
@@ -9,24 +9,24 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 29f338ab-5d25-48a4-9309-058e0cc94cff
-source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
-source-wordcount: '539'
+source-wordcount: '472'
 ht-degree: 0%
 
 ---
 
-# Felsökning av Dispatcher-problem {#troubleshooting-dispatcher-problems}
+# Felsöka problem med Dispatcher {#troubleshooting-dispatcher-problems}
 
 >[!NOTE]
 >
->Dispatcher-versionerna är oberoende av AEM. Dispatcher-dokumentationen är dock inbäddad i AEM. Använd alltid den Dispatcher-dokumentation som är inbäddad i dokumentationen för den senaste versionen av AEM.
+>Dispatcher-versionerna är oberoende av AEM. Dispatcher-dokumentationen är dock inbäddad i AEM-dokumentationen. Använd alltid den Dispatcher-dokumentation som är inbäddad i dokumentationen för den senaste versionen av AEM.
 >
 >Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen. Länken är inbäddad i dokumentationen för en tidigare version av AEM.
 
 >[!NOTE]
 >
->Mer information finns i [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), [Troubleshooting Dispatcher Flushing Issues](https://experienceleague.adobe.com/search.html?lang=sv-SE#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager]) och i [Dispatcher Top Issues FAQ](dispatcher-faq.md).
+>Mer information finns i <!-- URL is 404[Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), -->[Felsökning av Dispatcher-problem](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&sort=relevancy&f:el_product=[Experience%20Manager]) och [Vanliga problem i Dispatcher ](dispatcher-faq.md) .
 
 ## Kontrollera den grundläggande konfigurationen {#check-the-basic-configuration}
 
@@ -54,20 +54,21 @@ IIS innehåller olika spårningsverktyg, beroende på den faktiska versionen:
 
 De här verktygen kan hjälpa dig att övervaka aktiviteten.
 
-## IIS och 404 hittades inte {#iis-and-not-found}
+<!-- Both URLs in this topic 404! >
+## IIS and 404 Not Found {#iis-and-not-found}
 
-När du använder IIS kanske `404 Not Found` returneras i olika scenarier. Om så är fallet, se följande artiklar i kunskapsbasen.
+When using IIS, you might experience `404 Not Found` being returned in various scenarios. If so, see the following Knowledge Base articles.
 
-* [IIS 6/7: POSTEN returnerar 404 ](https://helpx.adobe.com/experience-manager/kb/IIS6IsapiFilters.html)
-* [IIS 6: Begäranden till URL:er som innehåller bassökvägen `/bin` returnerar `404 Not Found`](https://helpx.adobe.com/experience-manager/kb/RequestsToBinDirectoryFailInIIS6.html)
+* [IIS 6/7: POST method returns 404](https://helpx.adobe.com/experience-manager/kb/IIS6IsapiFilters.html)
+* [IIS 6: Requests to URLs that contain the base path `/bin` return a `404 Not Found`](https://helpx.adobe.com/experience-manager/kb/RequestsToBinDirectoryFailInIIS6.html)
 
-Kontrollera också att Dispatcher cacherot och IIS-dokumentroten är inställda på samma katalog.
+Also check that the Dispatcher cache root and the IIS document root are set to the same directory. -->
 
 ## Problem med att ta bort arbetsflödesmodeller {#problems-deleting-workflow-models}
 
 **Symtomen**
 
-Problem med att ta bort arbetsflödesmodeller vid åtkomst till en AEM författarinstans via Dispatcher.
+Problem med att ta bort arbetsflödesmodeller vid åtkomst till en AEM-författarinstans via Dispatcher.
 
 **Steg att återskapa:**
 

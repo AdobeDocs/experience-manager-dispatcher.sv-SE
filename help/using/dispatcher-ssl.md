@@ -1,5 +1,5 @@
 ---
-title: Använda SSL med Dispatcher
+title: Använd SSL med Dispatcher
 description: Lär dig hur du konfigurerar Dispatcher att kommunicera med AEM via SSL-anslutningar.
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
@@ -9,14 +9,14 @@ index: y
 internal: n
 snippet: y
 exl-id: ec378409-ddb7-4917-981d-dbf2198aca98
-source-git-commit: 971cffd4f7ba8b1fa88a8af620a723ce59957007
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
 source-wordcount: '1305'
 ht-degree: 0%
 
 ---
 
-# Använda SSL med Dispatcher {#using-ssl-with-dispatcher}
+# Använd SSL med Dispatcher {#using-ssl-with-dispatcher}
 
 Använd SSL-anslutningar mellan Dispatcher och återgivningsdatorn:
 
@@ -29,14 +29,14 @@ Använd SSL-anslutningar mellan Dispatcher och återgivningsdatorn:
 
 ## Använd SSL när Dispatcher ansluter till AEM {#use-ssl-when-dispatcher-connects-to-aem}
 
-Konfigurera Dispatcher för att kommunicera med AEM eller CQ-återgivningsinstansen med SSL-anslutningar.
+Konfigurera Dispatcher för att kommunicera med AEM- eller CQ-återgivningsinstansen med SSL-anslutningar.
 
 Konfigurera AEM eller CQ att använda SSL innan du konfigurerar Dispatcher. Mer information finns i:
 
-* [SSL/TLS som standard](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/ssl-by-default)
-* [Använd SSL-guiden i AEM](https://experienceleague.adobe.com/sv/docs/experience-manager-learn/foundation/security/use-the-ssl-wizard)
+* [SSL/TLS som standard](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/ssl-by-default)
+* [Använd SSL-guiden i AEM](https://experienceleague.adobe.com/en/docs/experience-manager-learn/foundation/security/use-the-ssl-wizard)
 
-### SSL-relaterade begärandehuvuden {#ssl-related-request-headers}
+### SSL-relaterade begäranderubriker {#ssl-related-request-headers}
 
 När Dispatcher tar emot en HTTPS-begäran inkluderar Dispatcher följande rubriker i den efterföljande begäran som skickas till AEM eller CQ:
 
@@ -111,9 +111,9 @@ I följande exempelfil `dispatcher.any` visas egenskapsvärden för anslutning m
 }
 ```
 
-## Konfigurera ömsesidigt SSL mellan Dispatcher och AEM {#configuring-mutual-ssl-between-dispatcher-and-aem}
+## Konfigurera gemensam SSL mellan Dispatcher och AEM {#configuring-mutual-ssl-between-dispatcher-and-aem}
 
-Konfigurera anslutningarna mellan Dispatcher och återgivningsdatorn (vanligtvis en AEM eller CQ-publiceringsinstans) om du vill använda ömsesidig SSL:
+Konfigurera anslutningarna mellan Dispatcher och återgivningsdatorn (vanligtvis en AEM- eller CQ-publiceringsinstans) om du vill använda ömsesidig SSL:
 
 * Dispatcher ansluter till återgivningsinstansen via SSL.
 * Återgivningsinstansen verifierar giltigheten för Dispatcher-certifikatet.
@@ -137,7 +137,7 @@ Så här konfigurerar du gemensam SSL:
 
 Skapa eller hämta de CA-signerade certifikat som autentiserar publiceringsinstansen och Dispatcher.
 
-#### Skapar din certifikatutfärdare {#creating-your-ca}
+#### Skapa en certifikatutfärdare {#creating-your-ca}
 
 Om du fungerar som certifikatutfärdare använder du [OpenSSL](https://www.openssl.org/) för att skapa certifikatutfärdaren som signerar servern och klientcertifikaten. (Du måste ha OpenSSL-biblioteken installerade.) Utför inte den här proceduren om du använder en tredjeparts certifikatutfärdare.
 
@@ -152,7 +152,7 @@ Om du fungerar som certifikatutfärdare använder du [OpenSSL](https://www.opens
    >
    >Flera egenskaper i filen `openssl.cnf` styr beteendet för skriptet CA.sh. Redigera den här filen efter behov innan du skapar din certifikatutfärdare.
 
-#### Skapa certifikaten {#creating-the-certificates}
+#### Skapa certifikat {#creating-the-certificates}
 
 Använd OpenSSL för att skapa de certifikatbegäranden som ska skickas till certifikatutfärdaren från tredje part eller för att signera med din certifikatutfärdare.
 
@@ -206,7 +206,7 @@ Använd följande kommando för att konvertera återgivningscertifikatet, som ä
    keytool -changealias -alias 1 -destalias jettyhttp -keystore render.keystore
    ```
 
-#### Lägga till certifikatutfärdarcertifikatet i återgivningens förtroendelager {#adding-the-ca-cert-to-the-render-s-truststore}
+#### Lägg till certifikatutfärdarcertifikatet i återgivningens förvaltararkiv {#adding-the-ca-cert-to-the-render-s-truststore}
 
 Om du fungerar som certifikatutfärdare importerar du ditt certifikatutfärdarcertifikat till en nyckelbehållare. Konfigurera sedan den JVM som kör återgivningsinstansen så att nyckelbehållaren är tillförlitlig.
 
@@ -248,11 +248,11 @@ Last Modified Date: 2014-08-12T13:11:21.401-0400
 
 Om du vill konfigurera HTTP-tjänsten för återgivningsinstansen så att den använder SSL använder du återgivningscertifikatet med instruktionerna i avsnittet *`Enable SSL on the Publish Instance`*:
 
-* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
-* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
-* Äldre AEM: se [den här sidan.](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* AEM 6.2: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* AEM 6.1: [Aktivera HTTP över SSL](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
+* Äldre versioner av AEM: se [den här sidan.](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)
 
-### Konfigurera SSL för Dispatcher Module {#configuring-ssl-for-the-dispatcher-module}
+### Konfigurera SSL för Dispatcher-modulen {#configuring-ssl-for-the-dispatcher-module}
 
 Om du vill konfigurera Dispatcher att använda gemensam SSL förbereder du Dispatcher-certifikatet och konfigurerar sedan webbservermodulen.
 

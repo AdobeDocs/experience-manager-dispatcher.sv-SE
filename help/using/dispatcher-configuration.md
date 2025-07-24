@@ -2,9 +2,9 @@
 title: Konfigurera AEM Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: a9ef9d7d2fe5c421cd8039579fd84961ea901def
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
-source-wordcount: '8941'
+source-wordcount: '8937'
 ht-degree: 0%
 
 ---
@@ -19,7 +19,7 @@ I följande avsnitt beskrivs hur du konfigurerar olika aspekter av Dispatcher.
 
 ## Stöd för IPv4 och IPv6 {#support-for-ipv-and-ipv}
 
-Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#ipv-and-ipv).
+Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#ipv-and-ipv).
 
 ## Dispatcher konfigurationsfiler {#dispatcher-configuration-files}
 
@@ -123,7 +123,7 @@ Om filerna `farm_1.any` till `farm_5.any` till exempel innehåller konfiguration
   }
 ```
 
-## Använda miljövariabler {#using-environment-variables}
+## Använd miljövariabler {#using-environment-variables}
 
 Du kan använda miljövariabler i egenskaper med strängvärden i dispatcher.any-filen i stället för att hårdkoda värdena. Använd formatet `${variable_name}` om du vill inkludera värdet för en miljövariabel.
 
@@ -255,7 +255,7 @@ Comment Type: draft
 
  -->
 
-## Ange vilka HTTP-huvuden som ska passera igenom {#specifying-the-http-headers-to-pass-through-clientheaders}
+## Ange vilka HTTP-huvuden som ska skickas igenom {#specifying-the-http-headers-to-pass-through-clientheaders}
 
 Egenskapen `/clientheaders` definierar en lista med HTTP-rubriker som Dispatcher skickar från klientens HTTP-begäran till återgivaren (AEM-instansen).
 
@@ -342,7 +342,7 @@ Följande konfiguration hanterar *alla*-begäranden:
     }
 ```
 
-### Matchar den virtuella värden {#resolving-the-virtual-host}
+### Lös det virtuella värdsystemet {#resolving-the-virtual-host}
 
 När Dispatcher tar emot en HTTP- eller HTTPS-begäran hittar den det virtuella värdvärdet som bäst matchar begärans `host,` `uri`- och `scheme`-huvuden. Dispatcher utvärderar värdena i egenskaperna `virtualhosts` i följande ordning:
 
@@ -398,13 +398,13 @@ I följande tabell visas de virtuella värdarna som matchas för de angivna HTTP
 | `https://www.mycompany.com/products/gloves.html` | `www.mycompany.com/products/` |
 | `https://www.mycompany.com/about.html` | `www.mycompany.com` |
 
-## Aktiverar säkra sessioner - `/sessionmanagement` {#enabling-secure-sessions-sessionmanagement}
+## Aktivera säkra sessioner - `/sessionmanagement` {#enabling-secure-sessions-sessionmanagement}
 
 >[!CAUTION]
 >
->`/allowAuthorized` Ange som `"0"` i avsnittet `/cache` om du vill aktivera den här funktionen. Så som anges i avsnittet [Cachelagring när autentisering används](#caching-when-authentication-is-used), cachelagras **inte** när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation. Om behörighetskänslig cachelagring krävs, se sidan [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/permissions-cache).
+>`/allowAuthorized` Ange som `"0"` i avsnittet `/cache` om du vill aktivera den här funktionen. Så som anges i avsnittet [&quot;Cachelagring när autentisering används&quot;](#caching-when-authentication-is-used), cachelagras `/allowAuthorized 0 `inte **när du anger** begäranden som innehåller autentiseringsinformation. Om behörighetskänslig cachelagring krävs, se sidan [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/permissions-cache).
 
-Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Mer information om hur du använder den här funktionen med CUG:er finns i [Skapa en stängd användargrupp](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/cug#creating-the-user-group-to-be-used). Se även Dispatcher [checklista för säkerhet](/help/using/security-checklist.md) innan du publicerar.
+Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Mer information om hur du använder den här funktionen med CUG:er finns i [Skapa en stängd användargrupp](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/cug#creating-the-user-group-to-be-used). Se även Dispatcher [checklista för säkerhet](/help/using/security-checklist.md) innan du publicerar.
 
 Egenskapen `/sessionmanagement` är en underegenskap till `/farms`.
 
@@ -453,7 +453,7 @@ Ett exempel på konfiguration ser ut så här:
   }
 ```
 
-## Definiera sidåtergivare {#defining-page-renderers-renders}
+## Definiera sidåtergivning {#defining-page-renderers-renders}
 
 Egenskapen `/renders` definierar den URL som Dispatcher skickar begäranden till för att återge ett dokument. I följande exempel `/renders` identifieras en enda AEM-instans för återgivning:
 
@@ -555,7 +555,7 @@ Använd avsnittet `/filter` för att ange de HTTP-begäranden som Dispatcher god
 
 >[!CAUTION]
 >
->Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM-installation.
+>Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM-installation.
 
 Avsnittet `/filter` består av en serie regler som antingen nekar eller tillåter åtkomst till innehåll enligt mönster i begärandoradsdelen av HTTP-begäran. Använd en tillåtelselista-strategi för ditt `/filter`-avsnitt:
 
@@ -604,7 +604,7 @@ Tecknen `<CRLF>` representerar en vagnretur följt av en radmatning. Följande e
 
 Dina mönster måste ta hänsyn till blankstegstecknen på raden med begäran och tecknen `<CRLF>`.
 
-#### Dubbla citattecken jämfört med enkla citattecken {#double-quotes-vs-single-quotes}
+#### Dubbla citattecken kontra enkla citattecken {#double-quotes-vs-single-quotes}
 
 När du skapar filterregler använder du citattecken `"pattern"` för enkla mönster. Om du använder Dispatcher 4.2.0 eller senare och mönstret innehåller ett reguljärt uttryck, måste du omsluta regex-mönstret `'(pattern1|pattern2)'` med enkla citattecken.
 
@@ -612,7 +612,7 @@ När du skapar filterregler använder du citattecken `"pattern"` för enkla mön
 
 I Dispatcher-versioner senare än 4.2.0 kan du inkludera utökade reguljära uttryck för POSIX i dina filtermönster.
 
-#### Felsöka filter {#troubleshooting-filters}
+#### Felsökningsfilter {#troubleshooting-filters}
 
 Om dina filter inte aktiveras på rätt sätt aktiverar du [Trace Logging](#trace-logging) på Dispatcher så att du kan se vilket filter som fångar upp begäran.
 
@@ -626,7 +626,7 @@ Följande exempelfilteravsnitt gör att Dispatcher nekar begäranden för alla f
 
 Begäranden till ett explicit nekat område resulterar i att 404-felkoden (sidan hittades inte) returneras.
 
-#### Exempelfilter: Neka åtkomst till specifika områden {#example-filter-deny-access-to-specific-areas}
+#### Exempelfilter: Neka åtkomst till vissa områden {#example-filter-deny-access-to-specific-areas}
 
 Med filter kan du också neka åtkomst till olika element, till exempel ASP-sidor och känsliga områden i en publiceringsinstans. Följande filter nekar åtkomst till ASP-sidor:
 
@@ -672,7 +672,7 @@ Om du måste komma åt enstaka sidor inom det begränsade området kan du tillå
 >
 >När flera filtermönster används i en begäran gäller det senast använda filtermönstret.
 
-#### Exempelfilter: Använda reguljära uttryck {#example-filter-using-regular-expressions}
+#### Exempelfilter: Använd reguljära uttryck {#example-filter-using-regular-expressions}
 
 Det här filtret aktiverar tillägg i icke-offentliga innehållskataloger med hjälp av ett reguljärt uttryck, som definieras här mellan enkla citattecken:
 
@@ -680,7 +680,7 @@ Det här filtret aktiverar tillägg i icke-offentliga innehållskataloger med hj
 /005  {  /type "allow" /extension '(css|gif|ico|js|png|swf|jpe?g)' }
 ```
 
-#### Exempelfilter: Filtrera extra element för en URL för en begäran {#example-filter-filter-additional-elements-of-a-request-url}
+#### Exempelfilter: Filtrera extra element för en begärande URL {#example-filter-filter-additional-elements-of-a-request-url}
 
 Nedan visas ett regelexempel som blockerar innehåll som hämtas från sökvägen `/content` och dess underträd, med filter för sökväg, väljare och tillägg:
 
@@ -805,7 +805,7 @@ Beroende på installationen kan det finnas fler resurser under `/libs`, `/apps` 
 
 >[!CAUTION]
 >
->Om du [använder rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/sites/administering/operations/reporting#using-reports-in-a-publish-environment) bör du konfigurera Dispatcher att neka åtkomst till `/etc/reports` för externa besökare.
+>Om du [använder rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/operations/reporting#using-reports-in-a-publish-environment) bör du konfigurera Dispatcher att neka åtkomst till `/etc/reports` för externa besökare.
 
 ### Begränsa frågesträngar {#restricting-query-strings}
 
@@ -836,7 +836,7 @@ En enskild post kan ha antingen `glob` eller en kombination av `method`, `url`, 
 }  
 ```
 
-### Testa Dispatcher Security {#testing-dispatcher-security}
+### Testa Dispatcher-säkerhet {#testing-dispatcher-security}
 
 Dispatcher-filter bör blockera åtkomsten till följande sidor och skript på AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 404 returneras. Justera filtren om du får andra resultat.
 
@@ -902,7 +902,7 @@ Om du vill försöka göra Dispatcher-cachen ogiltig och försäkra dig om att d
 
 `curl -H "CQ-Handle: /content" -H "CQ-Path: /content" https://yourhostname/dispatcher/invalidate.cache`
 
-## Aktivera åtkomst till Vanity-URL:er {#enabling-access-to-vanity-urls-vanity-urls}
+## Aktivera åtkomst till mål-URL:er {#enabling-access-to-vanity-urls-vanity-urls}
 
 <!-- 
 
@@ -937,7 +937,7 @@ Avsnittet `/vanity_urls` innehåller följande egenskaper:
 
 >[!NOTE]
 >
->Om din återgivning är en instans av AEM måste du installera paketet [VanityURLS-Components från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Mer information finns i [Programvarudistribution](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager#software-distribution).)
+>Om din återgivning är en instans av AEM måste du installera paketet [VanityURLS-Components från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Mer information finns i [Programvarudistribution](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager#software-distribution).)
 
 Använd följande procedur för att aktivera åtkomst till mål-URL:er.
 
@@ -959,15 +959,15 @@ Genom att lägga till `/loadOnStartup 0` (se exemplet nedan) kan du inaktivera i
       } 
 ```
 
-När `/loadOnStartup 1` läser in URL:er för vanity vid start. Tänk på att `/loadOnStartup 1` är det aktuella standardvärdet för den här parametern.
+När `/loadOnStartup 1` läser in URL:er för underordnat objekt vid start bör du komma ihåg att `/loadOnStartup 1` är det aktuella standardvärdet för den här parametern.
 
-## Vidarebefordrar syndikeringsbegäranden - `/propagateSyndPost` {#forwarding-syndication-requests-propagatesyndpost}
+## Vidarebefordra syndikeringsbegäranden - `/propagateSyndPost` {#forwarding-syndication-requests-propagatesyndpost}
 
 Syndikeringsbegäranden är endast avsedda för Dispatcher, så som standard skickas de inte till återgivaren (till exempel en AEM-instans).
 
 Om det behövs ställer du in egenskapen `/propagateSyndPost` på `"1"` för att vidarebefordra syndikeringsbegäranden till Dispatcher. Om den anges måste du se till att POST-begäranden inte nekas i filteravsnittet.
 
-## Konfigurerar Dispatcher-cachen - `/cache` {#configuring-the-dispatcher-cache-cache}
+## Konfigurera Dispatcher-cache - `/cache` {#configuring-the-dispatcher-cache-cache}
 
 Avsnittet `/cache` styr hur Dispatcher cachelagrar dokument. Konfigurera flera underegenskaper för att implementera dina cachningsstrategier:
 
@@ -1033,13 +1033,13 @@ Statusfilen har inget innehåll. När innehållet uppdateras uppdaterar Dispatch
 >
 >Om `/statfileslevel` har konfigurerats ignorerar Dispatcher egenskapen `/statfile` och använder `.stat` som namn.
 
-### Hantera gamla dokument när fel uppstår {#serving-stale-documents-when-errors-occur}
+### Spara gamla dokument när fel uppstår {#serving-stale-documents-when-errors-occur}
 
 Egenskapen `/serveStaleOnError` styr om Dispatcher returnerar ogiltiga dokument när återgivningsservern returnerar ett fel. Som standard tas det cachelagrade innehållet bort när en lägesfil ändras och det cachelagrade innehållet blir ogiltigt. Den här åtgärden utförs nästa gång den begärs.
 
 Om `/serveStaleOnError` är inställt på `"1"` tar Dispatcher inte bort ogiltigt innehåll från cachen. Det vill säga, om inte återgivningsservern returnerar ett lyckat svar. Ett 502-, 503- eller 504-svar från AEM eller en timeout för anslutningen gör att Dispatcher skickar det inaktuella innehållet och svarar med HTTP-statusen 111 (förnyelsen misslyckades).
 
-### Cachelagring när autentisering används {#caching-when-authentication-is-used}
+### Cachelagra när autentisering används {#caching-when-authentication-is-used}
 
 Egenskapen `/allowAuthorized` styr om begäranden som innehåller någon av följande autentiseringsinformation cachelagras:
 
@@ -1160,7 +1160,7 @@ Last Modified Date: 2017-11-13T09:23:24.326-0500
 
  -->
 
-### Ogiltiga filer per mappnivå {#invalidating-files-by-folder-level}
+### Invalidera filer på mappnivå {#invalidating-files-by-folder-level}
 
 Använd egenskapen `/statfileslevel` för att göra cachelagrade filer ogiltiga enligt deras sökväg:
 
@@ -1182,13 +1182,13 @@ När en fil i `/content/myWebsite/xx` blir ogiltig kommer alla `.stat`-filer fr�
 
 >[!NOTE]
 >
->Ogiltigförklaring kan förhindras genom att ett extra huvud `CQ-Action-Scope:ResourceOnly` skickas. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Mer information finns på [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/page-invalidate#configuring).
+>Ogiltigförklaring kan förhindras genom att ett extra huvud `CQ-Action-Scope:ResourceOnly` skickas. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Mer information finns på [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/page-invalidate#configuring).
 
 >[!NOTE]
 >
 >Om du anger ett värde för egenskapen `/statfileslevel` ignoreras egenskapen `/statfile`.
 
-### Automatisk invalidering av cachelagrade filer {#automatically-invalidating-cached-files}
+### Automatiskt göra cachelagrade filer ogiltiga {#automatically-invalidating-cached-files}
 
 Egenskapen `/invalidate` definierar de dokument som automatiskt görs ogiltiga när innehållet uppdateras.
 
@@ -1258,7 +1258,7 @@ Följande exempelskript loggar varje ogiltig begäran till en fil.
 printf "%-15s: %s %s" $1 $2 $3>> /opt/dispatcher/logs/invalidate.log
 ```
 
-### Begränsa de klienter som kan tömma cachen {#limiting-the-clients-that-can-flush-the-cache}
+### Begränsa klienterna som kan tömma cachen {#limiting-the-clients-that-can-flush-the-cache}
 
 Egenskapen `/allowedClients` definierar specifika klienter som tillåts tömma cachen. Globeringsmönstren matchas mot IP.
 
@@ -1283,7 +1283,7 @@ Mer information om Glob-egenskaper finns i [Designa mönster för Glob-egenskape
 >
 >Om detta inte görs kan alla klienter utfärda ett anrop för att rensa cachen. Om du gör det flera gånger kan det påverka webbplatsens prestanda negativt.
 
-### Ignorerar URL-parametrar {#ignoring-url-parameters}
+### Ignorera URL-parametrar {#ignoring-url-parameters}
 
 Avsnittet `ignoreUrlParams` definierar vilka URL-parametrar som ska ignoreras när du avgör om en sida cachelagras eller levereras från cache:
 
@@ -1304,7 +1304,7 @@ Om du vill ange vilka parametrar som ska ignoreras lägger du till glob-regler i
 >[!NOTE]
 >
 >När du konfigurerar glob-egenskapen bör den matcha frågeparameternamnet. Om du till exempel vill ignorera parametern &quot;p1&quot; från följande URL `http://example.com/path/test.html?p1=test&p2=v2`, ska egenskapen glob vara:
-> `/0002 { /glob "p1" /type "allow" }`
+>> `/0002 { /glob "p1" /type "allow" }`
 
 I följande exempel ignoreras alla parametrar, förutom parametern `nocache`. Därför cachelagrar Dispatcher aldrig URL-adresser som innehåller parametern `nocache`:
 
@@ -1389,7 +1389,7 @@ Egenskapen `mode` anger vilka filbehörigheter som ska gälla för nya kataloger
 
 Standardvärdet är `0755`, vilket gör att ägaren kan läsa, skriva eller söka i och att gruppen och andra kan läsa eller söka i.
 
-### Begränsar .stat-filberöring {#throttling-stat-file-touching}
+### Begränsa .stat-filberöring {#throttling-stat-file-touching}
 
 Med standardegenskapen `/invalidate` gör varje aktivering alla `.html`-filer ogiltiga (när deras sökväg matchar avsnittet `/invalidate`). På en webbplats med stor trafik ökar multipla aktiveringar processorbelastningen på backend-sidan. I ett sådant scenario är det önskvärt att strypa filberöringen `.stat` så att webbplatsen förblir responsiv. Du kan utföra den här åtgärden med egenskapen `/gracePeriod`.
 
@@ -1397,7 +1397,7 @@ Egenskapen `/gracePeriod` definierar hur många sekunder en inaktuell, automatis
 
 Mer information finns i `/invalidate` och `/statfileslevel`tidigare.
 
-### Konfigurerar tidsbaserad cacheinvalidering - `/enableTTL` {#configuring-time-based-cache-invalidation-enablettl}
+### Konfigurera tidsbaserad cacheogiltigförklaring - `/enableTTL` {#configuring-time-based-cache-invalidation-enablettl}
 
 Tidsbaserad cacheogiltigförklaring beror på egenskapen `/enableTTL` och förekomsten av vanliga förfallorubriker från HTTP-standarden. Om du ställer in egenskapen på 1 (`/enableTTL "1"`) utvärderas svarshuvuden från serverdelen. Om rubrikerna innehåller ett `Cache-Control`-, `max-age`- eller `Expires`-datum skapas en tom hjälpfil bredvid den cachelagrade filen, med en ändringstid som är lika med förfallodatumet. När den cachelagrade filen har begärts efter ändringstiden återbegärs den automatiskt från serverdelen.
 
@@ -1433,7 +1433,7 @@ Om du gör det ser du till att `.stat`-filogiltigförklaring inte används och a
 >
 >Den här funktionen är tillgänglig i Dispatcher version **4.1.11** eller senare.
 
-## Konfigurerar belastningsutjämning - `/statistics` {#configuring-load-balancing-statistics}
+## Konfigurera belastningsutjämning - `/statistics` {#configuring-load-balancing-statistics}
 
 Avsnittet `/statistics` definierar de filkategorier för vilka Dispatcher bedömer svarstiden för varje återgivning. Dispatcher använder poängen för att avgöra vilken rendering som ska skickas.
 
@@ -1499,7 +1499,7 @@ I följande exempel finns även en kategori för söksidor:
   }
 ```
 
-### Speglar om att servern inte är tillgänglig i Dispatcher-statistik {#reflecting-server-unavailability-in-dispatcher-statistics}
+### Spegla serverotillgänglighet i Dispatcher-statistik {#reflecting-server-unavailability-in-dispatcher-statistics}
 
 Egenskapen `/unavailablePenalty` anger den tid (i tiondelar av en sekund) som används för återgivningsstatistiken när en anslutning till återgivningen misslyckas. Dispatcher lägger till tiden i statistikkategorin som matchar den begärda URI:n.
 
@@ -1513,7 +1513,7 @@ Om det inte finns någon `/unavailablePenalty`-egenskap används värdet `"1"`.
 /unavailablePenalty "1"
 ```
 
-## Identifierar en mapp för fästig anslutning - `/stickyConnectionsFor` {#identifying-a-sticky-connection-folder-stickyconnectionsfor}
+## Identifiera en fast anslutningsmapp - `/stickyConnectionsFor` {#identifying-a-sticky-connection-folder-stickyconnectionsfor}
 
 Egenskapen `/stickyConnectionsFor` definierar en mapp som innehåller klisterlappande dokument. Den här egenskapen används med URL:en. Dispatcher skickar alla begäranden från en enskild användare som finns i den här mappen till samma återgivningsinstans. Anteckningar säkerställer att sessionsdata finns och är konsekventa för alla dokument. Den här mekanismen använder cookien `renderid`.
 
@@ -1549,7 +1549,7 @@ När klisterlappande anslutningar är aktiverade ställer Dispatcher-modulen in 
 
 Konfigurera Dispatcher när återgivningsservern returnerar ett 500-fel eller inte är tillgänglig.
 
-### Ange en hälsokontrollsida {#specifying-a-health-check-page}
+### Ange en sida för hälsokontroll {#specifying-a-health-check-page}
 
 Använd egenskapen `/health_check` för att ange en URL som kontrolleras när en 500-statuskod inträffar. Om den här sidan även returnerar en 500-statuskod anses instansen vara otillgänglig och en konfigurerbar tidsåtgång ( `/unavailablePenalty`) tillämpas på återgivningen innan du försöker igen.
 
@@ -1561,7 +1561,7 @@ Använd egenskapen `/health_check` för att ange en URL som kontrolleras när en
   }
 ```
 
-### Ange fördröjning för sidåterförsök {#specifying-the-page-retry-delay}
+### Ange fördröjning för återförsök av sidan {#specifying-the-page-retry-delay}
 
 Egenskapen `/retryDelay` anger den tid (i sekunder) som Dispatcher väntar mellan anslutningsförsök med servergruppens återgivningar. För varje rund är det högsta antalet gånger Dispatcher försöker ansluta till en rendering antalet renderingar i servergruppen.
 
@@ -1583,7 +1583,7 @@ Om värdet inte definieras explicit är standardvärdet `5`.
 /numberOfRetries "5"
 ```
 
-### Använda mekanismen för växling vid fel {#using-the-failover-mechanism}
+### Använda failover-mekanismen {#using-the-failover-mechanism}
 
 Om du vill skicka om begäranden till olika återgivningar när den ursprungliga begäran misslyckas, aktiverar du redundansfunktionen i Dispatcher-servergruppen. När redundans är aktiverat fungerar Dispatcher på följande sätt:
 
@@ -1602,7 +1602,7 @@ Om du vill aktivera redundans lägger du till följande rad i servergruppen (ell
 >
 >Om du vill försöka återanvända HTTP-begäranden som innehåller en brödtext skickar Dispatcher en `Expect: 100-continue`-begäranderubrik till återgivningen innan det faktiska innehållet mellanlagras. CQ 5.5 med CQSE besvarar sedan omedelbart med antingen 100 (CONTINUE) eller en felkod. Andra serverletsbehållare stöds också.
 
-## Ignorerar avbrott - `/ignoreEINTR` {#ignoring-interruption-errors-ignoreeintr}
+## Ignorera avbrottsfel - `/ignoreEINTR` {#ignoring-interruption-errors-ignoreeintr}
 
 >[!CAUTION]
 >
@@ -1610,7 +1610,7 @@ Om du vill aktivera redundans lägger du till följande rad i servergruppen (ell
 >
 >`Error while reading response: Interrupted system call`
 
-Alla filsystemorienterade systemanrop kan avbrytas `EINTR` om objektet för systemanropet finns på ett fjärrsystem som nås via NFS. Huruvida dessa systemanrop kan ta slut eller avbrytas baseras på hur det underliggande filsystemet monterades på den lokala datorn.
+Alla filsystemorienterade systemanrop kan avbrytas `EINTR` om objektet för systemanropet finns på ett fjärrsystem som nås via NFS. Huruvida dessa systemanrop kan ta slut eller avbrytas baseras på hur det underliggande filsystemet monteras på den lokala datorn.
 
 Använd parametern `/ignoreEINTR` om instansen har en sådan konfiguration och loggen innehåller följande meddelande:
 
@@ -1624,7 +1624,7 @@ read more data
 }
 ```
 
-Sådana meddelanden kan genereras när `EINTR` inträffar i avsnittet `read more data`. Och det är orsaken till att en signal tas emot innan data tas emot.
+Sådana meddelanden kan genereras när `EINTR` inträffar i avsnittet `read more data`. Problemet inträffar eftersom en signal kommer före data.
 
 Om du vill ignorera sådana avbrott kan du lägga till följande parameter i `dispatcher.any` (före `/farms`):
 
@@ -1632,7 +1632,7 @@ Om du vill ignorera sådana avbrott kan du lägga till följande parameter i `di
 
 Om `/ignoreEINTR` anges till `"1"` fortsätter Dispatcher att försöka läsa data tills det fullständiga svaret har lästs. Standardvärdet är `0` och alternativet inaktiveras.
 
-## Designa mönster för globala egenskaper {#designing-patterns-for-glob-properties}
+## Designmönster för globegenskaper {#designing-patterns-for-glob-properties}
 
 I flera avsnitt i Dispatcher konfigurationsfil används egenskaperna `glob` som urvalskriterier för klientbegäranden. Värdena för `glob`-egenskaperna är mönster som Dispatcher jämför med en aspekt av begäran, till exempel sökvägen till den begärda resursen eller klientens IP-adress. Objekten i avsnittet `/filter` använder till exempel `glob` mönster för att identifiera sökvägarna till de sidor som Dispatcher agerar på eller avvisar.
 
@@ -1644,7 +1644,7 @@ Värdena för `glob` kan innehålla jokertecken och alfanumeriska tecken för at
 | `?` | Matchar ett enskilt tecken. Använd teckenklasser utanför. I en teckenklass tolkas det här tecknet bokstavligen. | `*outdoors/??/*`<br/> Matchar sidorna för alla språk i den externa geometrixx-webbplatsen. Följande HTTP-begäran matchar till exempel globmönstret: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Följande begäran matchar inte mönstret: <br/><ul><li>&quot;GET /content/geometrixx-outdoors/en.html&quot;</li></ul> |
 | `[ and ]` | Avmarkerar början och slutet av en teckenklass. Teckenklasser kan innehålla ett eller flera teckenintervall och enskilda tecken.<br/>En matchning inträffar om måltecknet matchar något av tecknen i teckenklassen, eller inom ett definierat intervall.<br/>Om den avslutande parentesen inte inkluderas skapas inga matchningar i mönstret. | `*[o]men.html*`<br/> Matchar följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/> `*[o/]men.html*` <br/>Matchar följande HTTP-begäranden: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
 | `-` | Det betecknar ett teckenintervall. För användning i teckenklasser. Utanför en teckenklass tolkas detta tecken bokstavligen. | `*[m-p]men.html*` Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul>Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
-| `!` | Negerar tecknet eller teckenklassen som följer. Använd bara för negerande tecken och teckenintervall inuti teckenklasser. Motsvarar `^ wildcard`. <br/>Utanför en teckenklass tolkas det här tecknet bokstavligen. | `*[ !o]men.html*`<br/> Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Den matchar inte följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>`*[ !o!/]men.html*`<br/> Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"` eller `"GET /content/geometrixx-outdoors/en/men. html"`</li></ul> |
+| `!` | Negerar tecknet eller teckenklassen som följer. Använd bara för negerande tecken och teckenintervall inuti teckenklasser. Motsvarar `^ wildcard`. <br/>Utanför en teckenklass tolkas det här tecknet bokstavligen. | `*[!o]men.html*`<br/> Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Den matchar inte följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>`*[!o!/]men.html*`<br/> Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"` eller `"GET /content/geometrixx-outdoors/en/men. html"`</li></ul> |
 | `^` | Negerar tecknet eller teckenintervallet som följer. Används för att endast negera tecken och teckenintervall inuti teckenklasser. Motsvarar jokertecknet `!`. <br/>Utanför en teckenklass tolkas det här tecknet bokstavligen. | Exemplen för jokertecknet `!` används och `!`-tecknen i exempelmönstret ersätts med `^`-tecken. |
 
 
@@ -1740,7 +1740,7 @@ The following table describes the wildcard characters.
 </table>
 -->
 
-## Loggning {#logging}
+## Loggar {#logging}
 
 I webbserverkonfigurationen kan du ange:
 
@@ -1749,7 +1749,7 @@ I webbserverkonfigurationen kan du ange:
 
 Mer information finns i webbserverdokumentationen och filen Viktigt för din Dispatcher-instans.
 
-**Apache-loggar som roterats eller pipats**
+**Apache roterade eller pipade loggar**
 
 Om du använder en **Apache**-webbserver kan du använda standardfunktionerna för Loggrotation, Pipe-loggar eller båda. Använd till exempel pipade loggar:
 
@@ -1775,7 +1775,7 @@ Bland andra förbättringar för Dispatcher finns även version 4.2.0 med Trace 
 Den här möjligheten är högre än felsökningsloggning som visar ytterligare information i loggarna. Loggning läggs till för:
 
 * Värdena för de vidarebefordrade rubrikerna.
-* Regeln som tillämpas för en viss åtgärd.
+* Regeln som används för en viss åtgärd.
 
 Du kan aktivera spårningsloggning genom att ange loggnivån till `4` på webbservern.
 
@@ -1833,7 +1833,7 @@ I komplexa inställningar kan du använda flera Dispatcher. Du kan till exempel 
 
 I så fall måste du se till att varje begäran endast går igenom en Dispatcher. En Dispatcher hanterar inte begäranden som kommer från andra Dispatcher. Kontrollera därför att båda utskickarna har direktåtkomst till AEM webbplats.
 
-## Felsökning {#debugging}
+## Felsök {#debugging}
 
 När du lägger till rubriken `X-Dispatcher-Info` i en begäran, besvarar Dispatcher om målet har cachelagrats, returnerats från cachelagrat eller inte kunnat cachelagras alls. Svarshuvudet `X-Cache-Info` innehåller den här informationen i ett läsbart format. Du kan använda dessa svarshuvuden för att felsöka problem som rör svar som cachelagrats av Dispatcher.
 

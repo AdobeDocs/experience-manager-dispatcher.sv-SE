@@ -1,5 +1,5 @@
 ---
-title: Använda Dispatcher med flera domäner
+title: Använd Dispatcher med flera domäner
 description: Lär dig hur du använder Dispatcher för att bearbeta sidförfrågningar i flera webbdomäner.
 contentOwner: User
 cq-exporttemplate: /etc/contentsync/templates/geometrixx/page/rewrite
@@ -7,14 +7,16 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 1470b636-7e60-48cc-8c31-899f8785dafa
-source-git-commit: b8dc67a9633c1a459a2851f4be99a5fcbec7fe79
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
-source-wordcount: '3008'
+source-wordcount: '2986'
 ht-degree: 0%
 
 ---
 
 # Använda Dispatcher med flera domäner {#using-dispatcher-with-multiple-domains}
+
+<!-- This article is missing required metadata image ALT tags throughout -->
 
 >[!NOTE]
 >
@@ -52,14 +54,14 @@ När klienterna skickar HTTP-begäranden till webbservern måste URL:en för den
 1. Dispatcher avgör om de cachelagrade filerna är giltiga. Om det är giltigt skickas de cachelagrade filerna till klienten.
 1. Om cachelagrade filer inte är giltiga begär Dispatcher nyligen återgivna sidor från AEM publiceringsinstans.
 
-## Cacheinvalidering
+## Cacheogiltigförklaring
 
-När replikeringsagenter för Dispatcher Flush begär att Dispatcher ogiltigförklarar cachelagrade filer, måste sökvägen till innehållet i databasen matchas mot innehållet i cachen.
+När replikeringsagenter från `Dispatcher Flush` begär att Dispatcher ogiltigförklarar cachelagrade filer, måste sökvägen till innehållet i databasen matchas mot innehållet i cachen.
 
 ![](assets/chlimage_1-9.png)
 
 * a - En sida aktiveras på AEM författarinstans och innehållet replikeras till publiceringsinstansen.
-* b - Dispatcher Flush Agent anropar Dispatcher för att ogiltigförklara cachen för det replikerade innehållet.
+* b - Agenten `Dispatcher Flush` anropar Dispatcher för att ogiltigförklara cachen för det replikerade innehållet.
 * c - Dispatcher vidrör en eller flera .stat-filer för att göra de cachelagrade filerna ogiltiga.
 
 Om du vill använda Dispatcher med flera domäner måste du konfigurera AEM, Dispatcher och webbservern. Lösningarna som beskrivs på den här sidan är allmänna och gäller de flesta miljöer. På grund av komplexiteten i vissa AEM-topologier kan din lösning kräva ytterligare anpassade konfigurationer för att lösa vissa problem. Du måste antagligen anpassa exemplen för att uppfylla din befintliga IT-infrastruktur och hanteringspolicy.
@@ -115,7 +117,7 @@ De exempellösningar som finns gäller för en miljö med följande egenskaper:
                  | - content nodes
 ```
 
-## Inkommande URL-adresser skrivs om i AEM {#aem-rewrites-incoming-urls}
+## AEM skriver om inkommande URL:er {#aem-rewrites-incoming-urls}
 
 Genom att avbilda resursmatchningar kan du koppla inkommande URL:er till AEM innehållssökvägar. Skapa mappningar på AEM publiceringsinstans så att återgivningsbegäranden från Dispatcher kan matchas med rätt innehåll i databasen.
 
@@ -198,9 +200,9 @@ Virtuella värdar ärver egenskapsvärdet [DispatcherConfig](dispatcher-install.
 
 >[!NOTE]
 >
->I AEM as a Cloud Service måste en separat värdkonfiguration användas med en DocumentRoot på en högre nivå än var och en av undersidorna. Detta hanteras som standard i arkivtypen, men när flera DocumentRoots används måste en högre prioritetsvärdkonfiguration användas så att cacheogiltigförklaringen kan hanteras för hela cachen eftersom den inte kan konfigureras separat för varje plats. ServerAlias för den här nya konfigurationen måste acceptera värdhuvudet &quot;localhost&quot;.
+>I AEM as a Cloud Service måste en separat värdkonfiguration användas med en DocumentRoot på en högre nivå än var och en av undersidorna. Den här processen hanteras som standard i arkivtypen. När flera DocumentRoots används krävs dock en värdkonfiguration med högre prioritet för att hantera cacheogiltigförklaring för hela cachen, eftersom den inte kan konfigureras separat för varje plats. Den nya konfigurationens ServerAlias måste acceptera värdhuvudet &quot;localhost&quot;.
 
-### Konfigurera Dispatcher för hantering av flera domäner {#configure-dispatcher-to-handle-multiple-domains}
+### Konfigurera Dispatcher för att hantera flera domäner {#configure-dispatcher-to-handle-multiple-domains}
 
 Ange följande Dispatcher-grupper om du vill ha stöd för URL:er som innehåller domännamn och motsvarande virtuella värdar:
 
@@ -282,11 +284,11 @@ Dispatcher initializing (build 4.1.2)
 [Fri Nov 02 16:27:18 2012] [I] [24974(140006182991616)] Dispatcher initialized (build 4.1.2)
 ```
 
-### Konfigurera delningskarta för resursupplösning {#configure-sling-mapping-for-resource-resolution}
+### Konfigurera Sling-mappning för resursupplösning {#configure-sling-mapping-for-resource-resolution}
 
-Använd Sling-mappning för resursupplösning så att domänbaserade URL:er kan matcha innehåll i AEM publiceringsinstans. Resursmappningen översätter inkommande URL:er från Dispatcher (ursprungligen från klientens HTTP-begäranden) till innehållsnoder.
+Använd mappningen `Sling` för resursupplösning så att domänbaserade URL:er kan matcha innehåll i AEM publiceringsinstans. Resursmappningen översätter inkommande URL:er från Dispatcher (ursprungligen från klientens HTTP-begäranden) till innehållsnoder.
 
-Mer information om Sling-resursmappning finns i [Mappningar för resursupplösning](https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html) i Sling-dokumentationen.
+Mer information om `Sling`-resursmappning finns i [Mappningar för resursupplösning](https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html) i `Sling`-dokumentationen.
 
 Mappningar krävs vanligtvis för följande resurser, men andra mappningar kan vara nödvändiga:
 
@@ -302,7 +304,7 @@ När du har skapat mappningen för innehållssidan använder du en webbläsare f
 
 >[!NOTE]
 >
->Länkkontrolleraromformaren för standardomskrivaren för Apache Sling ändrar automatiskt hyperlänkar på sidan för att förhindra brutna länkar. Länkskrivningen utförs dock endast när länkmålet är en HTML- eller HTML-fil. Om du vill uppdatera länkar till andra filtyper skapar du en transformerarkomponent och lägger till den i en pipeline för HTML-omskrivare.
+>Länkkontrollerartransformatorn för standardskrivaren för Apache `Sling` ändrar automatiskt hyperlänkar på sidan för att förhindra brutna länkar. Länkskrivningen utförs dock endast när länkmålet är en HTML- eller HTML-fil. Om du vill uppdatera länkar till andra filtyper skapar du en transformerarkomponent och lägger till den i en pipeline för HTML-omskrivare.
 
 ### Exempel på noder för resursmappning
 
@@ -318,7 +320,7 @@ I följande tabell visas de noder som implementerar resursmappning för domänen
 
 ## Konfigurera Dispatcher Flush-replikeringsagenten {#configuring-the-dispatcher-flush-replication-agent}
 
-Replikeringsagenten Dispatcher Flush på AEM publiceringsinstans måste skicka ogiltigförklaringsbegäranden till rätt Dispatcher-servergrupp. Om du vill använda en servergrupp som mål använder du egenskapen URI för replikeringsagenten Dispatcher Flush (på fliken Transport). Inkludera värdet för egenskapen `/virtualhost` för Dispatcher-servergruppen som har konfigurerats för att göra cachen ogiltig:
+Replikeringsagenten `Dispatcher Flush` på AEM publiceringsinstans måste skicka ogiltigförklaringsbegäranden till rätt Dispatcher-servergrupp. Använd URI-egenskapen för replikeringsagenten `Dispatcher Flush` (på fliken Transport) för att ange en servergrupp som mål. Inkludera värdet för egenskapen `/virtualhost` för Dispatcher-servergruppen som har konfigurerats för att göra cachen ogiltig:
 
 `https://*webserver_name*:*port*/*virtual_host*/dispatcher/invalidate.cache`
 
@@ -326,7 +328,7 @@ Om du till exempel vill använda servergruppen `farm_flush` i föregående exemp
 
 ![](assets/chlimage_1-12.png)
 
-## Inkommande URL:er skrivs om på webbservern {#the-web-server-rewrites-incoming-urls}
+## Inkommande URL-adresser skrivs om på webbservern {#the-web-server-rewrites-incoming-urls}
 
 Om du vill översätta domänbaserade URL:er till filsökvägar i Dispatcher-cachen använder du webbserverns interna URL-omskrivningsfunktion. Klientförfrågningar för sidan `https://brandA.com/en.html` översätts till exempel till filen `content/sitea/en.html` i webbserverns dokumentrot.
 
@@ -498,23 +500,23 @@ Som vanligt är dokumentroten i cachen densamma som dokumentroten på webbserver
 
 >[!NOTE]
 >
->Eftersom en enda Dispatcher-servergrupp är definierad behöver Dispatcher Flush-replikeringsagenten på AEM publiceringsinstans inga särskilda konfigurationer.
+>Eftersom en enskild Dispatcher-grupp har definierats, kräver replikeringsagenten `Dispatcher Flush` på AEM publiceringsinstans inga särskilda konfigurationer.
 
 ## Skriva om länkar till filer som inte är från HTML {#rewriting-links-to-non-html-files}
 
 Om du vill skriva om referenser till filer som har andra tillägg än .html eller .htm skapar du en Sling-omskrivartransformeringskomponent och lägger till den i standardförskrivningsflödet.
 
-Skriv om referenser när resurssökvägar inte löses korrekt i webbserverkontexten. En omformare krävs till exempel när bildgenererande komponenter skapar länkar som /content/sitea/en/products.navimage.png. Komponenten `topnav` i [Så här skapar du en webbplats med alla funktioner](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/developing/introduction/the-basics).
+Skriv om referenser när resurssökvägar inte löses korrekt i webbserverkontexten. En omformare krävs till exempel när bildgenererande komponenter skapar länkar som /content/sitea/en/products.navimage.png. Komponenten `topnav` i [Så här skapar du en webbplats med alla funktioner](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/developing/introduction/the-basics).
 
-[Omskrivningsmodulen ](https://sling.apache.org/documentation/bundles/output-rewriting-pipelines-org-apache-sling-rewriter.html) är en modul som efterbearbetar Sling-utdata. implementeringar av rewriter-pipeline består av en generator, en eller flera transformatorer och en serialiserare:
+[`Sling` rewriter](https://sling.apache.org/documentation/bundles/output-rewriting-pipelines-org-apache-sling-rewriter.html) är en modul som efterbearbetar `Sling`-utdata. implementeringar av rewriter-pipeline består av en generator, en eller flera transformatorer och en serialiserare:
 
-* **Generator:** Tolkar Sling-utdataströmmen (HTML-dokument) och genererar SAX-händelser när specifika elementtyper påträffas.
+* **Generator:** Tolkar `Sling`-utdataströmmen (HTML-dokument) och genererar SAX-händelser när specifika elementtyper påträffas.
 * **Transformator:** Lyssnar efter SAX-händelser och ändrar därför händelsemålet (ett HTML-element). En omskrivarpipeline innehåller noll eller flera omformare. Transformers körs i sekvens och skickar SAX-händelserna till nästa transformator i sekvensen.
 * **Serialisering:** Serialiserar utdata, inklusive ändringar från varje transformator.
 
 ![](assets/chlimage_1-15.png)
 
-### AEM förinställda skrivarpipeline {#the-aem-default-rewriter-pipeline}
+### AEM standardförskrivningsförlopp {#the-aem-default-rewriter-pipeline}
 
 AEM använder en standardomskrivare för pipeline som bearbetar dokument av typen text/html:
 
@@ -524,7 +526,7 @@ AEM använder en standardomskrivare för pipeline som bearbetar dokument av type
 
 Noden `/libs/cq/config/rewriter/default` definierar pipelinen.
 
-### Skapa en omformare {#creating-a-transformer}
+### Skapa en transformator {#creating-a-transformer}
 
 Så här skapar du en transformatorkomponent och använder den i en pipeline:
 
@@ -542,7 +544,7 @@ Så här skapar du en transformatorkomponent och använder den i en pipeline:
 
 >[!NOTE]
 >
->Om du vill skapa ditt Maven-projekt använder du [multimodule](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)-arketypen i innehållspaketets plugin-program Maven. Strukturlister skapar och installerar automatiskt ett innehållspaket.
+>Om du vill skapa ditt Maven-projekt använder du [multimodule](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions)-arketypen i innehållspaketets plugin-program Maven. Strukturlister skapar och installerar automatiskt ett innehållspaket.
 
 I följande exempel implementeras en transformator som skriver om referenser till bildfiler.
 
@@ -645,7 +647,7 @@ public class MyRewriterTransformer extends AbstractSAXPipe implements Transforme
 }
 ```
 
-### Lägga till transformatorn i en skrivarpipeline {#adding-the-transformer-to-a-rewriter-pipeline}
+### Lägg till transformatorn i en skrivarpipeline {#adding-the-transformer-to-a-rewriter-pipeline}
 
 Skapa en JCR-nod som definierar en pipeline som använder din transformator. Följande noddefinition skapar en pipeline som bearbetar text-/html-filer. AEM standardgenerator och -parser för HTML används.
 

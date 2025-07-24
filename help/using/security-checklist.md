@@ -10,9 +10,9 @@ index: y
 internal: n
 snippet: y
 exl-id: 49009810-b5bf-41fd-b544-19dd0c06b013
-source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
-source-wordcount: '590'
+source-wordcount: '582'
 ht-degree: 0%
 
 ---
@@ -34,7 +34,7 @@ Adobe rekommenderar att du slutför följande checklista innan du börjar produc
 
 >[!CAUTION]
 >
->Slutför checklistan för din version av AEM innan du publicerar. Se motsvarande [Adobe Experience Manager-dokumentation](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/security-checklist).
+>Fyll i checklistan för din version av AEM innan du publicerar. Se motsvarande [Adobe Experience Manager-dokumentation](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist).
 
 ## Använd den senaste versionen av Dispatcher {#use-the-latest-version-of-dispatcher}
 
@@ -54,7 +54,7 @@ Adobe rekommenderar att du [begränsar antalet klienter som kan tömma cachen.](
 
 ## Aktivera HTTPS för transportlagrets säkerhet {#enable-https-for-transport-layer-security}
 
-Adobe rekommenderar att du aktiverar HTTPS-transportlagret på både författare- och publiceringsinstanser.
+Adobe rekommenderar att HTTPS-transportlagret aktiveras både för författare och publicering.
 
 <!-- 
 
@@ -89,18 +89,18 @@ Tillåtelselista är ett bättre sätt att tillhandahålla åtkomstkontroll efte
 
 ## Kör Dispatcher med en dedikerad systemanvändare {#run-dispatcher-with-a-dedicated-system-user}
 
-När du konfigurerar Dispatcher måste du se till att webbservern körs av en dedikerad användare med minst behörighet. Vi rekommenderar att du bara ger skrivåtkomst till cachemappen för Dispatcher.
+Konfigurera Dispatcher så att ett dedikerat, minst privilegierat användarkonto kör webbservern. Adobe rekommenderar att du bara ger skrivåtkomst till Dispatcher cachemapp.
 
 IIS-användare måste dessutom konfigurera sin webbplats på följande sätt:
 
 1. Välj **Anslut som en specifik användare** i inställningen för fysisk sökväg för din webbplats.
 1. Ange användaren.
 
-## Förhindra DoS-attacker {#prevent-denial-of-service-dos-attacks}
+## Förhindra DoS-attacker (denial of service) {#prevent-denial-of-service-dos-attacks}
 
 En denial of service-attack (DoS) är ett försök att göra en datorresurs otillgänglig för de avsedda användarna.
 
-På Dispatcher-nivå finns det två metoder för att konfigurera för att förhindra DoS-attacker: [Filter](https://experienceleague.adobe.com/sv/docs#/filter)
+På Dispatcher-nivå finns det två metoder för att konfigurera för att förhindra DoS-attacker: [Filter](https://experienceleague.adobe.com/en/docs#/filter)
 
 * Använd modulen mod_rewrite (till exempel [Apache 2.4](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)) för att utföra URL-valideringar (om URL-mönsterreglerna inte är för komplexa).
 
@@ -148,7 +148,7 @@ Last Modified Date: 2015-06-26T04:38:17.016-0400
 
 ## Konfigurera Dispatcher för att förhindra CSRF-attacker {#configure-dispatcher-to-prevent-csrf-attacks}
 
-AEM tillhandahåller ett [Framework](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#verification-steps) som syftar till att förhindra attacker av typen Cross-Site Request. Om du vill använda ramverket på rätt sätt tillåtslista du stödet för CSRF-token i Dispatcher genom att göra följande:
+AEM tillhandahåller ett [ramverk](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#verification-steps) som syftar till att förhindra attacker av typen Cross-Site Request. Om du vill använda ramverket på rätt sätt tillåtslista du stödet för CSRF-token i Dispatcher genom att göra följande:
 
 1. Skapa ett filter som tillåter sökvägen `/libs/granite/csrf/token.json`;
 1. Lägg till rubriken `CSRF-Token` i avsnittet `clientheaders` i Dispatcher-konfigurationen.
@@ -159,7 +159,7 @@ För att förhindra clickjacking rekommenderar Adobe att du konfigurerar webbser
 
 Mer information om clickjacking finns på [OWASP-webbplatsen](https://owasp.org/www-community/attacks/Clickjacking).
 
-## Utför ett penetrationstest {#perform-a-penetration-test}
+## Utför ett penetrationsprov {#perform-a-penetration-test}
 
-Adobe rekommenderar starkt att du utför ett penetrationstest av din AEM infrastruktur innan du börjar producera.
+Adobe rekommenderar att du gör ett penetrationstest av din AEM-infrastruktur innan du börjar producera.
 

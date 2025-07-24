@@ -6,9 +6,9 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 exl-id: 3d8d8204-7e0d-44ad-b41b-6fec2689c6a6
-source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
-source-wordcount: '924'
+source-wordcount: '923'
 ht-degree: 0%
 
 ---
@@ -17,9 +17,9 @@ ht-degree: 0%
 
 Behörighetskänslig cachelagring gör att du kan cachelagra skyddade sidor. Dispatcher kontrollerar användarens åtkomstbehörighet för en sida innan den cachelagrade sidan levereras.
 
-Dispatcher innehåller modulen AuthChecker som implementerar behörighetskänslig cachelagring. När modulen aktiveras anropar Dispatcher en AEM för att utföra användarautentisering och behörighet för det begärda innehållet. Serversvaret avgör om innehållet levereras till webbläsaren från cachen eller inte.
+Dispatcher innehåller modulen AuthChecker som implementerar behörighetskänslig cachelagring. När modulen är aktiverad anropar Dispatcher en AEM-server för att utföra användarautentisering och behörighet för det begärda innehållet. Serversvaret avgör om innehållet levereras till webbläsaren från cachen eller inte.
 
-Eftersom autentiserings- och auktoriseringsmetoderna är specifika för den AEM distributionen måste du skapa serverpaketet.
+Eftersom autentiserings- och auktoriseringsmetoderna är specifika för AEM-distributionen måste du skapa serverpaketet.
 
 >[!NOTE]
 >
@@ -32,7 +32,7 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 ![](assets/chlimage_1.png)
 
 1. Dispatcher fastställer att det begärda innehållet är cache-lagrat och giltigt.
-1. Dispatcher skickar ett begärandemeddelande till återgivningen. Avsnittet HEAD innehåller alla rubrikrader från webbläsarbegäran.
+1. Dispatcher skickar ett begärandemeddelande till återgivningen. HEAD-avsnittet innehåller alla rubrikrader från webbläsarbegäran.
 1. Renderingen anropar auth checker-servern för att utföra säkerhetskontrollen och svarar på Dispatcher. Svarsmeddelandet innehåller en HTTP-statuskod på 200 som anger att användaren är behörig.
 1. Dispatcher skickar ett svarsmeddelande till webbläsaren som består av rubrikraderna från återgivningssvaret och det cachelagrade innehållet i brödtexten.
 
@@ -42,7 +42,7 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 
 1. Dispatcher fastställer att innehållet inte cachas eller behöver uppdateras.
 1. Dispatcher vidarebefordrar den ursprungliga begäran till återgivningen.
-1. Renderingen anropar den AEM auktoriserarservern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
+1. Renderingen anropar AEM Authzer-servern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
 1. Dispatcher vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
 ## Användaren är inte auktoriserad {#user-is-not-authorized}
@@ -53,10 +53,10 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 1. Dispatcher skickar ett begärandemeddelande till återgivningen som innehåller alla rubrikrader från webbläsarens begäran.
 1. Renderingen anropar Auth Checker-servern för att utföra en säkerhetskontroll som misslyckas och återgivningen vidarebefordrar den ursprungliga begäran till Dispatcher.
 1. Dispatcher vidarebefordrar den ursprungliga begäran till återgivningen.
-1. Renderingen anropar den AEM auktoriserarservern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
+1. Renderingen anropar AEM Authzer-servern (den här servern är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
 1. Dispatcher vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
-## Tillämpa behörighetskänslig cachelagring {#implementing-permission-sensitive-caching}
+## Implementera behörighetskänslig cachelagring {#implementing-permission-sensitive-caching}
 
 Så här implementerar du behörighetskänslig cachelagring:
 
@@ -70,11 +70,11 @@ Så här implementerar du behörighetskänslig cachelagring:
 >[!NOTE]
 >
 >När det finns ett CDN (eller något annat cache-minne) framför Dispatcher bör du ställa in cache-rubrikerna så att CDN inte cachelagrar det privata innehållet. Till exempel: `Header always set Cache-Control private`.
->För AEM as a Cloud Service finns mer information om hur du anger privata cachelagringshuvuden på sidan [Caching](https://experienceleague.adobe.com/sv/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching).
+>>För AEM as a Cloud Service finns mer information om hur du anger privata cachelagringshuvuden på sidan [Caching](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching).
 
 ## Skapa Auth Checker-servleten {#create-the-auth-checker-servlet}
 
-Skapa och distribuera en serverdator som autentiserar och auktoriserar den användare som begär webbinnehållet. Servern kan använda vilken autentisering som helst. Den kan också använda vilken auktoriseringsmetod som helst. Den kan till exempel använda AEM användarkonto och databas-ACL:er. Den kan också använda en LDAP-sökningstjänst. Du distribuerar servleten till den AEM instansen som Dispatcher använder som rendering.
+Skapa och distribuera en serverdator som autentiserar och auktoriserar den användare som begär webbinnehållet. Servern kan använda vilken autentisering som helst. Den kan också använda vilken auktoriseringsmetod som helst. Den kan till exempel använda AEM användarkonto och databas-ACL:er. Den kan också använda en LDAP-sökningstjänst. Du distribuerar servleten till den AEM-instans som Dispatcher använder som rendering.
 
 Servern måste vara tillgänglig för alla användare. Därför bör din servlet utöka klassen `org.apache.sling.api.servlets.SlingSafeMethodsServlet` som ger skrivskyddad åtkomst till systemet.
 
@@ -92,7 +92,7 @@ Följande exempelserver hämtar URL:en för den begärda resursen från HTTP-beg
 
 >[!NOTE]
 >
->Värdet för egenskapen sling.servlet.paths måste aktiveras i tjänsten Sling Servlet Resolver (org.apache.sling.servlets.resolver.SlingServletResolver).
+>Värdet för egenskapen sling.servlet.paths måste aktiveras i tjänsten `Sling` Servlet Resolver (org.apache.sling.servlets.resolver.SlingServletResolver).
 
 ### Exempel på server {#example-servlet}
 

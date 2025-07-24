@@ -5,11 +5,11 @@ contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
-redirecttarget: https://helpx.adobe.com/se/experience-manager/6-4/sites/deploying/using/configuring-performance.html
+redirecttarget: https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/configuring-performance.html
 index: y
 internal: n
 snippet: y
-source-git-commit: 9be9f5935c21ebbf211b5da52280a31772993c2e
+source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
 workflow-type: tm+mt
 source-wordcount: '1128'
 ht-degree: 0%
@@ -44,11 +44,11 @@ Dispatcher har flera inbyggda mekanismer som du kan använda för att optimera p
 >
 >I allmänhet innebär många cachelagringsstrategier att du väljer bra URL-adresser och inte förlitar dig på dessa ytterligare data.
 
-## Använda konsekvent sidkodning {#using-consistent-page-encoding}
+## Använd konsekvent sidkodning {#using-consistent-page-encoding}
 
 HTTP-begäranrubriker cachelagras inte, vilket innebär att problem kan uppstå om du lagrar sidkodningsinformation i sidhuvudet. I det här fallet används webbserverns standardkodning för sidan när Dispatcher skickar en sida från cachen. Det finns två sätt att undvika det här problemet:
 
-* Om du bara använder en kodning kontrollerar du att den kodning som används på webbservern är densamma som standardkodningen för den AEM webbplatsen.
+* Om du bara använder en kodning kontrollerar du att kodningen som används på webbservern är densamma som standardkodningen på AEM webbplats.
 * Om du vill ställa in kodningen använder du en `<META>`-tagg i HTML `head` -avsnittet, som i följande exempel:
 
 ```xml
@@ -95,7 +95,7 @@ www.myCompany.com/news/main.large.html
 >
 >Med hjälp av skriptordlistan för malldefinitionen kan du ange ett separat skript som återger utskriftssidorna.
 
-## Invaliderar bildfiler som används som titlar {#invalidating-image-files-used-as-titles}
+## Gör bildfiler ogiltiga som titlar {#invalidating-image-files-used-as-titles}
 
 Om du återger sidrubriker eller annan text som bilder kan du lagra filerna så att de tas bort när innehållet uppdateras på sidan:
 
@@ -108,7 +108,7 @@ Du kan till exempel lagra titeln för sidan myPage.html i filen myPage.title.gif
 
 >[!NOTE]
 >
->Bildfilen finns inte nödvändigtvis i AEM. Du kan använda ett skript som skapar bildfilen dynamiskt. Dispatcher lagrar sedan filen på webbservern.
+>Bildfilen finns inte nödvändigtvis i AEM-instansen. Du kan använda ett skript som skapar bildfilen dynamiskt. Dispatcher lagrar sedan filen på webbservern.
 
 ## Ogiltiga bildfiler som används för navigering {#invalidating-image-files-used-for-navigation}
 
@@ -139,7 +139,7 @@ Dispatcher kan inte cachelagra personaliserade data, så vi rekommenderar att du
 >* använda JavaScript på klientsidan för att visa personaliserad information. Du måste dock se till att sidan fortfarande visas korrekt om en användare stänger av JavaScript.
 >
 
-## Fästiga anslutningar {#sticky-connections}
+## Fästanslutningar {#sticky-connections}
 
 [Antagliga anslutningar](dispatcher.md#TheBenefitsofLoadBalancing) säkerställer att dokumenten för en användare är sammansatta på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp så att den kan innehålla alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Om du gör det påverkas belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
 
@@ -157,7 +157,7 @@ För de flesta filer används MIME-typen i filtillägget:
 
 Om filnamnet saknar filtillägg visas det som oformaterad text.
 
-MIME-typen är en del av HTTP-huvudet och därför cachelagras den inte av Dispatcher. Ditt AEM kan returnera filer som inte har ett känt filtillägg. Om filerna i stället använder MIME-typen kan dessa filer visas felaktigt.
+MIME-typen är en del av HTTP-huvudet och därför cachelagras den inte av Dispatcher. Ditt AEM-program kan returnera filer som inte har något känt filtillägg. Om filerna i stället använder MIME-typen kan dessa filer visas felaktigt.
 
 Följ dessa riktlinjer för att vara säker på att filerna cachelagras korrekt:
 
