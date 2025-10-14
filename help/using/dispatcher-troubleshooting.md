@@ -26,7 +26,7 @@ ht-degree: 0%
 
 >[!NOTE]
 >
->Mer information finns i <!-- URL is 404[Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), -->[Felsökning av Dispatcher-problem](https://experienceleague.adobe.com/search.html?lang=sv-SE#q=troubleshooting%20dispatcher%20flushing%20issues&sort=relevancy&f:el_product=[Experience%20Manager]) och [Vanliga problem i Dispatcher ](dispatcher-faq.md) .
+>Mer information finns i <!-- URL is 404[Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html), -->[Felsökning av Dispatcher-problem](https://experienceleague.adobe.com/search.html?lang=sv-SE#q=troubleshooting%20dispatcher%20flushing%20issues&sort=relevancy&f:el_product=[Experience%20Manager]) och [Vanliga problem i Dispatcher &#x200B;](dispatcher-faq.md) .
 
 ## Kontrollera den grundläggande konfigurationen {#check-the-basic-configuration}
 

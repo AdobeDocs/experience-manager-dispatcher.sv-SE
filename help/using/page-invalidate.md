@@ -169,7 +169,7 @@ page_path1
 page_pathn
 ```
 
-De sidsökvägar som ska cachelagras omedelbart visas på separata rader i meddelandetexten. Värdet `CQ-Handle` är sökvägen till en sida som gör sidorna ogiltiga. (Se parametern `/statfileslevel` i konfigurationsobjektet [ Cache](dispatcher-configuration.md#main-pars_146_44_0010).) Följande exempel på HTTP-begäran tar bort och cachelagrar `/content/geometrixx-outdoors/en.html page`:
+De sidsökvägar som ska cachelagras omedelbart visas på separata rader i meddelandetexten. Värdet `CQ-Handle` är sökvägen till en sida som gör sidorna ogiltiga. (Se parametern `/statfileslevel` i konfigurationsobjektet [&#x200B; Cache](dispatcher-configuration.md#main-pars_146_44_0010).) Följande exempel på HTTP-begäran tar bort och cachelagrar `/content/geometrixx-outdoors/en.html page`:
 
 ```xml
 POST /dispatcher/invalidate.cache HTTP/1.1  

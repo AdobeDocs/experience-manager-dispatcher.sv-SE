@@ -192,7 +192,7 @@ Varje gruppegenskap kan innehålla följande underordnade egenskaper:
 
 | Egenskapsnamn | Beskrivning |
 |--- |--- |
-| [/hemsida ](#specify-a-default-page-iis-only-homepage) | Standardstartsida (valfritt) (endast IIS) |
+| [/hemsida &#x200B;](#specify-a-default-page-iis-only-homepage) | Standardstartsida (valfritt) (endast IIS) |
 | [/clientheaders](#specifying-the-http-headers-to-pass-through-clientheaders) | Rubrikerna från klientens HTTP-begäran som ska skickas. |
 | [/virtualhosts](#identifying-virtual-hosts-virtualhosts) | Den här servergruppens virtuella värdar. |
 | [/sessionmanagement](#enabling-secure-sessions-sessionmanagement) | Stöd för sessionshantering och autentisering. |

@@ -157,7 +157,7 @@ Om dokumentet har konfigurerats för automatisk ogiltigförklaring kontrollerar 
 
 ### Hur returnerar Dispatcher dokument?
 
-Du kan definiera om Dispatcher ska cachelagra ett dokument med hjälp av [Dispatcher-konfigurationsfilen ](dispatcher-configuration.md), `dispatcher.any`. Dispatcher kontrollerar begäran mot listan med cachelagrade dokument. Om dokumentet inte finns med i listan begär Dispatcher dokumentet från AEM-instansen.
+Du kan definiera om Dispatcher ska cachelagra ett dokument med hjälp av [Dispatcher-konfigurationsfilen &#x200B;](dispatcher-configuration.md), `dispatcher.any`. Dispatcher kontrollerar begäran mot listan med cachelagrade dokument. Om dokumentet inte finns med i listan begär Dispatcher dokumentet från AEM-instansen.
 
 Egenskapen `/rules` styr vilka dokument som cachelagras enligt dokumentsökvägen. Oavsett egenskapen `/rules` cachelagrar Dispatcher aldrig ett dokument under följande omständigheter:
 
