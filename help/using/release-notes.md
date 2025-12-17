@@ -5,9 +5,9 @@ topic-tags: release-notes
 content-type: reference
 products: SG_EXPERIENCEMANAGER/6.4
 exl-id: b55c7a34-d57b-4d45-bd83-29890f1524de
-source-git-commit: b7ab59ad2da1b73ebbf7819670f056a68162796d
+source-git-commit: f4ed724deccf14c570ca873728a97d0ae5fe0e4f
 workflow-type: tm+mt
-source-wordcount: '1098'
+source-wordcount: '1105'
 ht-degree: 1%
 
 ---
@@ -27,7 +27,7 @@ ht-degree: 1%
 
 ## Systemkrav och krav {#system-requirements-and-prerequisites}
 
-Mer information om krav och krav finns i [Plattformar som stöds](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#dispatcher-platforms-web-servers).
+Mer information om krav och krav finns i [Plattformar som stöds](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#dispatcher-platforms-web-servers).
 
 Adobe rekommenderar att du använder den senaste versionen av AEM Dispatcher för att utnyttja de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
 
@@ -41,9 +41,8 @@ Mer information finns i [Installera Dispatcher](dispatcher-install.md).
 
 **Förbättringar**:
 
-* DISP-1040 - korrigering för kunder som skriver om URL:er
+* DISP-1040 - Implementera `/allowedClients` i dispatcherkonfigurationen för att kontrollera vilka IP-adresser som kan utföra cacheogiltigförklaringar och blockera eller ta bort rubriker (`handle`, `cq-handle` osv.) om de inte uttryckligen behövs
 * DISP-1046 - inaktuell-while-error ska även hantera 429 svar från AEM
-* DISP-1041 - gör ogiltig uri konfigurerbar (#179)
 * SKYOPS-107219 - Optimera den aktuella implementeringen av inläsning av vanityUrls
 
 ### Version 4.3.7 (2024-March-27) {#march}
