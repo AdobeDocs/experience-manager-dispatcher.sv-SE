@@ -67,6 +67,6 @@ När miljövariabeln har aktiverats och konfigurationsändringarna har distribue
 
 Om du vill få vägledning om huvudcachelagring och hantering av `ETag` i Dispatcher kan du läsa:
 
-- [Konfigurera Dispatcher - cachelagra HTTP-svarshuvuden](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration#caching-http-response-headers)
+- [Konfigurera Dispatcher - cachelagra HTTP-svarshuvuden](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration#caching-http-response-headers)
 
 &quot;Den här funktionen är tillgänglig i Dispatcher `2.0.264` (AEM SDK `2026.2.24464`). När det här alternativet är aktiverat kan Dispatcher validera `If-None-Match` mot cachelagrade `ETag`-värden och returnera `304 Not Modified` vid cacheträffar. I AEM as a Cloud Service stöds detta och kan aktiveras via Cloud Manager-miljökonfiguration.&quot;

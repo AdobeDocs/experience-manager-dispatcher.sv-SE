@@ -29,7 +29,7 @@ ht-degree: 0%
    + [Konfigurera Dispatcher](dispatcher-configuration.md)
    + [Invalidera cachelagrade sidor från AEM](page-invalidate.md)
    + [Dispatcher ETag Enhancement for CDN Revalidation](dispatcher-etag-enhancement.md)
-   + [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
+   + [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-performance)
    + [Cachelagra skyddat innehåll](permissions-cache.md)
    + [Använd AEM Dispatcher med flera domäner](dispatcher-domains.md)
    + [Använd SSL med AEM Dispatcher](dispatcher-ssl.md)
