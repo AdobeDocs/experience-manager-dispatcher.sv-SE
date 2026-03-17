@@ -19,7 +19,7 @@ I följande avsnitt beskrivs hur du konfigurerar olika aspekter av Dispatcher.
 
 ## Stöd för IPv4 och IPv6 {#support-for-ipv-and-ipv}
 
-Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#ipv-and-ipv).
+Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#ipv-and-ipv).
 
 ## Dispatcher konfigurationsfiler {#dispatcher-configuration-files}
 
@@ -402,9 +402,9 @@ I följande tabell visas de virtuella värdarna som matchas för de angivna HTTP
 
 >[!CAUTION]
 >
->`/allowAuthorized` Ange som `"0"` i avsnittet `/cache` om du vill aktivera den här funktionen. Så som anges i avsnittet [&quot;Cachelagring när autentisering används&quot;](#caching-when-authentication-is-used), cachelagras **inte** när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation. Om behörighetskänslig cachelagring krävs, se sidan [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/permissions-cache).
+>`/allowAuthorized` Ange som `"0"` i avsnittet `/cache` om du vill aktivera den här funktionen. Så som anges i avsnittet [&quot;Cachelagring när autentisering används&quot;](#caching-when-authentication-is-used), cachelagras **inte** när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation. Om behörighetskänslig cachelagring krävs, se sidan [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/permissions-cache).
 
-Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Mer information om hur du använder den här funktionen med CUG:er finns i [Skapa en stängd användargrupp](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/cug#creating-the-user-group-to-be-used). Se även Dispatcher [checklista för säkerhet](/help/using/security-checklist.md) innan du publicerar.
+Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Mer information om hur du använder den här funktionen med CUG:er finns i [Skapa en stängd användargrupp](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/cug#creating-the-user-group-to-be-used). Se även Dispatcher [checklista för säkerhet](/help/using/security-checklist.md) innan du publicerar.
 
 Egenskapen `/sessionmanagement` är en underegenskap till `/farms`.
 
@@ -555,7 +555,7 @@ Använd avsnittet `/filter` för att ange de HTTP-begäranden som Dispatcher god
 
 >[!CAUTION]
 >
->Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM-installation.
+>Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM-installation.
 
 Avsnittet `/filter` består av en serie regler som antingen nekar eller tillåter åtkomst till innehåll enligt mönster i begärandoradsdelen av HTTP-begäran. Använd en tillåtelselista-strategi för ditt `/filter`-avsnitt:
 
@@ -806,7 +806,7 @@ Beroende på installationen kan det finnas fler resurser under `/libs`, `/apps` 
 
 >[!CAUTION]
 >
->Om du [använder rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/operations/reporting#using-reports-in-a-publish-environment) bör du konfigurera Dispatcher att neka åtkomst till `/etc/reports` för externa besökare.
+>Om du [använder rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/sites/administering/operations/reporting#using-reports-in-a-publish-environment) bör du konfigurera Dispatcher att neka åtkomst till `/etc/reports` för externa besökare.
 
 ### Begränsa frågesträngar {#restricting-query-strings}
 
@@ -938,7 +938,7 @@ Avsnittet `/vanity_urls` innehåller följande egenskaper:
 
 >[!NOTE]
 >
->Om din återgivning är en instans av AEM måste du installera paketet [VanityURLS-Components från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Mer information finns i [Programvarudistribution](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager#software-distribution).)
+>Om din återgivning är en instans av AEM måste du installera paketet [VanityURLS-Components från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Mer information finns i [Programvarudistribution](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager#software-distribution).)
 
 Använd följande procedur för att aktivera åtkomst till mål-URL:er.
 
@@ -1183,7 +1183,7 @@ När en fil i `/content/myWebsite/xx` blir ogiltig kommer alla `.stat`-filer fr�
 
 >[!NOTE]
 >
->Ogiltigförklaring kan förhindras genom att ett extra huvud `CQ-Action-Scope:ResourceOnly` skickas. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Mer information finns på [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/page-invalidate#configuring).
+>Ogiltigförklaring kan förhindras genom att ett extra huvud `CQ-Action-Scope:ResourceOnly` skickas. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Mer information finns på [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/page-invalidate#configuring).
 
 >[!NOTE]
 >
