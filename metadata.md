@@ -2,12 +2,12 @@
 cloud: Experience Cloud
 solution: Experience Manager
 type: Documentation
-git-repo: https://github.com/AdobeDocs/experience-manager-dispatcher.sv-SE
-index: y
+git-repo: https://github.com/AdobeDocs/experience-manager-dispatcher.en
+index: true
 recommendations: noDisplay
-source-git-commit: 0a1aa854ea286a30c3527be8fc7c0998726a663f
+source-git-commit: 53781f068db078045ae366d3494cd7d1b78c4a7e
 workflow-type: tm+mt
-source-wordcount: '112'
+source-wordcount: '129'
 ht-degree: 0%
 
 ---

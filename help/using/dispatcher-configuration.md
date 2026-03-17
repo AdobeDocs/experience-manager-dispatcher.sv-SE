@@ -2,9 +2,9 @@
 title: Konfigurera AEM Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler och om att namnge instansen. Läs om hur du definierar servergrupper, identifierar virtuella värdar och mycket mer.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: fbfbe76b730d4037cccb400b70619fbe24b3b1bc
+source-git-commit: 53781f068db078045ae366d3494cd7d1b78c4a7e
 workflow-type: tm+mt
-source-wordcount: '8938'
+source-wordcount: '9194'
 ht-degree: 0%
 
 ---
@@ -19,7 +19,7 @@ I följande avsnitt beskrivs hur du konfigurerar olika aspekter av Dispatcher.
 
 ## Stöd för IPv4 och IPv6 {#support-for-ipv-and-ipv}
 
-Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#ipv-and-ipv).
+Alla element i AEM och Dispatcher kan installeras i både IPv4- och IPv6-nätverk. Se [IPV4 och IPV6](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/introduction/technical-requirements#ipv-and-ipv).
 
 ## Dispatcher konfigurationsfiler {#dispatcher-configuration-files}
 
@@ -192,7 +192,7 @@ Varje gruppegenskap kan innehålla följande underordnade egenskaper:
 
 | Egenskapsnamn | Beskrivning |
 |--- |--- |
-| [/hemsida &#x200B;](#specify-a-default-page-iis-only-homepage) | Standardstartsida (valfritt) (endast IIS) |
+| [/hemsida ](#specify-a-default-page-iis-only-homepage) | Standardstartsida (valfritt) (endast IIS) |
 | [/clientheaders](#specifying-the-http-headers-to-pass-through-clientheaders) | Rubrikerna från klientens HTTP-begäran som ska skickas. |
 | [/virtualhosts](#identifying-virtual-hosts-virtualhosts) | Den här servergruppens virtuella värdar. |
 | [/sessionmanagement](#enabling-secure-sessions-sessionmanagement) | Stöd för sessionshantering och autentisering. |
@@ -225,7 +225,7 @@ Comment Type: draft
 <p>Typically this situation occurs when a user specifies an URL for which neither IIS or AEM provides an automatic redirection target. For example, if the AEM render instance is shut down after the content is cached, the content redirect URL is unavailable.</p> 
 <p>The following example configuration displays the <span class="code">index.html</span> page in such circumstances:</p>
 
- -->
+-->
 
 <!-- 
 
@@ -235,7 +235,7 @@ Comment Type: draft
   /homepage&nbsp;"/index.html" 
 </codeblock>
 
- -->
+-->
 
 <!-- 
 
@@ -243,7 +243,7 @@ Comment Type: draft
 
 <p>The <span class="code">/homepage</span> section is located inside the <span class="code">/farms</span> section, for example:<br /> </p>
 
- -->
+-->
 
 <!-- 
 
@@ -253,7 +253,7 @@ Comment Type: draft
   #name&nbsp;of&nbsp;dispatcher!!discoiqbr!!/name&nbsp;"day&nbsp;sites"!!discoiqbr!!!!discoiqbr!!#farms&nbsp;section&nbsp;defines&nbsp;a&nbsp;list&nbsp;of&nbsp;farms&nbsp;or&nbsp;sites!!discoiqbr!!/farms!!discoiqbr!!{!!discoiqbr!!&nbsp;&nbsp;&nbsp;/daycom!!discoiqbr!!&nbsp;&nbsp;&nbsp;{!!discoiqbr!!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/homepage&nbsp;"/index.html"!!discoiqbr!!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...!!discoiqbr!!&nbsp;&nbsp;&nbsp;}!!discoiqbr!!&nbsp;&nbsp;&nbsp;/docdaycom!!discoiqbr!!&nbsp;&nbsp;&nbsp;{!!discoiqbr!!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...!!discoiqbr!!&nbsp;&nbsp;&nbsp;}!!discoiqbr!!} 
 </codeblock>
 
- -->
+-->
 
 ## Ange vilka HTTP-huvuden som ska skickas igenom {#specifying-the-http-headers-to-pass-through-clientheaders}
 
@@ -402,9 +402,9 @@ I följande tabell visas de virtuella värdarna som matchas för de angivna HTTP
 
 >[!CAUTION]
 >
->`/allowAuthorized` Ange som `"0"` i avsnittet `/cache` om du vill aktivera den här funktionen. Så som anges i avsnittet [&quot;Cachelagring när autentisering används&quot;](#caching-when-authentication-is-used), cachelagras `/allowAuthorized 0 `inte **när du anger** begäranden som innehåller autentiseringsinformation. Om behörighetskänslig cachelagring krävs, se sidan [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/permissions-cache).
+>`/allowAuthorized` Ange som `"0"` i avsnittet `/cache` om du vill aktivera den här funktionen. Så som anges i avsnittet [&quot;Cachelagring när autentisering används&quot;](#caching-when-authentication-is-used), cachelagras **inte** när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation. Om behörighetskänslig cachelagring krävs, se sidan [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/permissions-cache).
 
-Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Mer information om hur du använder den här funktionen med CUG:er finns i [Skapa en stängd användargrupp](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/cug#creating-the-user-group-to-be-used). Se även Dispatcher [checklista för säkerhet](/help/using/security-checklist.md) innan du publicerar.
+Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Mer information om hur du använder den här funktionen med CUG:er finns i [Skapa en stängd användargrupp](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/cug#creating-the-user-group-to-be-used). Se även Dispatcher [checklista för säkerhet](/help/using/security-checklist.md) innan du publicerar.
 
 Egenskapen `/sessionmanagement` är en underegenskap till `/farms`.
 
@@ -555,7 +555,7 @@ Använd avsnittet `/filter` för att ange de HTTP-begäranden som Dispatcher god
 
 >[!CAUTION]
 >
->Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM-installation.
+>Se [Dispatcher Security Checklist](security-checklist.md) för mer information om begränsningar av åtkomst med AEM Dispatcher. Läs även [AEM Security Checklist](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist#security) om du vill ha mer säkerhetsinformation om din AEM-installation.
 
 Avsnittet `/filter` består av en serie regler som antingen nekar eller tillåter åtkomst till innehåll enligt mönster i begärandoradsdelen av HTTP-begäran. Använd en tillåtelselista-strategi för ditt `/filter`-avsnitt:
 
@@ -719,7 +719,7 @@ Last Modified Date: 2015-06-26T04:32:37.986-0400
 
 <p>We should mention the config files that are shipped with the dispatcher distribution and only give a few examples here. This aims to avoid confusion and reduce content maintenance.<br /> </p>
 
- -->
+-->
 
 ```xml
   /filter
@@ -778,10 +778,11 @@ Last Modified Date: 2015-06-26T04:32:37.986-0400
 >
 >När du använder Apache utformar du dina filter-URL-mönster enligt egenskapen DispatcherUseProcsedURL i Dispatcher-modulen. (Se [Apache-webbserver - Konfigurera Apache-webbservern för Dispatcher](dispatcher-install.md##apache-web-server-configure-apache-web-server-for-dispatcher).)
 
-<!----
+<!--
 >[!NOTE]
 >
->Filters `0030` and `0031` regarding Dynamic Media are applicable to AEM 6.0 and higher. -->
+>Filters `0030` and `0031` regarding Dynamic Media are applicable to AEM 6.0 and higher. 
+-->
 
 Tänk på följande om du väljer att utöka åtkomsten:
 
@@ -805,7 +806,7 @@ Beroende på installationen kan det finnas fler resurser under `/libs`, `/apps` 
 
 >[!CAUTION]
 >
->Om du [använder rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/sites/administering/operations/reporting#using-reports-in-a-publish-environment) bör du konfigurera Dispatcher att neka åtkomst till `/etc/reports` för externa besökare.
+>Om du [använder rapporter i en publiceringsmiljö](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/operations/reporting#using-reports-in-a-publish-environment) bör du konfigurera Dispatcher att neka åtkomst till `/etc/reports` för externa besökare.
 
 ### Begränsa frågesträngar {#restricting-query-strings}
 
@@ -912,7 +913,7 @@ Last Modified Date: 2015-03-25T14:23:05.185-0400
 
 <p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;">For https://jira.corp.adobe.com/browse/DOC-4812</p> 
 <p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;">The "com.adobe.granite.dispatcher.vanityurl.content" package needs to be made public before publishing this contnet.</p>
- -->
+-->
 
 Konfigurera Dispatcher för att aktivera åtkomst till tillfälliga URL:er som är konfigurerade för dina AEM-sidor.
 
@@ -937,7 +938,7 @@ Avsnittet `/vanity_urls` innehåller följande egenskaper:
 
 >[!NOTE]
 >
->Om din återgivning är en instans av AEM måste du installera paketet [VanityURLS-Components från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Mer information finns i [Programvarudistribution](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager#software-distribution).)
+>Om din återgivning är en instans av AEM måste du installera paketet [VanityURLS-Components från Software Distribution](https://experience.adobe.com/#/downloads/content/software-distribution/en/aem.html?package=/content/software-distribution/en/details.html/content/dam/aem/public/adobe/packages/granite/vanityurls-components) för att aktivera tjänsten för huvud-URL. (Mer information finns i [Programvarudistribution](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager#software-distribution).)
 
 Använd följande procedur för att aktivera åtkomst till mål-URL:er.
 
@@ -1130,7 +1131,7 @@ Comment Type: draft
  <p> </p> 
 </note>
 
- -->
+-->
 
 <!-- 
 
@@ -1138,7 +1139,7 @@ Comment Type: draft
 
 <p>The following rule caches all documents in compressed form; Apache can return either the uncompressed or the compressed form to the client:</p>
 
- -->
+-->
 
 <!-- 
 
@@ -1148,7 +1149,7 @@ Comment Type: draft
   /rules!!discoiqbr!!&nbsp;&nbsp;{!!discoiqbr!!&nbsp;&nbsp;&nbsp;/rulelabel&nbsp;&nbsp;{&nbsp;&nbsp;/glob&nbsp;"*"&nbsp;/type&nbsp;"allow"&nbsp;&nbsp;/compress&nbsp;"gzip"&nbsp;}!!discoiqbr!!&nbsp;&nbsp;} 
 </codeblock>
 
- -->
+-->
 
 <!-- 
 
@@ -1158,7 +1159,7 @@ Last Modified Date: 2017-11-13T09:23:24.326-0500
 
 <p>Hidden the <span class="code">mod_gzip</span> content as requested in CQDOC-11124.</p>
 
- -->
+-->
 
 ### Invalidera filer på mappnivå {#invalidating-files-by-folder-level}
 
@@ -1182,7 +1183,7 @@ När en fil i `/content/myWebsite/xx` blir ogiltig kommer alla `.stat`-filer fr�
 
 >[!NOTE]
 >
->Ogiltigförklaring kan förhindras genom att ett extra huvud `CQ-Action-Scope:ResourceOnly` skickas. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Mer information finns på [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/sv/docs/experience-manager-dispatcher/using/configuring/page-invalidate#configuring).
+>Ogiltigförklaring kan förhindras genom att ett extra huvud `CQ-Action-Scope:ResourceOnly` skickas. Den här metoden kan användas för att tömma vissa resurser utan att andra delar av cachen blir ogiltiga. Mer information finns på [den här sidan](https://adobe-consulting-services.github.io/acs-aem-commons/features/dispatcher-flush-rules/index.html) och [Invalidera Dispatcher-cachen manuellt](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/page-invalidate#configuring).
 
 >[!NOTE]
 >
@@ -1208,7 +1209,7 @@ Mer information om Glob-egenskaper finns i [Designa mönster för Glob-egenskape
 
 Den här konfigurationen orsakar följande aktivitet när `/content/wknd/us/en` aktiveras:
 
-* Alla filer med mönstret en.* har tagits bort från mappen `/content/wknd/us`.
+* Alla filer med mönstret en.* tas bort från mappen `/content/wknd/us`.
 * Mappen `/content/wknd/us/en./_jcr_content` har tagits bort.
 * Alla andra filer som matchar konfigurationen för `/invalidate` tas inte bort omedelbart. Dessa filer tas bort när nästa begäran görs. I exemplet tas inte `/content/wknd.html` bort, utan tas bort när `/content/wknd.html` begärs.
 
@@ -1294,7 +1295,7 @@ När en parameter ignoreras för en sida cachelagras sidan första gången som s
 
 >[!NOTE]
 >
->Vi rekommenderar att du konfigurerar inställningen `ignoreUrlParams` på ett sätt som tillåtslista. Därför ignoreras alla frågeparametrar och endast kända eller förväntade frågeparametrar undantas (&quot;nekas&quot;) från att ignoreras. Mer information och exempel finns på [den här sidan](https://github.com/adobe/aem-dispatcher-optimizer-tool/blob/main/docs/Rules.md#dot---the-dispatcher-publish-farm-cache-should-have-its-ignoreurlparams-rules-configured-in-an-allow-list-manner).
+>Vi rekommenderar att du konfigurerar inställningen `ignoreUrlParams` på ett sätt som tillåtslista. Därför ignoreras alla frågeparametrar och endast kända eller förväntade frågeparametrar undantas (&quot;nekas&quot;) från att ignoreras. Mer information och exempel finns på [den här sidan](https://github.com/adobe/aem-dispatcher-optimizer-tool/blob/main/docs/Rules.md#dot—the-dispatcher-publish-farm-cache-should-its-ignore-reurlparams-rules-configure-in-an-allow-list-way).
 
 Om du vill ange vilka parametrar som ska ignoreras lägger du till glob-regler i egenskapen `ignoreUrlParams`:
 
@@ -1304,7 +1305,7 @@ Om du vill ange vilka parametrar som ska ignoreras lägger du till glob-regler i
 >[!NOTE]
 >
 >När du konfigurerar glob-egenskapen bör den matcha frågeparameternamnet. Om du till exempel vill ignorera parametern &quot;p1&quot; från följande URL `http://example.com/path/test.html?p1=test&p2=v2`, ska egenskapen glob vara:
->&#x200B;> `/0002 { /glob "p1" /type "allow" }`
+> `/0002 { /glob "p1" /type "allow" }`
 
 I följande exempel ignoreras alla parametrar, förutom parametern `nocache`. Därför cachelagrar Dispatcher aldrig URL-adresser som innehåller parametern `nocache`:
 
@@ -1642,13 +1643,14 @@ Värdena för `glob` kan innehålla jokertecken och alfanumeriska tecken för at
 |--- |--- |--- |
 | `*` | Matchar noll eller flera intilliggande förekomster av ett tecken i strängen. Något av följande avgör det sista tecknet i matchningen: <br/>Ett tecken i strängen matchar nästa tecken i mönstret och mönstertecknet har följande egenskaper:<br/><ul><li>Inte en `*`</li><li>Inte en `?`</li><li>Ett literalt tecken (inklusive ett blanksteg) eller en teckenklass.</li><li>Slutet på mönstret nås.</li></ul>I en teckenklass tolkas tecknet bokstavligen. | `*/geo*` Matchar alla sidor under noden `/content/geometrixx` och noden `/content/geometrixx-outdoors`. Följande HTTP-begäranden matchar mönstret: <br/><ul><li>`"GET /content/geometrixx/en.html"`</li><li>`"GET /content/geometrixx-outdoors/en.html"` </li></ul><br/> `*outdoors/*` <br/>Matchar alla sidor under noden `/content/geometrixx-outdoors`. Följande HTTP-begäran matchar till exempel globmönstret: <br/><ul><li>`"GET /content/geometrixx-outdoors/en.html"`</li></ul> |
 | `?` | Matchar ett enskilt tecken. Använd teckenklasser utanför. I en teckenklass tolkas det här tecknet bokstavligen. | `*outdoors/??/*`<br/> Matchar sidorna för alla språk i den externa geometrixx-webbplatsen. Följande HTTP-begäran matchar till exempel globmönstret: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Följande begäran matchar inte mönstret: <br/><ul><li>&quot;GET /content/geometrixx-outdoors/en.html&quot;</li></ul> |
-| `[ and ]` | Avmarkerar början och slutet av en teckenklass. Teckenklasser kan innehålla ett eller flera teckenintervall och enskilda tecken.<br/>En matchning inträffar om måltecknet matchar något av tecknen i teckenklassen, eller inom ett definierat intervall.<br/>Om den avslutande parentesen inte inkluderas skapas inga matchningar i mönstret. | `*[o]men.html*`<br/> Matchar följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/> `*[o/]men.html*` <br/>Matchar följande HTTP-begäranden: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
+| `[ and ]` | Avmarkerar början och slutet av en teckenklass. Teckenklasser kan innehålla ett eller flera teckenintervall och enskilda tecken.<br/>En matchning inträffar om måltecknet matchar något av tecknen i teckenklassen, eller inom ett definierat intervall.<br/>Om den avslutande parentesen inte ingår, skapas inga matchningar i mönstret. | `*[o]men.html*`<br/> Matchar följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/> `*[o/]men.html*` <br/>Matchar följande HTTP-begäranden: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
 | `-` | Det betecknar ett teckenintervall. För användning i teckenklasser. Utanför en teckenklass tolkas detta tecken bokstavligen. | `*[m-p]men.html*` Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul>Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
-| `!` | Negerar tecknet eller teckenklassen som följer. Använd bara för negerande tecken och teckenintervall inuti teckenklasser. Motsvarar `^ wildcard`. <br/>Utanför en teckenklass tolkas det här tecknet bokstavligen. | `*[ !o]men.html*`<br/> Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Den matchar inte följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>`*[ !o!/]men.html*`<br/> Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"` eller `"GET /content/geometrixx-outdoors/en/men. html"`</li></ul> |
-| `^` | Negerar tecknet eller teckenintervallet som följer. Används för att endast negera tecken och teckenintervall inuti teckenklasser. Motsvarar jokertecknet `!`. <br/>Utanför en teckenklass tolkas det här tecknet bokstavligen. | Exemplen för jokertecknet `!` används och `!`-tecknen i exempelmönstret ersätts med `^`-tecken. |
+| `!` | Negerar tecknet eller teckenklassen som följer. Använd bara för negerande tecken och teckenintervall inuti teckenklasser. Motsvarar `^ wildcard`. <br/>Utanför en teckenklass tolkas detta tecken bokstavligen. | `*[!o]men.html*`<br/> Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Den matchar inte följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>`*[!o!/]men.html*`<br/> Den matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"` eller `"GET /content/geometrixx-outdoors/en/men. html"`</li></ul> |
+| `^` | Negerar tecknet eller teckenintervallet som följer. Används för att endast negera tecken och teckenintervall inuti teckenklasser. Motsvarar jokertecknet `!`. <br/>Utanför en teckenklass tolkas detta tecken bokstavligen. | Exemplen för jokertecknet `!` används och `!`-tecknen i exempelmönstret ersätts med `^`-tecken. |
 
 
-<!--- need to troubleshoot table
+<!--
+need to troubleshoot table
 
 The following table describes the wildcard characters.
 
@@ -1843,7 +1845,7 @@ Den här funktionen är inte aktiverad som standard, så för att svarsrubriken 
 /info "1"
 ```
 
-Exempel:
+Till exempel:
 
 ```xml
 /farm

@@ -6,13 +6,13 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 jcr-lastmodifiedby: remove-legacypath-6-1
-index: y
+index: true
 internal: n
 snippet: y
 exl-id: 49009810-b5bf-41fd-b544-19dd0c06b013
-source-git-commit: c41b4026a64f9c90318e12de5397eb4c116056d9
+source-git-commit: 53781f068db078045ae366d3494cd7d1b78c4a7e
 workflow-type: tm+mt
-source-wordcount: '582'
+source-wordcount: '625'
 ht-degree: 0%
 
 ---
@@ -34,7 +34,7 @@ Adobe rekommenderar att du slutför följande checklista innan du börjar produc
 
 >[!CAUTION]
 >
->Fyll i checklistan för din version av AEM innan du publicerar. Se motsvarande [Adobe Experience Manager-dokumentation](https://experienceleague.adobe.com/sv/docs/experience-manager-65/content/security/security-checklist).
+>Fyll i checklistan för din version av AEM innan du publicerar. Se motsvarande [Adobe Experience Manager-dokumentation](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/security/security-checklist).
 
 ## Använd den senaste versionen av Dispatcher {#use-the-latest-version-of-dispatcher}
 
@@ -100,7 +100,7 @@ IIS-användare måste dessutom konfigurera sin webbplats på följande sätt:
 
 En denial of service-attack (DoS) är ett försök att göra en datorresurs otillgänglig för de avsedda användarna.
 
-På Dispatcher-nivå finns det två metoder för att konfigurera för att förhindra DoS-attacker: [Filter](https://experienceleague.adobe.com/sv/docs#/filter)
+På Dispatcher-nivå finns det två metoder för att konfigurera för att förhindra DoS-attacker: [Filter](https://experienceleague.adobe.com/en/docs#/filter)
 
 * Använd modulen mod_rewrite (till exempel [Apache 2.4](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)) för att utföra URL-valideringar (om URL-mönsterreglerna inte är för komplexa).
 
@@ -148,7 +148,7 @@ Last Modified Date: 2015-06-26T04:38:17.016-0400
 
 ## Konfigurera Dispatcher för att förhindra CSRF-attacker {#configure-dispatcher-to-prevent-csrf-attacks}
 
-AEM tillhandahåller ett [ramverk](https://experienceleague.adobe.com/sv/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#verification-steps) som syftar till att förhindra attacker av typen Cross-Site Request. Om du vill använda ramverket på rätt sätt tillåtslista du stödet för CSRF-token i Dispatcher genom att göra följande:
+AEM tillhandahåller ett [ramverk](https://experienceleague.adobe.com/en/docs/experience-manager-release-information/aem-release-updates/previous-updates/aem-previous-versions#verification-steps) som syftar till att förhindra attacker av typen Cross-Site Request. Om du vill använda ramverket på rätt sätt tillåtslista du stödet för CSRF-token i Dispatcher genom att göra följande:
 
 1. Skapa ett filter som tillåter sökvägen `/libs/granite/csrf/token.json`;
 1. Lägg till rubriken `CSRF-Token` i avsnittet `clientheaders` i Dispatcher-konfigurationen.
